@@ -1,0 +1,20 @@
+{
+  "organisasjonsnummer" : "815597222",
+  "navn" : "SLETTET ENHET AS",
+  "organisasjonsform" : {
+    "kode" : "UTBG",
+    "beskrivelse" : "Frivillig registrert utleiebygg",
+    "utgaatt" : "2017-07-17",
+    "_links" : {
+      "self" : {
+        "href" : "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/UTBG"
+      }
+    }
+  },
+  "slettedato" : "2017-10-20",
+  "_links" : {
+    "self" : {
+      "href" : "https://data.brreg.no/enhetsregisteret/api/enheter/815597222"
+    }
+  }
+}

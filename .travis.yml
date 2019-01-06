@@ -1,0 +1,22 @@
+dist: xenial
+
+language: python
+
+python:
+  - "3.6"
+
+cache: pip
+
+env:
+  matrix:
+    - TOX_ENV=py36
+    - TOX_ENV=flake8
+    - TOX_ENV=black
+    - TOX_ENV=mypy
+    - TOX_ENV=safety-check
+
+install:
+  - pip install tox
+
+script:
+  - tox -e $TOX_ENV

@@ -1,0 +1,51 @@
+{
+  "organisasjonsnummer" : "818511752",
+  "navn" : "SESAM STASJON",
+  "organisasjonsform" : {
+    "kode" : "AS",
+    "beskrivelse" : "Aksjeselskap",
+    "_links" : {
+      "self" : {
+        "href" : "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/AS"
+      }
+    }
+  },
+  "postadresse" : {
+    "land" : "Norge",
+    "landkode" : "NO",
+    "postnummer" : "0122",
+    "poststed" : "OSLO",
+    "adresse" : [ "c/o reder K. Rusing", "Postboks 1752 Vika", "" ],
+    "kommune" : "OSLO",
+    "kommunenummer" : "0301"
+  },
+  "registreringsdatoEnhetsregisteret" : "2017-10-20",
+  "registrertIMvaregisteret" : true,
+  "naeringskode1" : {
+    "beskrivelse" : "Skipsmegling",
+    "kode" : "52.292"
+  },
+  "antallAnsatte" : 50,
+  "forretningsadresse" : {
+    "land" : "Norge",
+    "landkode" : "NO",
+    "postnummer" : "0101",
+    "poststed" : "OSLO",
+    "adresse" : [ "Tyvholmen 1", null, null, "" ],
+    "kommune" : "OSLO",
+    "kommunenummer" : "0301"
+  },
+  "stiftelsesdato" : "2017-10-20",
+  "registrertIForetaksregisteret" : true,
+  "registrertIStiftelsesregisteret" : false,
+  "registrertIFrivillighetsregisteret" : false,
+  "konkurs" : false,
+  "underAvvikling" : false,
+  "underTvangsavviklingEllerTvangsopplosning" : false,
+  "maalform" : "Bokmål",
+  "_links" : {
+    "self" : {
+      "href" : "https://data.brreg.no/enhetsregisteret/api/enheter/818511752"
+    }
+  }
+}
