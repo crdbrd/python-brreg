@@ -32,7 +32,7 @@ Project resources
     :target: https://pypi.org/project/brreg/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/travis/otovo/python-brreg/master.svg?style=flat
+.. image:: https://img.shields.io/travis/com/otovo/python-brreg/master.svg?style=flat
     :target: https://travis-ci.com/otovo/python-brreg
     :alt: Travis CI build status
 
