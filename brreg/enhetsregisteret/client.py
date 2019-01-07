@@ -3,7 +3,7 @@ from typing import Optional
 import requests
 
 from brreg import BrregException, BrregRestException
-from brreg.enhetsregisteret import Enhet
+from brreg.enhetsregisteret.types import Enhet
 
 
 __all__ = ['get_enhet']
