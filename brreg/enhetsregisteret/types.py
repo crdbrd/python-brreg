@@ -15,7 +15,11 @@ __all__ = [
 
 @attr.s(auto_attribs=True)
 class InstitusjonellSektorkode:
+
+    #: Sektorkoden
     kode: str
+
+    #: Tekstlig beskrivelse av sektorkoden
     beskrivelse: str
 
     def __str__(self):
@@ -33,12 +37,25 @@ class InstitusjonellSektorkode:
 
 @attr.s(auto_attribs=True)
 class Adresse:
+    #: Land
     land: str
+
+    #: Landkode
     landkode: str
+
+    #: Postnummer
     postnummer: str
+
+    #: Poststed
     poststed: str
+
+    #: Adresse
     adresse: List[str]
+
+    #: Kommune
     kommune: str
+
+    #: Kommunenummer
     kommunenummer: str
 
     def __str__(self):
@@ -62,7 +79,11 @@ class Adresse:
 
 @attr.s(auto_attribs=True)
 class Naeringskode:
+
+    #: Næringskoden
     kode: str
+
+    #: Tekstlig beskrivelse av næringskoden
     beskrivelse: str
 
     def __str__(self):
@@ -77,7 +98,11 @@ class Naeringskode:
 
 @attr.s(auto_attribs=True)
 class Organisasjonsform:
+
+    #: Organisasjonsformen
     kode: str
+
+    #: Tekstlig beskrivelse av organisasjonsformen
     beskrivelse: str
 
     def __str__(self):
@@ -90,25 +115,64 @@ class Organisasjonsform:
 
 @attr.s(auto_attribs=True)
 class Enhet:
+    #: Organisasjonsnummer
     organisasjonsnummer: str
+
+    #: Navn
     navn: str
+
+    #: Organisasjonsform
     organisasjonsform: Organisasjonsform
+
+    #: Hjemmeside
     hjemmeside: Optional[str]
+
+    #: Registreringsdato i Enhetsregisteret
     registreringsdato_enhetsregisteret: Optional[date]
+
+    #: Hvorvidt enheten er registrert i MVA-registeret
     registrert_i_mvaregisteret: Optional[bool]
+
+    #: Næringskode 1
     naeringskode1: Optional[Naeringskode]
+
+    #: Antall ansatte
     antall_ansatte: Optional[int]
+
+    #: Forretningsadresse
     forretningsadresse: Optional[Adresse]
+
+    #: Stiftelsesdato
     stiftelsesdato: Optional[date]
+
+    #: Sektorkode
     institusjonell_sektorkode: Optional[InstitusjonellSektorkode]
+
+    #: Hvorvidt enheten er registrert i Foretaksregisteret
     registrert_i_foretaksregisteret: Optional[bool]
+
+    #: Hvorvidt enheten er registrert i Stiftelsesregisteret
     registrert_i_stiftelsesregisteret: Optional[bool]
+
+    #: Hvorvidt enheten er registrert i Frivillighetsregisteret
     registrert_i_frivillighetsregisteret: Optional[bool]
+
+    #: År for siste innsendte årsregnskap
     siste_innsendte_aarsregnskap: Optional[int]
+
+    #: Hvorvidt enheten er konkurs
     konkurs: Optional[bool]
+
+    #: Hvorvidt enheten er under avvikling
     under_avvikling: Optional[bool]
+
+    #: Hvorvidt enheten er under tvangsavvikling eller tvangsoppløsning
     under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
+
+    #: Målform
     maalform: Optional[str]
+
+    #: Dato enheten ble slettet
     slettedato: Optional[str]
 
     def __str__(self):
