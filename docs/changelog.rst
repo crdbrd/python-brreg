@@ -3,9 +3,10 @@ Changelog
 =========
 
 
-v0.1.0 (UNRELEASED)
-===================
+v1.0.0a1 (2019-01-07)
+=====================
 
-Initial release.
+Initial alpha release. No guarantees about backwards compatibility.
 
-- Lookup of organizations by organization number.
+Supports lookup of organizations ("enheter") by organization number from
+Enhetsregisteret.
