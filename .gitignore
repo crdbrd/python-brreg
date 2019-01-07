@@ -3,4 +3,5 @@
 /.mypy_cache/
 /.pytest_cache/
 /.tox/
+/docs/_build/
 __pycache__
