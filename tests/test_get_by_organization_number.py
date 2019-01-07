@@ -2,8 +2,8 @@ import pytest
 
 import responses
 
+from brreg import BrregRestException
 from brreg.client import Client
-from brreg.exceptions import BrregRestException
 
 
 @responses.activate

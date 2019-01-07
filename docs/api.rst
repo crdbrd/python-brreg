@@ -2,19 +2,25 @@
 API reference
 =============
 
+.. module:: brreg
+
+Exceptions
+==========
+
+.. autoclass:: BrregException
+   :members:
+   :undoc-members:
+
+
+.. autoclass:: BrregRestException
+   :members:
+   :undoc-members:
+
 
 Client
 ======
 
 .. automodule:: brreg.client
-   :members:
-   :undoc-members:
-
-
-Exceptions
-==========
-
-.. automodule:: brreg.exceptions
    :members:
    :undoc-members:
 

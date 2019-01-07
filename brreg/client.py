@@ -2,7 +2,7 @@ from typing import Optional
 
 import requests
 
-from brreg.exceptions import BrregException, BrregRestException
+from brreg import BrregException, BrregRestException
 from brreg.types import Organisasjon
 
 
