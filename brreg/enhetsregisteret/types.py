@@ -6,9 +6,9 @@ import attr
 
 __all__ = [
     'Adresse',
+    'Enhet',
     'InstitusjonellSektorkode',
     'Naeringskode',
-    'Organisasjon',
     'Organisasjonsform',
 ]
 
@@ -89,7 +89,7 @@ class Organisasjonsform:
 
 
 @attr.s(auto_attribs=True)
-class Organisasjon:
+class Enhet:
     organisasjonsnummer: str
     navn: str
     organisasjonsform: Organisasjonsform
@@ -115,7 +115,7 @@ class Organisasjon:
         return f'{self.navn} ({self.organisasjonsnummer})'
 
     @classmethod
-    def from_json(cls, json: dict) -> Optional['Organisasjon']:
+    def from_json(cls, json: dict) -> Optional['Enhet']:
         if not json:
             return None
 

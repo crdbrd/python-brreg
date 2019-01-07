@@ -22,9 +22,9 @@ Enhetsregisteret
 
 .. automodule:: brreg.enhetsregisteret
 
-.. autofunction:: brreg.enhetsregisteret.get_organization_by_number
+.. autofunction:: brreg.enhetsregisteret.get_enhet
 
-.. autoclass:: brreg.enhetsregisteret.Organisasjon
+.. autoclass:: brreg.enhetsregisteret.Enhet
    :members:
    :undoc-members:
 

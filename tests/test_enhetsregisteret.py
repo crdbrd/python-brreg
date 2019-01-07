@@ -9,7 +9,7 @@ from brreg import enhetsregisteret
 
 
 @responses.activate
-def test_get_organization_by_number(organization_details_response):
+def test_get_enhet(organization_details_response):
     responses.add(
         responses.GET,
         'https://data.brreg.no/enhetsregisteret/api/enheter/818511752',
@@ -18,7 +18,7 @@ def test_get_organization_by_number(organization_details_response):
         content_type='application/json',
     )
 
-    org = enhetsregisteret.get_organization_by_number('818511752')
+    org = enhetsregisteret.get_enhet('818511752')
 
     assert org.organisasjonsnummer == '818511752'
 
@@ -29,9 +29,7 @@ def test_get_organization_by_number(organization_details_response):
 
 
 @responses.activate
-def test_get_organization_by_number_when_deleted(
-    deleted_organization_details_response
-):
+def test_get_enhet_when_deleted(deleted_organization_details_response):
     responses.add(
         responses.GET,
         'https://data.brreg.no/enhetsregisteret/api/enheter/815597222',
@@ -40,13 +38,13 @@ def test_get_organization_by_number_when_deleted(
         content_type='application/json',
     )
 
-    org = enhetsregisteret.get_organization_by_number('815597222')
+    org = enhetsregisteret.get_enhet('815597222')
 
     assert org.organisasjonsnummer == '815597222'
 
 
 @responses.activate
-def test_get_organization_by_number_when_gone():
+def test_get_enhet_when_gone():
     responses.add(
         responses.GET,
         'https://data.brreg.no/enhetsregisteret/api/enheter/818511752',
@@ -54,13 +52,13 @@ def test_get_organization_by_number_when_gone():
         content_type='application/json',
     )
 
-    org = enhetsregisteret.get_organization_by_number('818511752')
+    org = enhetsregisteret.get_enhet('818511752')
 
     assert org is None
 
 
 @responses.activate
-def test_get_organization_by_number_when_not_found():
+def test_get_enhet_when_not_found():
     responses.add(
         responses.GET,
         'https://data.brreg.no/enhetsregisteret/api/enheter/818511752',
@@ -68,13 +66,13 @@ def test_get_organization_by_number_when_not_found():
         content_type='application/json',
     )
 
-    org = enhetsregisteret.get_organization_by_number('818511752')
+    org = enhetsregisteret.get_enhet('818511752')
 
     assert org is None
 
 
 @responses.activate
-def test_get_organization_by_number_when_http_error():
+def test_get_enhet_when_http_error():
     responses.add(
         responses.GET,
         'https://data.brreg.no/enhetsregisteret/api/enheter/818511752',
@@ -83,14 +81,14 @@ def test_get_organization_by_number_when_http_error():
     )
 
     with pytest.raises(BrregRestException) as exc:
-        enhetsregisteret.get_organization_by_number('818511752')
+        enhetsregisteret.get_enhet('818511752')
 
     assert 'Bad Request' in str(exc.value)
 
 
 @responses.activate
-def test_get_organization_by_number_when_http_timeout():
+def test_get_enhet_when_http_timeout():
     with pytest.raises(BrregRestException) as exc:
-        enhetsregisteret.get_organization_by_number('818511752')
+        enhetsregisteret.get_enhet('818511752')
 
     assert 'Connection refused' in str(exc.value)

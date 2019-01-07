@@ -9,16 +9,16 @@ The following examples takes you through typical use cases with the
 Organization details by organization number
 ===========================================
 
-To get details about an organization given its organization number:
+To get details about an organization ("enhet") given its organization number:
 
 >>> from brreg import enhetsregisteret
->>> org = enhetsregisteret.get_organization_by_number('915501680')
->>> org.organisasjonsnummer
+>>> enhet = enhetsregisteret.get_enhet('915501680')
+>>> enhet.organisasjonsnummer
 '915501680'
->>> org.navn
+>>> enhet.navn
 'OTOVO AS'
->>> org.organisasjonsform
+>>> enhet.organisasjonsform
 Organisasjonsform(kode='AS', beskrivelse='Aksjeselskap')
->>> org.forretningsadresse
+>>> enhet.forretningsadresse
 Adresse(land='Norge', landkode='NO', postnummer='0181', poststed='OSLO', adresse=['Torggata 5'], kommune='OSLO', kommunenummer='0301')
 >>>
