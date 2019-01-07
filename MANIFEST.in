@@ -1,3 +1,4 @@
+include *.yml
 include LICENSE
 include MANIFEST.in
 include pyproject.toml
