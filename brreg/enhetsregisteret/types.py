@@ -104,7 +104,7 @@ class Organisasjon:
     registrert_i_foretaksregisteret: Optional[bool]
     registrert_i_stiftelsesregisteret: Optional[bool]
     registrert_i_frivillighetsregisteret: Optional[bool]
-    siste_innsendte_aarsregnskap: Optional[date]
+    siste_innsendte_aarsregnskap: Optional[int]
     konkurs: Optional[bool]
     under_avvikling: Optional[bool]
     under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
@@ -148,7 +148,7 @@ class Organisasjon:
             registrert_i_frivillighetsregisteret=json.get(
                 'registrertIFrivillighetsregisteret'
             ),
-            siste_innsendte_aarsregnskap=parse_date(
+            siste_innsendte_aarsregnskap=parse_int(
                 json.get('sisteInnsendteAarsregnskap')
             ),
             konkurs=json.get('konkurs'),
@@ -162,6 +162,12 @@ class Organisasjon:
 
 
 def parse_date(date_string: Optional[str]) -> Optional[date]:
-    if not date_string:
+    if date_string is None:
         return None
     return datetime.strptime(date_string, '%Y-%m-%d').date()
+
+
+def parse_int(int_string: Optional[str]) -> Optional[int]:
+    if int_string is None:
+        return None
+    return int(int_string)
