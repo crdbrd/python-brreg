@@ -4,6 +4,15 @@ from typing import List, Optional
 import attr
 
 
+__all__ = [
+    'Adresse',
+    'InstitusjonellSektorkode',
+    'Naeringskode',
+    'Organisasjon',
+    'Organisasjonsform',
+]
+
+
 @attr.s(auto_attribs=True)
 class InstitusjonellSektorkode:
     kode: str

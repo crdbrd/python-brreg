@@ -17,17 +17,29 @@ Exceptions
    :undoc-members:
 
 
-Client
-======
+Enhetsregisteret
+================
 
-.. automodule:: brreg.client
+.. automodule:: brreg.enhetsregisteret
+
+.. autofunction:: brreg.enhetsregisteret.get_organization_by_number
+
+.. autoclass:: brreg.enhetsregisteret.Organisasjon
    :members:
    :undoc-members:
 
+.. autoclass:: brreg.enhetsregisteret.Adresse
+   :members:
+   :undoc-members:
 
-Types
-=====
+.. autoclass:: brreg.enhetsregisteret.InstitusjonellSektorkode
+   :members:
+   :undoc-members:
 
-.. automodule:: brreg.types
+.. autoclass:: brreg.enhetsregisteret.Naeringskode
+   :members:
+   :undoc-members:
+
+.. autoclass:: brreg.enhetsregisteret.Organisasjonsform
    :members:
    :undoc-members:
