@@ -2,21 +2,39 @@ dist: xenial
 
 language: python
 
-python:
-  - "3.6"
-
-cache: pip
-
-env:
-  matrix:
-    - TOX_ENV=py36
-    - TOX_ENV=flake8
-    - TOX_ENV=black
-    - TOX_ENV=mypy
-    - TOX_ENV=safety-check
+matrix:
+  include:
+    - python: 3.6
+      env: TOX_ENV=py36
+    - python: 3.7
+      env: TOX_ENV=py37
+    - python: 3.7
+      env: TOX_ENV=flake8
+    - python: 3.7
+      env: TOX_ENV=black
+    - python: 3.7
+      env: TOX_ENV=mypy
+    - python: 3.7
+      env: TOX_ENV=check-manifest
+    - python: 3.7
+      env: TOX_ENV=docs
+    - python: 3.7
+      env: TOX_ENV=doctest
+    - python: 3.7
+      env: TOX_ENV=pydocstyle
+  allow_failures:
+    - python: 3.7
+      env: TOX_ENV=docs
+    - python: 3.7
+      env: TOX_ENV=doctest
+    - python: 3.7
+      env: TOX_ENV=pydocstyle
 
 install:
-  - pip install tox
+  - "pip install tox"
 
 script:
-  - tox -e $TOX_ENV
+  - "tox -e $TOX_ENV"
+
+after_success:
+  - "if [ $TOX_ENV == 'py37' ]; then pip install coveralls; coveralls; fi"
