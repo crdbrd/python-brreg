@@ -1,3 +1,5 @@
+from datetime import date
+
 import pytest
 
 import responses
@@ -19,6 +21,11 @@ def test_get_organization_by_number(organization_details_response):
     org = enhetsregisteret.get_organization_by_number('818511752')
 
     assert org.organisasjonsnummer == '818511752'
+
+    # TODO Test all other fields
+
+    assert org.stiftelsesdato == date(2017, 10, 20)
+    assert org.siste_innsendte_aarsregnskap is None
 
 
 @responses.activate

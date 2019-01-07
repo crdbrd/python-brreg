@@ -104,7 +104,7 @@ class Organisasjon:
     registrert_i_foretaksregisteret: Optional[bool]
     registrert_i_stiftelsesregisteret: Optional[bool]
     registrert_i_frivillighetsregisteret: Optional[bool]
-    siste_innsendte_aarsregnskap: Optional[str]
+    siste_innsendte_aarsregnskap: Optional[date]
     konkurs: Optional[bool]
     under_avvikling: Optional[bool]
     under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
@@ -148,7 +148,9 @@ class Organisasjon:
             registrert_i_frivillighetsregisteret=json.get(
                 'registrertIFrivillighetsregisteret'
             ),
-            siste_innsendte_aarsregnskap=json.get('sisteInnsendteAarsregnskap'),
+            siste_innsendte_aarsregnskap=parse_date(
+                json.get('sisteInnsendteAarsregnskap')
+            ),
             konkurs=json.get('konkurs'),
             under_avvikling=json.get('underAvvikling'),
             under_tvangsavvikling_eller_tvangsopplosning=json.get(
