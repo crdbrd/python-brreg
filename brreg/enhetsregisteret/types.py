@@ -94,20 +94,20 @@ class Organisasjon:
     navn: str
     organisasjonsform: Organisasjonsform
     hjemmeside: Optional[str]
-    registreringsdatoEnhetsregisteret: Optional[date]
-    registrertIMvaregisteret: Optional[bool]
+    registreringsdato_enhetsregisteret: Optional[date]
+    registrert_i_mvaregisteret: Optional[bool]
     naeringskode1: Optional[Naeringskode]
-    antallAnsatte: Optional[int]
+    antall_ansatte: Optional[int]
     forretningsadresse: Optional[Adresse]
     stiftelsesdato: Optional[date]
-    institusjonellSektorkode: Optional[InstitusjonellSektorkode]
-    registrertIForetaksregisteret: Optional[bool]
-    registrertIStiftelsesregisteret: Optional[bool]
-    registrertIFrivillighetsregisteret: Optional[bool]
-    sisteInnsendteAarsregnskap: Optional[str]
+    institusjonell_sektorkode: Optional[InstitusjonellSektorkode]
+    registrert_i_foretaksregisteret: Optional[bool]
+    registrert_i_stiftelsesregisteret: Optional[bool]
+    registrert_i_frivillighetsregisteret: Optional[bool]
+    siste_innsendte_aarsregnskap: Optional[str]
     konkurs: Optional[bool]
-    underAvvikling: Optional[bool]
-    underTvangsavviklingEllerTvangsopplosning: Optional[bool]
+    under_avvikling: Optional[bool]
+    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
     maalform: Optional[str]
     slettedato: Optional[str]
 
@@ -126,32 +126,32 @@ class Organisasjon:
                 json['organisasjonsform']
             ),
             hjemmeside=json.get('hjemmeside'),
-            registreringsdatoEnhetsregisteret=parse_date(
+            registreringsdato_enhetsregisteret=parse_date(
                 json.get('registreringsdatoEnhetsregisteret')
             ),
-            registrertIMvaregisteret=json.get('registrertIMvaregisteret'),
+            registrert_i_mvaregisteret=json.get('registrertIMvaregisteret'),
             naeringskode1=Naeringskode.from_json(json.get('naeringskode1')),
-            antallAnsatte=json.get('antallAnsatte'),
+            antall_ansatte=json.get('antallAnsatte'),
             forretningsadresse=Adresse.from_json(
                 json.get('forretningsadresse')
             ),
             stiftelsesdato=parse_date(json.get('stiftelsesdato')),
-            institusjonellSektorkode=InstitusjonellSektorkode.from_json(
+            institusjonell_sektorkode=InstitusjonellSektorkode.from_json(
                 json.get('institusjonellSektorkode')
             ),
-            registrertIForetaksregisteret=json.get(
+            registrert_i_foretaksregisteret=json.get(
                 'registrertIForetaksregisteret'
             ),
-            registrertIStiftelsesregisteret=json.get(
+            registrert_i_stiftelsesregisteret=json.get(
                 'registrertIStiftelsesregisteret'
             ),
-            registrertIFrivillighetsregisteret=json.get(
+            registrert_i_frivillighetsregisteret=json.get(
                 'registrertIFrivillighetsregisteret'
             ),
-            sisteInnsendteAarsregnskap=json.get('sisteInnsendteAarsregnskap'),
+            siste_innsendte_aarsregnskap=json.get('sisteInnsendteAarsregnskap'),
             konkurs=json.get('konkurs'),
-            underAvvikling=json.get('underAvvikling'),
-            underTvangsavviklingEllerTvangsopplosning=json.get(
+            under_avvikling=json.get('underAvvikling'),
+            under_tvangsavvikling_eller_tvangsopplosning=json.get(
                 'underTvangsavviklingEllerTvangsopplosning'
             ),
             maalform=json.get('maalform'),
