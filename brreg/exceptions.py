@@ -1,7 +1,4 @@
-__all__ = [
-    'BrregException',
-    'BrregRestException',
-]
+__all__ = ['BrregException', 'BrregRestException']
 
 
 class BrregException(Exception):
