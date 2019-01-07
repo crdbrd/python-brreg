@@ -14,6 +14,8 @@ class BrregException(Exception):
 class BrregRestException(BrregException):
     """REST API exception."""
 
-    # TODO Expose HTTP status code, etc.
-
-    pass
+    def __init__(self, msg, *, method, url, status):
+        super().__init__(f'REST API exception: {msg}')
+        self.method = method
+        self.url = url
+        self.status = status

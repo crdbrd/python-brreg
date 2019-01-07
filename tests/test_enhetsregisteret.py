@@ -80,15 +80,31 @@ def test_get_enhet_when_http_error():
         content_type='application/json',
     )
 
-    with pytest.raises(BrregRestException) as exc:
+    with pytest.raises(BrregRestException) as exc_info:
         enhetsregisteret.get_enhet('818511752')
 
-    assert 'Bad Request' in str(exc.value)
+    assert 'REST API exception' in str(exc_info.value)
+    assert 'Bad Request' in str(exc_info.value)
+
+    assert exc_info.value.method == 'GET'
+    assert (
+        exc_info.value.url
+        == 'https://data.brreg.no/enhetsregisteret/api/enheter/818511752'
+    )
+    assert exc_info.value.status == 400
 
 
 @responses.activate
-def test_get_enhet_when_http_timeout():
-    with pytest.raises(BrregRestException) as exc:
+def test_get_organization_by_number_when_http_timeout():
+    with pytest.raises(BrregRestException) as exc_info:
         enhetsregisteret.get_enhet('818511752')
 
-    assert 'Connection refused' in str(exc.value)
+    assert 'REST API exception' in str(exc_info.value)
+    assert 'Connection refused' in str(exc_info.value)
+
+    assert exc_info.value.method == 'GET'
+    assert (
+        exc_info.value.url
+        == 'https://data.brreg.no/enhetsregisteret/api/enheter/818511752'
+    )
+    assert exc_info.value.status is None
