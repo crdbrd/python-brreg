@@ -173,7 +173,7 @@ class Enhet:
     maalform: Optional[str]
 
     #: Dato enheten ble slettet
-    slettedato: Optional[str]
+    slettedato: Optional[date]
 
     def __str__(self):
         return f'{self.navn} ({self.organisasjonsnummer})'
@@ -221,7 +221,7 @@ class Enhet:
                 'underTvangsavviklingEllerTvangsopplosning'
             ),
             maalform=json.get('maalform'),
-            slettedato=json.get('slettedato'),
+            slettedato=parse_date(json.get('slettedato')),
         )
 
 

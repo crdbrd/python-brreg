@@ -21,11 +21,34 @@ def test_get_enhet(organization_details_response):
     org = enhetsregisteret.get_enhet('818511752')
 
     assert org.organisasjonsnummer == '818511752'
-
-    # TODO Test all other fields
-
+    assert org.navn == 'SESAM STASJON'
+    assert org.hjemmeside is None
+    assert org.registreringsdato_enhetsregisteret == date(2017, 10, 20)
+    assert org.registrert_i_mvaregisteret is True
+    assert org.naeringskode1 == enhetsregisteret.Naeringskode(
+        kode='52.292', beskrivelse='Skipsmegling'
+    )
+    assert org.antall_ansatte == 50
+    assert org.forretningsadresse == enhetsregisteret.Adresse(
+        land='Norge',
+        landkode='NO',
+        postnummer='0101',
+        poststed='OSLO',
+        adresse=['Tyvholmen 1', None, None, ''],
+        kommune='OSLO',
+        kommunenummer='0301',
+    )
     assert org.stiftelsesdato == date(2017, 10, 20)
+    assert org.institusjonell_sektorkode is None
+    assert org.registrert_i_foretaksregisteret is True
+    assert org.registrert_i_stiftelsesregisteret is False
+    assert org.registrert_i_frivillighetsregisteret is False
     assert org.siste_innsendte_aarsregnskap is None
+    assert org.konkurs is False
+    assert org.under_avvikling is False
+    assert org.under_tvangsavvikling_eller_tvangsopplosning is False
+    assert org.maalform == 'Bokmål'
+    assert org.slettedato is None
 
 
 @responses.activate
@@ -41,6 +64,11 @@ def test_get_enhet_when_deleted(deleted_organization_details_response):
     org = enhetsregisteret.get_enhet('815597222')
 
     assert org.organisasjonsnummer == '815597222'
+    assert org.navn == 'SLETTET ENHET AS'
+    assert org.organisasjonsform == enhetsregisteret.Organisasjonsform(
+        kode='UTBG', beskrivelse='Frivillig registrert utleiebygg'
+    )
+    assert org.slettedato == date(2017, 10, 20)
 
 
 @responses.activate
