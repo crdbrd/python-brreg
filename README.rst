@@ -32,10 +32,14 @@ Project resources
     :target: https://pypi.org/project/brreg/
     :alt: Latest PyPI version
 
-.. image:: https://img.shields.io/travis/com/otovo/python-brreg/master.svg?style=flat
-    :target: https://travis-ci.com/otovo/python-brreg
-    :alt: Travis CI build status
+.. image:: https://img.shields.io/circleci/project/github/otovo/python-brreg/master.svg
+    :target: https://circleci.com/gh/otovo/python-brreg
+    :alt: CircleCI build status
 
-.. image:: https://img.shields.io/coveralls/otovo/python-brreg/master.svg?style=flat
-    :target: https://coveralls.io/github/otovo/python-brreg
+.. image:: https://img.shields.io/readthedocs/brreg.svg
+    :target: https://brreg.readthedocs.io/
+    :alt: Read the Docs build status
+
+.. image:: https://img.shields.io/codecov/c/github/otovo/python-brreg/master.svg
+    :target: https://codecov.io/gh/otovo/python-brreg
     :alt: Test coverage
