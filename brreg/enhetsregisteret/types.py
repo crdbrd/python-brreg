@@ -1,5 +1,7 @@
+# -*- coding: future_fstrings -*-
 from datetime import date, datetime
 from typing import List, Optional
+import typing
 
 import attr
 
@@ -13,14 +15,14 @@ __all__ = [
 ]
 
 
-@attr.s(auto_attribs=True)
+@attr.s()
 class InstitusjonellSektorkode:
 
     #: Sektorkoden
-    kode: str
+    kode  = attr.ib(type=str)
 
     #: Tekstlig beskrivelse av sektorkoden
-    beskrivelse: str
+    beskrivelse  = attr.ib(type=str)
 
     def __str__(self):
         return f'{self.beskrivelse} ({self.kode})'
@@ -35,28 +37,28 @@ class InstitusjonellSektorkode:
         return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
 
 
-@attr.s(auto_attribs=True)
+@attr.s()
 class Adresse:
     #: Land
-    land: str
+    land = attr.ib(type=str)
 
     #: Landkode
-    landkode: str
+    landkode  = attr.ib(type=str)
 
     #: Postnummer
-    postnummer: str
+    postnummer  = attr.ib(type=str)
 
     #: Poststed
-    poststed: str
+    poststed  = attr.ib(type=str)
 
     #: Adresse
-    adresse: List[str]
+    adresse = attr.ib(type=List[str])
 
     #: Kommune
-    kommune: str
+    kommune  = attr.ib(type=str)
 
     #: Kommunenummer
-    kommunenummer: str
+    kommunenummer  = attr.ib(type=str)
 
     def __str__(self):
         return self.adresse[0]
@@ -77,14 +79,14 @@ class Adresse:
         )
 
 
-@attr.s(auto_attribs=True)
+@attr.s()
 class Naeringskode:
 
     #: Næringskoden
-    kode: str
+    kode  = attr.ib(type=str)
 
     #: Tekstlig beskrivelse av næringskoden
-    beskrivelse: str
+    beskrivelse  = attr.ib(type=str)
 
     def __str__(self):
         return f'{self.beskrivelse} ({self.kode})'
@@ -96,14 +98,14 @@ class Naeringskode:
         return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
 
 
-@attr.s(auto_attribs=True)
+@attr.s()
 class Organisasjonsform:
 
     #: Organisasjonsformen
-    kode: str
+    kode  = attr.ib(type=str)
 
     #: Tekstlig beskrivelse av organisasjonsformen
-    beskrivelse: str
+    beskrivelse  = attr.ib(type=str)
 
     def __str__(self):
         return f'{self.beskrivelse} ({self.kode})'
@@ -113,67 +115,67 @@ class Organisasjonsform:
         return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
 
 
-@attr.s(auto_attribs=True)
+@attr.s()
 class Enhet:
     #: Organisasjonsnummer
-    organisasjonsnummer: str
+    organisasjonsnummer  = attr.ib(type=str)
 
     #: Navn
-    navn: str
+    navn  = attr.ib(type=str)
 
     #: Organisasjonsform
-    organisasjonsform: Organisasjonsform
+    organisasjonsform = attr.ib(type=Organisasjonsform)
 
     #: Hjemmeside
-    hjemmeside: Optional[str]
+    hjemmeside = attr.ib(type=Optional[str])
 
     #: Registreringsdato i Enhetsregisteret
-    registreringsdato_enhetsregisteret: Optional[date]
+    registreringsdato_enhetsregisteret = attr.ib(type=Optional[date])
 
     #: Hvorvidt enheten er registrert i MVA-registeret
-    registrert_i_mvaregisteret: Optional[bool]
+    registrert_i_mvaregisteret = attr.ib(type=Optional[bool])
 
     #: Næringskode 1
-    naeringskode1: Optional[Naeringskode]
+    naeringskode1 = attr.ib(type=Optional[Naeringskode])
 
     #: Antall ansatte
-    antall_ansatte: Optional[int]
+    antall_ansatte = attr.ib(type=Optional[int])
 
     #: Forretningsadresse
-    forretningsadresse: Optional[Adresse]
+    forretningsadresse = attr.ib(type=Optional[Adresse])
 
     #: Stiftelsesdato
-    stiftelsesdato: Optional[date]
+    stiftelsesdato = attr.ib(type=Optional[date])
 
     #: Sektorkode
-    institusjonell_sektorkode: Optional[InstitusjonellSektorkode]
+    institusjonell_sektorkode = attr.ib(type=Optional[InstitusjonellSektorkode])
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
-    registrert_i_foretaksregisteret: Optional[bool]
+    registrert_i_foretaksregisteret = attr.ib(type=Optional[bool])
 
     #: Hvorvidt enheten er registrert i Stiftelsesregisteret
-    registrert_i_stiftelsesregisteret: Optional[bool]
+    registrert_i_stiftelsesregisteret = attr.ib(type=Optional[bool])
 
     #: Hvorvidt enheten er registrert i Frivillighetsregisteret
-    registrert_i_frivillighetsregisteret: Optional[bool]
+    registrert_i_frivillighetsregisteret = attr.ib(type=Optional[bool])
 
     #: År for siste innsendte årsregnskap
-    siste_innsendte_aarsregnskap: Optional[int]
+    siste_innsendte_aarsregnskap = attr.ib(type=Optional[int])
 
     #: Hvorvidt enheten er konkurs
-    konkurs: Optional[bool]
+    konkurs = attr.ib(type=Optional[bool])
 
     #: Hvorvidt enheten er under avvikling
-    under_avvikling: Optional[bool]
+    under_avvikling = attr.ib(type=Optional[bool])
 
     #: Hvorvidt enheten er under tvangsavvikling eller tvangsoppløsning
-    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
+    under_tvangsavvikling_eller_tvangsopplosning = attr.ib(type=Optional[bool])
 
     #: Målform
-    maalform: Optional[str]
+    maalform = attr.ib(type=Optional[str])
 
     #: Dato enheten ble slettet
-    slettedato: Optional[date]
+    slettedato = attr.ib(type= Optional[date])
 
     def __str__(self):
         return f'{self.navn} ({self.organisasjonsnummer})'
