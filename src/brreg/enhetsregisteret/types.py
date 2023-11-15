@@ -49,7 +49,7 @@ class Adresse:
     poststed: str
 
     #: Adresse
-    adresse: List[str]
+    adresse: List[Optional[str]]
 
     #: Kommune
     kommune: str
@@ -58,7 +58,7 @@ class Adresse:
     kommunenummer: str
 
     def __str__(self) -> str:
-        return self.adresse[0]
+        return ", ".join(line for line in self.adresse if line)
 
     @classmethod
     def from_json(
