@@ -3,13 +3,22 @@
 See https://data.brreg.no/enhetsregisteret/api/docs/index.html for API details.
 """
 
-from brreg.enhetsregisteret.client import *  # noqa: F403, I001
-from brreg.enhetsregisteret.types import *  # noqa: F403
-
-# Must come after reexport imports
-from brreg.enhetsregisteret import (
-    client,
-    types,
+from brreg.enhetsregisteret._client import get_enhet
+from brreg.enhetsregisteret._types import (
+    Adresse,
+    Enhet,
+    InstitusjonellSektorkode,
+    Naeringskode,
+    Organisasjonsform,
 )
 
-__all__ = client.__all__ + types.__all__
+__all__ = [
+    # From _client module:
+    "get_enhet",
+    # From _types module:
+    "Adresse",
+    "Enhet",
+    "InstitusjonellSektorkode",
+    "Naeringskode",
+    "Organisasjonsform",
+]

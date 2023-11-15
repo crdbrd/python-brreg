@@ -3,10 +3,8 @@ from typing import Optional
 import requests
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret.types import Enhet
 
-__all__ = ["get_enhet"]
-
+from ._types import Enhet
 
 BASE_URL = "https://data.brreg.no/enhetsregisteret/api"
 
