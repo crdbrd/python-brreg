@@ -1,6 +1,6 @@
 from typing import Optional
 
-import requests
+import httpx
 
 from brreg import BrregError, BrregRestError
 
@@ -18,8 +18,9 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
     Raises :class:`BrregRestException` if a REST exception occures
     Raises :class:`BrregException` if an unhandled exception occures
     """
+    res: Optional[httpx.Response] = None
     try:
-        res = requests.get(f"{BASE_URL}/enheter/{organisasjonsnummer}")
+        res = httpx.get(f"{BASE_URL}/enheter/{organisasjonsnummer}")
 
         if res.status_code in (404, 410):
             return None
@@ -27,12 +28,12 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
         res.raise_for_status()
 
         return Enhet.from_json(res.json())
-    except requests.RequestException as exc:
+    except httpx.HTTPError as exc:
         raise BrregRestError(
             str(exc),
             method=(exc.request.method if exc.request else None),
-            url=(exc.request.url if exc.request else None),
-            status=getattr(exc.response, "status_code", None),
+            url=(str(exc.request.url) if exc.request else None),
+            status_code=(res.status_code if res else None),
         ) from exc
     except Exception as exc:
         raise BrregError(exc) from exc

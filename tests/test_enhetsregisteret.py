@@ -1,19 +1,22 @@
 from datetime import date
 
+import httpx
 import pytest
-import responses
+from pytest_httpx import HTTPXMock
 
 from brreg import BrregRestError, enhetsregisteret
 
 
-@responses.activate
-def test_get_enhet(organization_details_response: bytes) -> None:
-    responses.add(
-        responses.GET,
-        "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        body=organization_details_response,
-        status=200,
-        content_type="application/json",
+def test_get_enhet(
+    httpx_mock: HTTPXMock,
+    organization_details_response: bytes,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=organization_details_response,
     )
 
     org = enhetsregisteret.get_enhet("818511752")
@@ -50,14 +53,16 @@ def test_get_enhet(organization_details_response: bytes) -> None:
     assert org.slettedato is None
 
 
-@responses.activate
-def test_get_enhet_when_deleted(deleted_organization_details_response: bytes) -> None:
-    responses.add(
-        responses.GET,
-        "https://data.brreg.no/enhetsregisteret/api/enheter/815597222",
-        body=deleted_organization_details_response,
-        status=200,
-        content_type="application/json",
+def test_get_enhet_when_deleted(
+    httpx_mock: HTTPXMock,
+    deleted_organization_details_response: bytes,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/815597222",
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=deleted_organization_details_response,
     )
 
     org = enhetsregisteret.get_enhet("815597222")
@@ -71,13 +76,14 @@ def test_get_enhet_when_deleted(deleted_organization_details_response: bytes) ->
     assert org.slettedato == date(2017, 10, 20)
 
 
-@responses.activate
-def test_get_enhet_when_gone() -> None:
-    responses.add(
-        responses.GET,
-        "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        status=410,
-        content_type="application/json",
+def test_get_enhet_when_gone(
+    httpx_mock: HTTPXMock,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
+        status_code=410,
+        headers={"content-type": "application/json"},
     )
 
     org = enhetsregisteret.get_enhet("818511752")
@@ -85,13 +91,14 @@ def test_get_enhet_when_gone() -> None:
     assert org is None
 
 
-@responses.activate
-def test_get_enhet_when_not_found() -> None:
-    responses.add(
-        responses.GET,
-        "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        status=404,
-        content_type="application/json",
+def test_get_enhet_when_not_found(
+    httpx_mock: HTTPXMock,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
+        status_code=404,
+        headers={"content-type": "application/json"},
     )
 
     org = enhetsregisteret.get_enhet("818511752")
@@ -99,13 +106,14 @@ def test_get_enhet_when_not_found() -> None:
     assert org is None
 
 
-@responses.activate
-def test_get_enhet_when_http_error() -> None:
-    responses.add(
-        responses.GET,
-        "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        status=400,
-        content_type="application/json",
+def test_get_enhet_when_http_error(
+    httpx_mock: HTTPXMock,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
+        status_code=400,
+        headers={"content-type": "application/json"},
     )
 
     with pytest.raises(BrregRestError) as exc_info:
@@ -119,11 +127,16 @@ def test_get_enhet_when_http_error() -> None:
         exc_info.value.url
         == "https://data.brreg.no/enhetsregisteret/api/enheter/818511752"
     )
-    assert exc_info.value.status == 400
+    assert exc_info.value.status_code == 400
 
 
-@responses.activate
-def test_get_organization_by_number_when_http_timeout() -> None:
+def test_get_organization_by_number_when_http_timeout(
+    httpx_mock: HTTPXMock,
+) -> None:
+    httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
+        httpx.ConnectTimeout("Connection refused"),
+    )
+
     with pytest.raises(BrregRestError) as exc_info:
         enhetsregisteret.get_enhet("818511752")
 
@@ -135,4 +148,4 @@ def test_get_organization_by_number_when_http_timeout() -> None:
         exc_info.value.url
         == "https://data.brreg.no/enhetsregisteret/api/enheter/818511752"
     )
-    assert exc_info.value.status is None
+    assert exc_info.value.status_code is None

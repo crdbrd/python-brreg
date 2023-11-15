@@ -18,9 +18,9 @@ class BrregRestError(BrregError):
         *,
         method: Optional[str],
         url: Optional[str],
-        status: Optional[int],
+        status_code: Optional[int],
     ) -> None:
         super().__init__(f"REST API exception: {msg}")
         self.method = method
         self.url = url
-        self.status = status
+        self.status_code = status_code
