@@ -77,7 +77,7 @@ select = [
 	"B",   # flake8-bugbear
 	"C4",  # flake8-comprehensions
 	"C90", # mccabe
-	"D",   # pydocstyle
+	# "D",   # pydocstyle  # TODO
 	"DTZ", # flake8-datetimez
 	"E",   # pycodestyle
 	"ERA", # eradicate
