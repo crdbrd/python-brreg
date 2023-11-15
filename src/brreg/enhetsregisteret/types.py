@@ -1,4 +1,4 @@
-from datetime import date, datetime
+import datetime as dt
 from typing import List, Optional
 
 import attr
@@ -122,7 +122,7 @@ class Enhet:
     hjemmeside: Optional[str]
 
     #: Registreringsdato i Enhetsregisteret
-    registreringsdato_enhetsregisteret: Optional[date]
+    registreringsdato_enhetsregisteret: Optional[dt.date]
 
     #: Hvorvidt enheten er registrert i MVA-registeret
     registrert_i_mvaregisteret: Optional[bool]
@@ -137,7 +137,7 @@ class Enhet:
     forretningsadresse: Optional[Adresse]
 
     #: Stiftelsesdato
-    stiftelsesdato: Optional[date]
+    stiftelsesdato: Optional[dt.date]
 
     #: Sektorkode
     institusjonell_sektorkode: Optional[InstitusjonellSektorkode]
@@ -167,7 +167,7 @@ class Enhet:
     maalform: Optional[str]
 
     #: Dato enheten ble slettet
-    slettedato: Optional[date]
+    slettedato: Optional[dt.date]
 
     def __str__(self) -> str:
         return f"{self.navn} ({self.organisasjonsnummer})"
@@ -213,10 +213,14 @@ class Enhet:
         )
 
 
-def parse_date(date_string: Optional[str]) -> Optional[date]:
+def parse_date(date_string: Optional[str]) -> Optional[dt.date]:
     if date_string is None:
         return None
-    return datetime.strptime(date_string, "%Y-%m-%d").date()
+    return (
+        dt.datetime.strptime(date_string, "%Y-%m-%d")
+        .replace(tzinfo=dt.timezone.utc)
+        .date()
+    )
 
 
 def parse_int(int_string: Optional[str]) -> Optional[int]:
