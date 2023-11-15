@@ -1,7 +1,7 @@
 import datetime as dt
 from typing import Any, Dict, List, Optional
 
-import attr
+from pydantic import BaseModel
 
 __all__ = [
     "Adresse",
@@ -12,8 +12,7 @@ __all__ = [
 ]
 
 
-@attr.s(auto_attribs=True)
-class InstitusjonellSektorkode:
+class InstitusjonellSektorkode(BaseModel):
     #: Sektorkoden
     kode: str
 
@@ -34,8 +33,7 @@ class InstitusjonellSektorkode:
         return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
-@attr.s(auto_attribs=True)
-class Adresse:
+class Adresse(BaseModel):
     #: Land
     land: str
 
@@ -79,8 +77,7 @@ class Adresse:
         )
 
 
-@attr.s(auto_attribs=True)
-class Naeringskode:
+class Naeringskode(BaseModel):
     #: Næringskoden
     kode: str
 
@@ -100,8 +97,7 @@ class Naeringskode:
         return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
-@attr.s(auto_attribs=True)
-class Organisasjonsform:
+class Organisasjonsform(BaseModel):
     #: Organisasjonsformen
     kode: str
 
@@ -119,8 +115,7 @@ class Organisasjonsform:
         return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
-@attr.s(auto_attribs=True)
-class Enhet:
+class Enhet(BaseModel):
     #: Organisasjonsnummer
     organisasjonsnummer: str
 
