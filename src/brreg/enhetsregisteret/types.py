@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 import attr
 
@@ -24,7 +24,10 @@ class InstitusjonellSektorkode:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(cls, json: Optional[dict]) -> Optional["InstitusjonellSektorkode"]:
+    def from_json(
+        cls,
+        json: Optional[Dict[str, Any]],
+    ) -> Optional["InstitusjonellSektorkode"]:
         if not json:
             return None
 
@@ -58,7 +61,10 @@ class Adresse:
         return self.adresse[0]
 
     @classmethod
-    def from_json(cls, json: Optional[dict]) -> Optional["Adresse"]:
+    def from_json(
+        cls,
+        json: Optional[Dict[str, Any]],
+    ) -> Optional["Adresse"]:
         if not json:
             return None
 
@@ -85,7 +91,10 @@ class Naeringskode:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(cls, json: Optional[dict]) -> Optional["Naeringskode"]:
+    def from_json(
+        cls,
+        json: Optional[Dict[str, Any]],
+    ) -> Optional["Naeringskode"]:
         if not json:
             return None
         return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
@@ -103,7 +112,10 @@ class Organisasjonsform:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(cls, json: dict) -> "Organisasjonsform":
+    def from_json(
+        cls,
+        json: Dict[str, Any],
+    ) -> "Organisasjonsform":
         return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
@@ -173,7 +185,10 @@ class Enhet:
         return f"{self.navn} ({self.organisasjonsnummer})"
 
     @classmethod
-    def from_json(cls, json: dict) -> Optional["Enhet"]:
+    def from_json(
+        cls,
+        json: Dict[str, Any],
+    ) -> Optional["Enhet"]:
         if not json:
             return None
 
