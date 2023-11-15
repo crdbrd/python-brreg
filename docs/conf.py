@@ -1,6 +1,6 @@
 """Sphinx configuration file."""
 
-project = "brreg"
+project = "python-brreg"
 author = "Stein Magnus Jodal"
 copyright = f"2019 Otovo ASA, 2023 {author}"  # noqa: A001
 
