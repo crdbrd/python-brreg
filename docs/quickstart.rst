@@ -16,9 +16,9 @@ To get details about an organization ("enhet") given its organization number:
 >>> enhet.organisasjonsnummer
 '915501680'
 >>> enhet.navn
-'OTOVO AS'
+'OTOVO ASA'
 >>> enhet.organisasjonsform
-Organisasjonsform(kode='AS', beskrivelse='Aksjeselskap')
+Organisasjonsform(kode='ASA', beskrivelse='Allmennaksjeselskap')
 >>> enhet.forretningsadresse
-Adresse(land='Norge', landkode='NO', postnummer='0181', poststed='OSLO', adresse=['Torggata 5'], kommune='OSLO', kommunenummer='0301')
+Adresse(land='Norge', landkode='NO', postnummer='0181', poststed='OSLO', adresse=['Torggata 7'], kommune='OSLO', kommunenummer='0301')
 >>>
