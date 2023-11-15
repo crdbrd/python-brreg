@@ -11,7 +11,7 @@ Installation
 
 The library requires Python 3.8 or newer.
 
-The package is available from [PyPI](https://pypi.org/project/brreg/):
+The package is available from `PyPI <https://pypi.org/project/brreg/`_:
 
 .. code-block:: console
 
@@ -48,5 +48,5 @@ License
 2019 `Otovo ASA <https://www.otovo.com/>`_,
 2023 Stein Magnus Jodal and contributors.
 
-`python-brreg` is licensed under the
+``python-brreg`` is licensed under the
 `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.
