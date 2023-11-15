@@ -12,12 +12,10 @@ if TYPE_CHECKING:
 
 
 class Client:
-    client: httpx.Client
+    _client: httpx.Client
 
-    def __new__(cls) -> Client:
-        self = super().__new__(cls)
+    def __init__(self) -> None:
         self.open()
-        return self
 
     def __enter__(self) -> Client:
         return self
@@ -31,12 +29,12 @@ class Client:
         self.close()
 
     def open(self) -> None:
-        self.client = httpx.Client(
+        self._client = httpx.Client(
             base_url="https://data.brreg.no/enhetsregisteret/api",
         )
 
     def close(self) -> None:
-        self.client.close()
+        self._client.close()
 
     def get_enhet(self, organisasjonsnummer: str) -> Optional[Enhet]:
         """Get :class:`Enhet` given an organization number.
@@ -49,7 +47,7 @@ class Client:
         """
         res: Optional[httpx.Response] = None
         try:
-            res = self.client.get(f"/enheter/{organisasjonsnummer}")
+            res = self._client.get(f"/enheter/{organisasjonsnummer}")
             if res.status_code in (404, 410):
                 return None
             res.raise_for_status()
