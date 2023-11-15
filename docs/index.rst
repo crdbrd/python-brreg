@@ -1,6 +1,6 @@
-=====
-brreg
-=====
+============
+python-brreg
+============
 
 ``python-brreg`` is a Python library for interacting with the open APIs of the
 Norwegian Business Registry, `Brønnøysundregistrene <https://www.brreg.no/>`_.
