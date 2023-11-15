@@ -7,7 +7,7 @@ from brreg import BrregRestError, enhetsregisteret
 
 
 @responses.activate
-def test_get_enhet(organization_details_response):
+def test_get_enhet(organization_details_response: bytes) -> None:
     responses.add(
         responses.GET,
         "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -18,6 +18,7 @@ def test_get_enhet(organization_details_response):
 
     org = enhetsregisteret.get_enhet("818511752")
 
+    assert org is not None
     assert org.organisasjonsnummer == "818511752"
     assert org.navn == "SESAM STASJON"
     assert org.hjemmeside is None
@@ -50,7 +51,7 @@ def test_get_enhet(organization_details_response):
 
 
 @responses.activate
-def test_get_enhet_when_deleted(deleted_organization_details_response):
+def test_get_enhet_when_deleted(deleted_organization_details_response: bytes) -> None:
     responses.add(
         responses.GET,
         "https://data.brreg.no/enhetsregisteret/api/enheter/815597222",
@@ -61,6 +62,7 @@ def test_get_enhet_when_deleted(deleted_organization_details_response):
 
     org = enhetsregisteret.get_enhet("815597222")
 
+    assert org is not None
     assert org.organisasjonsnummer == "815597222"
     assert org.navn == "SLETTET ENHET AS"
     assert org.organisasjonsform == enhetsregisteret.Organisasjonsform(
@@ -70,7 +72,7 @@ def test_get_enhet_when_deleted(deleted_organization_details_response):
 
 
 @responses.activate
-def test_get_enhet_when_gone():
+def test_get_enhet_when_gone() -> None:
     responses.add(
         responses.GET,
         "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -84,7 +86,7 @@ def test_get_enhet_when_gone():
 
 
 @responses.activate
-def test_get_enhet_when_not_found():
+def test_get_enhet_when_not_found() -> None:
     responses.add(
         responses.GET,
         "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -98,7 +100,7 @@ def test_get_enhet_when_not_found():
 
 
 @responses.activate
-def test_get_enhet_when_http_error():
+def test_get_enhet_when_http_error() -> None:
     responses.add(
         responses.GET,
         "https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -121,7 +123,7 @@ def test_get_enhet_when_http_error():
 
 
 @responses.activate
-def test_get_organization_by_number_when_http_timeout():
+def test_get_organization_by_number_when_http_timeout() -> None:
     with pytest.raises(BrregRestError) as exc_info:
         enhetsregisteret.get_enhet("818511752")
 

@@ -1,6 +1,9 @@
 __all__ = ["BrregError", "BrregRestError"]
 
 
+from typing import Optional
+
+
 class BrregError(Exception):
     """Top-level exception.
 
@@ -12,7 +15,14 @@ class BrregError(Exception):
 class BrregRestError(BrregError):
     """REST API exception."""
 
-    def __init__(self, msg, *, method, url, status):
+    def __init__(
+        self,
+        msg: str,
+        *,
+        method: Optional[str],
+        url: Optional[str],
+        status: Optional[int],
+    ) -> None:
         super().__init__(f"REST API exception: {msg}")
         self.method = method
         self.url = url

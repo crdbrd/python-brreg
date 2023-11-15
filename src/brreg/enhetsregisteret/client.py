@@ -31,9 +31,9 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
         return Enhet.from_json(res.json())
     except requests.RequestException as exc:
         raise BrregRestError(
-            exc,
-            method=exc.request.method,
-            url=exc.request.url,
+            str(exc),
+            method=(exc.request.method if exc.request else None),
+            url=(exc.request.url if exc.request else None),
             status=getattr(exc.response, "status_code", None),
         ) from exc
     except Exception as exc:

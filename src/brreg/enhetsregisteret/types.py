@@ -20,7 +20,7 @@ class InstitusjonellSektorkode:
     #: Tekstlig beskrivelse av sektorkoden
     beskrivelse: str
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
@@ -54,7 +54,7 @@ class Adresse:
     #: Kommunenummer
     kommunenummer: str
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.adresse[0]
 
     @classmethod
@@ -81,7 +81,7 @@ class Naeringskode:
     #: Tekstlig beskrivelse av næringskoden
     beskrivelse: str
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
@@ -99,7 +99,7 @@ class Organisasjonsform:
     #: Tekstlig beskrivelse av organisasjonsformen
     beskrivelse: str
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
@@ -169,7 +169,7 @@ class Enhet:
     #: Dato enheten ble slettet
     slettedato: Optional[date]
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f"{self.navn} ({self.organisasjonsnummer})"
 
     @classmethod
