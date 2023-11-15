@@ -6,10 +6,10 @@ from brreg import BrregException, BrregRestException
 from brreg.enhetsregisteret.types import Enhet
 
 
-__all__ = ['get_enhet']
+__all__ = ["get_enhet"]
 
 
-BASE_URL = 'https://data.brreg.no/enhetsregisteret/api'
+BASE_URL = "https://data.brreg.no/enhetsregisteret/api"
 
 
 def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
@@ -23,7 +23,7 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
     """
 
     try:
-        res = requests.get(f'{BASE_URL}/enheter/{organisasjonsnummer}')
+        res = requests.get(f"{BASE_URL}/enheter/{organisasjonsnummer}")
 
         if res.status_code in (404, 410):
             return None
@@ -36,7 +36,7 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
             exc,
             method=exc.request.method,
             url=exc.request.url,
-            status=getattr(exc.response, 'status_code', None),
+            status=getattr(exc.response, "status_code", None),
         ) from exc
     except Exception as exc:
         raise BrregException(exc)

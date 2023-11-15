@@ -5,17 +5,16 @@ import attr
 
 
 __all__ = [
-    'Adresse',
-    'Enhet',
-    'InstitusjonellSektorkode',
-    'Naeringskode',
-    'Organisasjonsform',
+    "Adresse",
+    "Enhet",
+    "InstitusjonellSektorkode",
+    "Naeringskode",
+    "Organisasjonsform",
 ]
 
 
 @attr.s(auto_attribs=True)
 class InstitusjonellSektorkode:
-
     #: Sektorkoden
     kode: str
 
@@ -23,16 +22,14 @@ class InstitusjonellSektorkode:
     beskrivelse: str
 
     def __str__(self):
-        return f'{self.beskrivelse} ({self.kode})'
+        return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(
-        cls, json: Optional[dict]
-    ) -> Optional['InstitusjonellSektorkode']:
+    def from_json(cls, json: Optional[dict]) -> Optional["InstitusjonellSektorkode"]:
         if not json:
             return None
 
-        return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
+        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
 @attr.s(auto_attribs=True)
@@ -62,24 +59,23 @@ class Adresse:
         return self.adresse[0]
 
     @classmethod
-    def from_json(cls, json: Optional[dict]) -> Optional['Adresse']:
+    def from_json(cls, json: Optional[dict]) -> Optional["Adresse"]:
         if not json:
             return None
 
         return cls(
-            land=json['land'],
-            landkode=json['landkode'],
-            postnummer=json['postnummer'],
-            poststed=json['poststed'],
-            adresse=json['adresse'],
-            kommune=json['kommune'],
-            kommunenummer=json['kommunenummer'],
+            land=json["land"],
+            landkode=json["landkode"],
+            postnummer=json["postnummer"],
+            poststed=json["poststed"],
+            adresse=json["adresse"],
+            kommune=json["kommune"],
+            kommunenummer=json["kommunenummer"],
         )
 
 
 @attr.s(auto_attribs=True)
 class Naeringskode:
-
     #: Næringskoden
     kode: str
 
@@ -87,18 +83,17 @@ class Naeringskode:
     beskrivelse: str
 
     def __str__(self):
-        return f'{self.beskrivelse} ({self.kode})'
+        return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(cls, json: Optional[dict]) -> Optional['Naeringskode']:
+    def from_json(cls, json: Optional[dict]) -> Optional["Naeringskode"]:
         if not json:
             return None
-        return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
+        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
 @attr.s(auto_attribs=True)
 class Organisasjonsform:
-
     #: Organisasjonsformen
     kode: str
 
@@ -106,11 +101,11 @@ class Organisasjonsform:
     beskrivelse: str
 
     def __str__(self):
-        return f'{self.beskrivelse} ({self.kode})'
+        return f"{self.beskrivelse} ({self.kode})"
 
     @classmethod
-    def from_json(cls, json: dict) -> 'Organisasjonsform':
-        return cls(kode=json['kode'], beskrivelse=json['beskrivelse'])
+    def from_json(cls, json: dict) -> "Organisasjonsform":
+        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
 
 
 @attr.s(auto_attribs=True)
@@ -176,59 +171,53 @@ class Enhet:
     slettedato: Optional[date]
 
     def __str__(self):
-        return f'{self.navn} ({self.organisasjonsnummer})'
+        return f"{self.navn} ({self.organisasjonsnummer})"
 
     @classmethod
-    def from_json(cls, json: dict) -> Optional['Enhet']:
+    def from_json(cls, json: dict) -> Optional["Enhet"]:
         if not json:
             return None
 
         return cls(
-            organisasjonsnummer=json['organisasjonsnummer'],
-            navn=json['navn'],
-            organisasjonsform=Organisasjonsform.from_json(
-                json['organisasjonsform']
-            ),
-            hjemmeside=json.get('hjemmeside'),
+            organisasjonsnummer=json["organisasjonsnummer"],
+            navn=json["navn"],
+            organisasjonsform=Organisasjonsform.from_json(json["organisasjonsform"]),
+            hjemmeside=json.get("hjemmeside"),
             registreringsdato_enhetsregisteret=parse_date(
-                json.get('registreringsdatoEnhetsregisteret')
+                json.get("registreringsdatoEnhetsregisteret")
             ),
-            registrert_i_mvaregisteret=json.get('registrertIMvaregisteret'),
-            naeringskode1=Naeringskode.from_json(json.get('naeringskode1')),
-            antall_ansatte=json.get('antallAnsatte'),
-            forretningsadresse=Adresse.from_json(
-                json.get('forretningsadresse')
-            ),
-            stiftelsesdato=parse_date(json.get('stiftelsesdato')),
+            registrert_i_mvaregisteret=json.get("registrertIMvaregisteret"),
+            naeringskode1=Naeringskode.from_json(json.get("naeringskode1")),
+            antall_ansatte=json.get("antallAnsatte"),
+            forretningsadresse=Adresse.from_json(json.get("forretningsadresse")),
+            stiftelsesdato=parse_date(json.get("stiftelsesdato")),
             institusjonell_sektorkode=InstitusjonellSektorkode.from_json(
-                json.get('institusjonellSektorkode')
+                json.get("institusjonellSektorkode")
             ),
-            registrert_i_foretaksregisteret=json.get(
-                'registrertIForetaksregisteret'
-            ),
+            registrert_i_foretaksregisteret=json.get("registrertIForetaksregisteret"),
             registrert_i_stiftelsesregisteret=json.get(
-                'registrertIStiftelsesregisteret'
+                "registrertIStiftelsesregisteret"
             ),
             registrert_i_frivillighetsregisteret=json.get(
-                'registrertIFrivillighetsregisteret'
+                "registrertIFrivillighetsregisteret"
             ),
             siste_innsendte_aarsregnskap=parse_int(
-                json.get('sisteInnsendteAarsregnskap')
+                json.get("sisteInnsendteAarsregnskap")
             ),
-            konkurs=json.get('konkurs'),
-            under_avvikling=json.get('underAvvikling'),
+            konkurs=json.get("konkurs"),
+            under_avvikling=json.get("underAvvikling"),
             under_tvangsavvikling_eller_tvangsopplosning=json.get(
-                'underTvangsavviklingEllerTvangsopplosning'
+                "underTvangsavviklingEllerTvangsopplosning"
             ),
-            maalform=json.get('maalform'),
-            slettedato=parse_date(json.get('slettedato')),
+            maalform=json.get("maalform"),
+            slettedato=parse_date(json.get("slettedato")),
         )
 
 
 def parse_date(date_string: Optional[str]) -> Optional[date]:
     if date_string is None:
         return None
-    return datetime.strptime(date_string, '%Y-%m-%d').date()
+    return datetime.strptime(date_string, "%Y-%m-%d").date()
 
 
 def parse_int(int_string: Optional[str]) -> Optional[int]:

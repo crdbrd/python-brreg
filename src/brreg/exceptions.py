@@ -1,4 +1,4 @@
-__all__ = ['BrregException', 'BrregRestException']
+__all__ = ["BrregException", "BrregRestException"]
 
 
 class BrregException(Exception):
@@ -10,12 +10,11 @@ class BrregException(Exception):
 
     pass
 
-
 class BrregRestException(BrregException):
     """REST API exception."""
 
     def __init__(self, msg, *, method, url, status):
-        super().__init__(f'REST API exception: {msg}')
+        super().__init__(f"REST API exception: {msg}")
         self.method = method
         self.url = url
         self.status = status
