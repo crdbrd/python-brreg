@@ -19,7 +19,7 @@ def test_get_enhet(
         content=organization_details_response,
     )
 
-    org = enhetsregisteret.get_enhet("818511752")
+    org = enhetsregisteret.Client().get_enhet("818511752")
 
     assert org is not None
     assert org.organisasjonsnummer == "818511752"
@@ -65,7 +65,7 @@ def test_get_enhet_when_deleted(
         content=deleted_organization_details_response,
     )
 
-    org = enhetsregisteret.get_enhet("815597222")
+    org = enhetsregisteret.Client().get_enhet("815597222")
 
     assert org is not None
     assert org.organisasjonsnummer == "815597222"
@@ -86,7 +86,7 @@ def test_get_enhet_when_gone(
         headers={"content-type": "application/json"},
     )
 
-    org = enhetsregisteret.get_enhet("818511752")
+    org = enhetsregisteret.Client().get_enhet("818511752")
 
     assert org is None
 
@@ -101,7 +101,7 @@ def test_get_enhet_when_not_found(
         headers={"content-type": "application/json"},
     )
 
-    org = enhetsregisteret.get_enhet("818511752")
+    org = enhetsregisteret.Client().get_enhet("818511752")
 
     assert org is None
 
@@ -117,7 +117,7 @@ def test_get_enhet_when_http_error(
     )
 
     with pytest.raises(BrregRestError) as exc_info:
-        enhetsregisteret.get_enhet("818511752")
+        enhetsregisteret.Client().get_enhet("818511752")
 
     assert "REST API exception" in str(exc_info.value)
     assert "Bad Request" in str(exc_info.value)
@@ -138,7 +138,7 @@ def test_get_organization_by_number_when_http_timeout(
     )
 
     with pytest.raises(BrregRestError) as exc_info:
-        enhetsregisteret.get_enhet("818511752")
+        enhetsregisteret.Client().get_enhet("818511752")
 
     assert "REST API exception" in str(exc_info.value)
     assert "Connection refused" in str(exc_info.value)
