@@ -43,9 +43,6 @@ pytest = "^7.4.2"
 pytest-cov = "^4.1.0"
 pytest-httpx = "0.22.0"
 
-[tool.poetry.group.typing.dependencies]
-types-requests = "^2.31.0.10"
-
 [tool.coverage.paths]
 source = ["src"]
 
