@@ -53,7 +53,7 @@ def mypy(session: nox.Session) -> None:
         "install",
         "--quiet",
         "--all-extras",
-        "--only=main,dev,docs,tests,mypy",
+        "--only=main,dev,docs,tests,typing,mypy",
         external=True,
     )
     session.run("mypy", *args)
@@ -68,7 +68,7 @@ def pyright(session: nox.Session) -> None:
         "install",
         "--quiet",
         "--all-extras",
-        "--only=main,dev,docs,tests,pyright",
+        "--only=main,dev,docs,tests,typing,pyright",
         external=True,
     )
     session.run("pyright", *args)
