@@ -1,7 +1,7 @@
-__all__ = ["BrregException", "BrregRestException"]
+__all__ = ["BrregError", "BrregRestError"]
 
 
-class BrregException(Exception):
+class BrregError(Exception):
     """Top-level exception.
 
     All exceptions raised by the :mod:`brreg` library are subclasses of this
@@ -9,7 +9,7 @@ class BrregException(Exception):
     """
 
 
-class BrregRestException(BrregException):
+class BrregRestError(BrregError):
     """REST API exception."""
 
     def __init__(self, msg, *, method, url, status):

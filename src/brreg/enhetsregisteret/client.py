@@ -2,7 +2,7 @@ from typing import Optional
 
 import requests
 
-from brreg import BrregException, BrregRestException
+from brreg import BrregError, BrregRestError
 from brreg.enhetsregisteret.types import Enhet
 
 __all__ = ["get_enhet"]
@@ -30,11 +30,11 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
 
         return Enhet.from_json(res.json())
     except requests.RequestException as exc:
-        raise BrregRestException(
+        raise BrregRestError(
             exc,
             method=exc.request.method,
             url=exc.request.url,
             status=getattr(exc.response, "status_code", None),
         ) from exc
     except Exception as exc:
-        raise BrregException(exc)
+        raise BrregError(exc) from exc

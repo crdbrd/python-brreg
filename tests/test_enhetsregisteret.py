@@ -3,7 +3,7 @@ from datetime import date
 import pytest
 import responses
 
-from brreg import BrregRestException, enhetsregisteret
+from brreg import BrregRestError, enhetsregisteret
 
 
 @responses.activate
@@ -106,7 +106,7 @@ def test_get_enhet_when_http_error():
         content_type="application/json",
     )
 
-    with pytest.raises(BrregRestException) as exc_info:
+    with pytest.raises(BrregRestError) as exc_info:
         enhetsregisteret.get_enhet("818511752")
 
     assert "REST API exception" in str(exc_info.value)
@@ -122,7 +122,7 @@ def test_get_enhet_when_http_error():
 
 @responses.activate
 def test_get_organization_by_number_when_http_timeout():
-    with pytest.raises(BrregRestException) as exc_info:
+    with pytest.raises(BrregRestError) as exc_info:
         enhetsregisteret.get_enhet("818511752")
 
     assert "REST API exception" in str(exc_info.value)
