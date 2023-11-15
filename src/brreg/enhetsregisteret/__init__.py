@@ -3,7 +3,7 @@
 See https://data.brreg.no/enhetsregisteret/api/docs/index.html for API details.
 """
 
-from brreg.enhetsregisteret._client import get_enhet
+from brreg.enhetsregisteret._client import Client
 from brreg.enhetsregisteret._types import (
     Adresse,
     Enhet,
@@ -14,7 +14,7 @@ from brreg.enhetsregisteret._types import (
 
 __all__ = [
     # From _client module:
-    "get_enhet",
+    "Client",
     # From _types module:
     "Adresse",
     "Enhet",

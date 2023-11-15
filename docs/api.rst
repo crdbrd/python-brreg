@@ -7,12 +7,12 @@ API reference
 Exceptions
 ==========
 
-.. autoclass:: BrregException
+.. autoclass:: BrregError
    :members:
    :undoc-members:
 
 
-.. autoclass:: BrregRestException
+.. autoclass:: BrregRestError
    :members:
    :undoc-members:
 
@@ -22,7 +22,9 @@ Enhetsregisteret
 
 .. automodule:: brreg.enhetsregisteret
 
-.. autofunction:: brreg.enhetsregisteret.get_enhet
+.. autoclass:: brreg.enhetsregisteret.Client
+   :members:
+   :undoc-members:
 
 .. autoclass:: brreg.enhetsregisteret.Enhet
    :members:

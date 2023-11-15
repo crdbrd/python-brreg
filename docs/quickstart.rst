@@ -11,8 +11,9 @@ Organization details by organization number
 
 To get details about an organization ("enhet") given its organization number:
 
->>> from brreg import enhetsregisteret
->>> enhet = enhetsregisteret.get_enhet('915501680')
+>>> from brreg.enhetsregisteret import Client
+>>> client = Client()
+>>> enhet = client.get_enhet('915501680')
 >>> enhet.organisasjonsnummer
 '915501680'
 >>> enhet.navn
