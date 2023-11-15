@@ -8,7 +8,6 @@ class BrregException(Exception):
     exception.
     """
 
-    pass
 
 class BrregRestException(BrregException):
     """REST API exception."""

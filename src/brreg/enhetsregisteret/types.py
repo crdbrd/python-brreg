@@ -3,7 +3,6 @@ from typing import List, Optional
 
 import attr
 
-
 __all__ = [
     "Adresse",
     "Enhet",

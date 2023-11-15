@@ -5,7 +5,6 @@ import requests
 from brreg import BrregException, BrregRestException
 from brreg.enhetsregisteret.types import Enhet
 
-
 __all__ = ["get_enhet"]
 
 
@@ -21,7 +20,6 @@ def get_enhet(organisasjonsnummer: str) -> Optional[Enhet]:
     Raises :class:`BrregRestException` if a REST exception occures
     Raises :class:`BrregException` if an unhandled exception occures
     """
-
     try:
         res = requests.get(f"{BASE_URL}/enheter/{organisasjonsnummer}")
 

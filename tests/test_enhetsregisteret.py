@@ -1,11 +1,9 @@
 from datetime import date
 
 import pytest
-
 import responses
 
-from brreg import BrregRestException
-from brreg import enhetsregisteret
+from brreg import BrregRestException, enhetsregisteret
 
 
 @responses.activate
