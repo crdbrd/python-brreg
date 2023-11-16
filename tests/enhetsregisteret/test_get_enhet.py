@@ -7,7 +7,7 @@ from pytest_httpx import HTTPXMock
 
 from brreg import BrregRestError, enhetsregisteret
 
-DATA_DIR = Path(__file__).parent / "data"
+DATA_DIR = Path(__file__).parent.parent / "data"
 
 
 def test_get_enhet(httpx_mock: HTTPXMock) -> None:
