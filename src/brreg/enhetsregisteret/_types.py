@@ -94,7 +94,7 @@ class Enhet(BaseModel):
     er registrert i Enhetsregisteret. Identifiseres med organisasjonsnummer.
     """
 
-    model_config = ConfigDict(alias_generator=to_camel, from_attributes=True)
+    model_config = ConfigDict(alias_generator=to_camel)
 
     #: Organisasjonsnummer
     organisasjonsnummer: str
