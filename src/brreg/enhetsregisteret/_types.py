@@ -49,6 +49,13 @@ class Adresse(BaseModel):
 
 
 class Naeringskode(BaseModel):
+    """Næringskode.
+
+    Organisasjonsform er virksomhetens formelle organisering og gir
+    retningslinjer overfor blant annet ansvarsforhold, skatt, revisjonsplikt,
+    rettigheter og plikter.
+    """
+
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Næringskoden
@@ -62,6 +69,12 @@ class Naeringskode(BaseModel):
 
 
 class Organisasjonsform(BaseModel):
+    """Organisasjonsform er virksomhetens formelle organisering.
+
+    Organisasjonsform gir retningslinjer overfor blant annet ansvarsforhold,
+    skatt, revisjonsplikt, rettigheter og plikter.
+    """
+
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Organisasjonsformen
@@ -75,6 +88,12 @@ class Organisasjonsform(BaseModel):
 
 
 class Enhet(BaseModel):
+    """Enhet på øverste nivå i registreringsstrukturen i Enhetsregisteret.
+
+    Eksempelvis enkeltpersonforetak, foreninger, selskap, sameier og andre som
+    er registrert i Enhetsregisteret. Identifiseres med organisasjonsnummer.
+    """
+
     model_config = ConfigDict(alias_generator=to_camel, from_attributes=True)
 
     #: Organisasjonsnummer
