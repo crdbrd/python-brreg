@@ -1,7 +1,8 @@
 import datetime as dt
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
-import attr
+from pydantic import BaseModel, ConfigDict, Field
+from pydantic.alias_generators import to_camel
 
 __all__ = [
     "Adresse",
@@ -12,115 +13,89 @@ __all__ = [
 ]
 
 
-@attr.s(auto_attribs=True)
-class InstitusjonellSektorkode:
+class InstitusjonellSektorkode(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
     #: Sektorkoden
-    kode: str
+    kode: Optional[str] = None
 
     #: Tekstlig beskrivelse av sektorkoden
-    beskrivelse: str
-
-    def __str__(self) -> str:
-        return f"{self.beskrivelse} ({self.kode})"
-
-    @classmethod
-    def from_json(
-        cls,
-        json: Optional[Dict[str, Any]],
-    ) -> Optional["InstitusjonellSektorkode"]:
-        if not json:
-            return None
-
-        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
+    beskrivelse: Optional[str] = None
 
 
-@attr.s(auto_attribs=True)
-class Adresse:
-    #: Land
-    land: str
-
-    #: Landkode
-    landkode: str
-
-    #: Postnummer
-    postnummer: str
-
-    #: Poststed
-    poststed: str
+class Adresse(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
 
     #: Adresse
-    adresse: List[Optional[str]]
+    adresse: List[Optional[str]] = Field(default_factory=list)
 
-    #: Kommune
-    kommune: str
+    #: Postnummer
+    postnummer: Optional[str] = None
+
+    #: Poststed
+    poststed: Optional[str] = None
 
     #: Kommunenummer
-    kommunenummer: str
+    kommunenummer: Optional[str] = None
 
-    def __str__(self) -> str:
-        return ", ".join(line for line in self.adresse if line)
+    #: Kommune
+    kommune: Optional[str] = None
 
-    @classmethod
-    def from_json(
-        cls,
-        json: Optional[Dict[str, Any]],
-    ) -> Optional["Adresse"]:
-        if not json:
-            return None
+    #: Landkode
+    landkode: Optional[str] = None
 
-        return cls(
-            land=json["land"],
-            landkode=json["landkode"],
-            postnummer=json["postnummer"],
-            poststed=json["poststed"],
-            adresse=json["adresse"],
-            kommune=json["kommune"],
-            kommunenummer=json["kommunenummer"],
-        )
+    #: Land
+    land: Optional[str] = None
 
 
-@attr.s(auto_attribs=True)
-class Naeringskode:
+class Naeringskode(BaseModel):
+    """Næringskode.
+
+    Organisasjonsform er virksomhetens formelle organisering og gir
+    retningslinjer overfor blant annet ansvarsforhold, skatt, revisjonsplikt,
+    rettigheter og plikter.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel)
+
     #: Næringskoden
-    kode: str
+    kode: Optional[str] = None
 
     #: Tekstlig beskrivelse av næringskoden
-    beskrivelse: str
+    beskrivelse: Optional[str] = None
 
-    def __str__(self) -> str:
-        return f"{self.beskrivelse} ({self.kode})"
-
-    @classmethod
-    def from_json(
-        cls,
-        json: Optional[Dict[str, Any]],
-    ) -> Optional["Naeringskode"]:
-        if not json:
-            return None
-        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
+    #: Beskriver om dette er en hjelpeenhetskode
+    hjelpeenhetskode: Optional[bool] = None
 
 
-@attr.s(auto_attribs=True)
-class Organisasjonsform:
+class Organisasjonsform(BaseModel):
+    """Organisasjonsform er virksomhetens formelle organisering.
+
+    Organisasjonsform gir retningslinjer overfor blant annet ansvarsforhold,
+    skatt, revisjonsplikt, rettigheter og plikter.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel)
+
     #: Organisasjonsformen
     kode: str
 
     #: Tekstlig beskrivelse av organisasjonsformen
     beskrivelse: str
 
-    def __str__(self) -> str:
-        return f"{self.beskrivelse} ({self.kode})"
-
-    @classmethod
-    def from_json(
-        cls,
-        json: Dict[str, Any],
-    ) -> "Organisasjonsform":
-        return cls(kode=json["kode"], beskrivelse=json["beskrivelse"])
+    #: Dato når organisasjonsformen evt. ble ugyldig
+    utgaatt: Optional[dt.date] = None
 
 
-@attr.s(auto_attribs=True)
-class Enhet:
+class Enhet(BaseModel):
+    """Enhet på øverste nivå i registreringsstrukturen i Enhetsregisteret.
+
+    Eksempelvis enkeltpersonforetak, foreninger, selskap, sameier og andre som
+    er registrert i Enhetsregisteret. Identifiseres med organisasjonsnummer.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel, from_attributes=True)
+
     #: Organisasjonsnummer
     organisasjonsnummer: str
 
@@ -131,114 +106,71 @@ class Enhet:
     organisasjonsform: Organisasjonsform
 
     #: Hjemmeside
-    hjemmeside: Optional[str]
+    hjemmeside: Optional[str] = None
+
+    #: Enhetens postadresse
+    postadresse: Optional[Adresse] = None
 
     #: Registreringsdato i Enhetsregisteret
-    registreringsdato_enhetsregisteret: Optional[dt.date]
+    registreringsdato_enhetsregisteret: Optional[dt.date] = None
 
     #: Hvorvidt enheten er registrert i MVA-registeret
-    registrert_i_mvaregisteret: Optional[bool]
+    registrert_i_mvaregisteret: Optional[bool] = None
+
+    #: Enheter som i utgangspunktet ikke er mva-pliktig, kan søke om frivillig
+    #: registrering i Merverdiavgiftsregisteret
+    frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[Naeringskode]
+    naeringskode1: Optional[Naeringskode] = None
+
+    #: Næringskode 2
+    naeringskode2: Optional[Naeringskode] = None
+
+    #: Næringskode 3
+    naeringskode3: Optional[Naeringskode] = None
 
     #: Antall ansatte
-    antall_ansatte: Optional[int]
+    antall_ansatte: Optional[int] = None
+
+    #: Organisasjonsnummeret til overordnet enhet i offentlig sektor
+    overordnet_enhet: Optional[str] = None
 
     #: Forretningsadresse
-    forretningsadresse: Optional[Adresse]
+    forretningsadresse: Optional[Adresse] = None
 
     #: Stiftelsesdato
-    stiftelsesdato: Optional[dt.date]
+    stiftelsesdato: Optional[dt.date] = None
 
     #: Sektorkode
-    institusjonell_sektorkode: Optional[InstitusjonellSektorkode]
+    institusjonell_sektorkode: Optional[InstitusjonellSektorkode] = None
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
-    registrert_i_foretaksregisteret: Optional[bool]
+    registrert_i_foretaksregisteret: Optional[bool] = None
 
     #: Hvorvidt enheten er registrert i Stiftelsesregisteret
-    registrert_i_stiftelsesregisteret: Optional[bool]
+    registrert_i_stiftelsesregisteret: Optional[bool] = None
 
     #: Hvorvidt enheten er registrert i Frivillighetsregisteret
-    registrert_i_frivillighetsregisteret: Optional[bool]
+    registrert_i_frivillighetsregisteret: Optional[bool] = None
 
     #: År for siste innsendte årsregnskap
-    siste_innsendte_aarsregnskap: Optional[int]
+    siste_innsendte_aarsregnskap: Optional[int] = None
 
     #: Hvorvidt enheten er konkurs
-    konkurs: Optional[bool]
+    konkurs: Optional[bool] = None
 
     #: Hvorvidt enheten er under avvikling
-    under_avvikling: Optional[bool]
+    under_avvikling: Optional[bool] = None
 
     #: Hvorvidt enheten er under tvangsavvikling eller tvangsoppløsning
-    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool]
+    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool] = None
 
     #: Målform
-    maalform: Optional[str]
+    maalform: Optional[str] = None
 
-    #: Dato enheten ble slettet
-    slettedato: Optional[dt.date]
+    #: Nedleggelsesdato for underenheten
+    nedleggelsesdato: Optional[dt.date] = None
 
-    def __str__(self) -> str:
-        return f"{self.navn} ({self.organisasjonsnummer})"
-
-    @classmethod
-    def from_json(
-        cls,
-        json: Dict[str, Any],
-    ) -> Optional["Enhet"]:
-        if not json:
-            return None
-
-        return cls(
-            organisasjonsnummer=json["organisasjonsnummer"],
-            navn=json["navn"],
-            organisasjonsform=Organisasjonsform.from_json(json["organisasjonsform"]),
-            hjemmeside=json.get("hjemmeside"),
-            registreringsdato_enhetsregisteret=parse_date(
-                json.get("registreringsdatoEnhetsregisteret")
-            ),
-            registrert_i_mvaregisteret=json.get("registrertIMvaregisteret"),
-            naeringskode1=Naeringskode.from_json(json.get("naeringskode1")),
-            antall_ansatte=json.get("antallAnsatte"),
-            forretningsadresse=Adresse.from_json(json.get("forretningsadresse")),
-            stiftelsesdato=parse_date(json.get("stiftelsesdato")),
-            institusjonell_sektorkode=InstitusjonellSektorkode.from_json(
-                json.get("institusjonellSektorkode")
-            ),
-            registrert_i_foretaksregisteret=json.get("registrertIForetaksregisteret"),
-            registrert_i_stiftelsesregisteret=json.get(
-                "registrertIStiftelsesregisteret"
-            ),
-            registrert_i_frivillighetsregisteret=json.get(
-                "registrertIFrivillighetsregisteret"
-            ),
-            siste_innsendte_aarsregnskap=parse_int(
-                json.get("sisteInnsendteAarsregnskap")
-            ),
-            konkurs=json.get("konkurs"),
-            under_avvikling=json.get("underAvvikling"),
-            under_tvangsavvikling_eller_tvangsopplosning=json.get(
-                "underTvangsavviklingEllerTvangsopplosning"
-            ),
-            maalform=json.get("maalform"),
-            slettedato=parse_date(json.get("slettedato")),
-        )
-
-
-def parse_date(date_string: Optional[str]) -> Optional[dt.date]:
-    if date_string is None:
-        return None
-    return (
-        dt.datetime.strptime(date_string, "%Y-%m-%d")
-        .replace(tzinfo=dt.timezone.utc)
-        .date()
-    )
-
-
-def parse_int(int_string: Optional[str]) -> Optional[int]:
-    if int_string is None:
-        return None
-    return int(int_string)
+    #: Dato under-/enheten ble slettet
+    slettedato: Optional[dt.date] = None

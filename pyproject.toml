@@ -17,8 +17,8 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">= 3.8.0"
-attrs = ">= 22.2"
 httpx = ">= 0.24"
+pydantic = ">= 2"
 
 [tool.poetry.group.dev.dependencies]
 nox = "^2023.4.22"

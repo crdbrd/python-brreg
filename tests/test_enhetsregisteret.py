@@ -71,7 +71,9 @@ def test_get_enhet_when_deleted(
     assert org.organisasjonsnummer == "815597222"
     assert org.navn == "SLETTET ENHET AS"
     assert org.organisasjonsform == enhetsregisteret.Organisasjonsform(
-        kode="UTBG", beskrivelse="Frivillig registrert utleiebygg"
+        kode="UTBG",
+        beskrivelse="Frivillig registrert utleiebygg",
+        utgaatt=date(2017, 7, 17),
     )
     assert org.slettedato == date(2017, 10, 20)
 

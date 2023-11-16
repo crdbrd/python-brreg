@@ -51,7 +51,7 @@ class Client:
             if res.status_code in (404, 410):
                 return None
             res.raise_for_status()
-            return Enhet.from_json(res.json())
+            return Enhet.model_validate_json(res.content)
         except httpx.HTTPError as exc:
             raise BrregRestError(
                 str(exc),
