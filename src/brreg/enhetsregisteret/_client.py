@@ -47,7 +47,12 @@ class Client:
         """
         res: Optional[httpx.Response] = None
         try:
-            res = self._client.get(f"/enheter/{organisasjonsnummer}")
+            res = self._client.get(
+                f"/enheter/{organisasjonsnummer}",
+                headers={
+                    "accept": "application/vnd.brreg.enhetsregisteret.enhet.v2+json"
+                },
+            )
             if res.status_code in (404, 410):
                 return None
             res.raise_for_status()

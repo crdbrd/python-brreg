@@ -1,8 +1,9 @@
 import datetime as dt
 from typing import List, Optional
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, BeforeValidator, ConfigDict, Field
 from pydantic.alias_generators import to_camel
+from typing_extensions import Annotated
 
 __all__ = [
     "Adresse",
@@ -10,6 +11,13 @@ __all__ = [
     "InstitusjonellSektorkode",
     "Naeringskode",
     "Organisasjonsform",
+]
+
+
+# Same as `Optional[dt.date]`, except that this version deserializes empty
+# strings to `None`.
+DateOrNone = Annotated[
+    Optional[dt.date], BeforeValidator(lambda v: v if v != "" else None)
 ]
 
 
@@ -64,9 +72,6 @@ class Naeringskode(BaseModel):
     #: Tekstlig beskrivelse av næringskoden
     beskrivelse: Optional[str] = None
 
-    #: Beskriver om dette er en hjelpeenhetskode
-    hjelpeenhetskode: Optional[bool] = None
-
 
 class Organisasjonsform(BaseModel):
     """Organisasjonsform er virksomhetens formelle organisering.
@@ -84,7 +89,7 @@ class Organisasjonsform(BaseModel):
     beskrivelse: str
 
     #: Dato når organisasjonsformen evt. ble ugyldig
-    utgaatt: Optional[dt.date] = None
+    utgaatt: DateOrNone = None
 
 
 class Enhet(BaseModel):
@@ -94,7 +99,7 @@ class Enhet(BaseModel):
     er registrert i Enhetsregisteret. Identifiseres med organisasjonsnummer.
     """
 
-    model_config = ConfigDict(alias_generator=to_camel, from_attributes=True)
+    model_config = ConfigDict(alias_generator=to_camel)
 
     #: Organisasjonsnummer
     organisasjonsnummer: str
@@ -112,7 +117,7 @@ class Enhet(BaseModel):
     postadresse: Optional[Adresse] = None
 
     #: Registreringsdato i Enhetsregisteret
-    registreringsdato_enhetsregisteret: Optional[dt.date] = None
+    registreringsdato_enhetsregisteret: DateOrNone = None
 
     #: Hvorvidt enheten er registrert i MVA-registeret
     registrert_i_mvaregisteret: Optional[bool] = None
@@ -130,8 +135,14 @@ class Enhet(BaseModel):
     #: Næringskode 3
     naeringskode3: Optional[Naeringskode] = None
 
+    #: Hjelpeenhetskode
+    hjelpeenhetskode: Optional[Naeringskode] = None
+
     #: Antall ansatte
     antall_ansatte: Optional[int] = None
+
+    #: Angir om enheten har registrert ansatte
+    har_registrert_antall_ansatte: Optional[bool] = None
 
     #: Organisasjonsnummeret til overordnet enhet i offentlig sektor
     overordnet_enhet: Optional[str] = None
@@ -140,7 +151,7 @@ class Enhet(BaseModel):
     forretningsadresse: Optional[Adresse] = None
 
     #: Stiftelsesdato
-    stiftelsesdato: Optional[dt.date] = None
+    stiftelsesdato: DateOrNone = None
 
     #: Sektorkode
     institusjonell_sektorkode: Optional[InstitusjonellSektorkode] = None
@@ -160,6 +171,9 @@ class Enhet(BaseModel):
     #: Hvorvidt enheten er konkurs
     konkurs: Optional[bool] = None
 
+    #: Kjennelsesdato for konkursen
+    konkursdato: DateOrNone = None
+
     #: Hvorvidt enheten er under avvikling
     under_avvikling: Optional[bool] = None
 
@@ -169,8 +183,17 @@ class Enhet(BaseModel):
     #: Målform
     maalform: Optional[str] = None
 
+    #: Enhetens vedtektsdato
+    vedtektsdato: DateOrNone = None
+
+    #: Enhetens formål
+    vedtektsfestet_formaal: List[str] = Field(default_factory=list)
+
+    #: Enhetens aktivitet
+    aktivitet: List[str] = Field(default_factory=list)
+
     #: Nedleggelsesdato for underenheten
-    nedleggelsesdato: Optional[dt.date] = None
+    nedleggelsesdato: DateOrNone = None
 
     #: Dato under-/enheten ble slettet
-    slettedato: Optional[dt.date] = None
+    slettedato: DateOrNone = None

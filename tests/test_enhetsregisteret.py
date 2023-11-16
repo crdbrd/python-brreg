@@ -13,16 +13,16 @@ def test_get_enhet(
 ) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
-        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/112233445",
         status_code=200,
         headers={"content-type": "application/json"},
         content=organization_details_response,
     )
 
-    org = enhetsregisteret.Client().get_enhet("818511752")
+    org = enhetsregisteret.Client().get_enhet("112233445")
 
     assert org is not None
-    assert org.organisasjonsnummer == "818511752"
+    assert org.organisasjonsnummer == "112233445"
     assert org.navn == "SESAM STASJON"
     assert org.hjemmeside is None
     assert org.registreringsdato_enhetsregisteret == date(2017, 10, 20)
@@ -31,6 +31,7 @@ def test_get_enhet(
         kode="52.292", beskrivelse="Skipsmegling"
     )
     assert org.antall_ansatte == 50
+    assert org.har_registrert_antall_ansatte is True
     assert org.forretningsadresse == enhetsregisteret.Adresse(
         land="Norge",
         landkode="NO",
@@ -59,16 +60,16 @@ def test_get_enhet_when_deleted(
 ) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
-        url="https://data.brreg.no/enhetsregisteret/api/enheter/815597222",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
         status_code=200,
         headers={"content-type": "application/json"},
         content=deleted_organization_details_response,
     )
 
-    org = enhetsregisteret.Client().get_enhet("815597222")
+    org = enhetsregisteret.Client().get_enhet("123456789")
 
     assert org is not None
-    assert org.organisasjonsnummer == "815597222"
+    assert org.organisasjonsnummer == "123456789"
     assert org.navn == "SLETTET ENHET AS"
     assert org.organisasjonsform == enhetsregisteret.Organisasjonsform(
         kode="UTBG",
