@@ -16,7 +16,7 @@ Norwegian Business Registry, [Brønnøysundregistrene](https://www.brreg.no/).
 
 The library requires Python 3.8 or newer.
 
-The package is available from [PyPI](https://pypi.org/project/brreg/):
+The library can be installed from [PyPI](https://pypi.org/project/brreg/):
 
 ```
 python3 -m pip install brreg

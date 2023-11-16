@@ -11,7 +11,7 @@ Installation
 
 The library requires Python 3.8 or newer.
 
-The package is available from `PyPI <https://pypi.org/project/brreg/`>_:
+The library can be installed from `PyPI <https://pypi.org/project/brreg/`>_:
 
 .. code-block:: console
 
