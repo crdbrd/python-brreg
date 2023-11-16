@@ -1,4 +1,5 @@
 from datetime import date
+from pathlib import Path
 
 import httpx
 import pytest
@@ -6,17 +7,16 @@ from pytest_httpx import HTTPXMock
 
 from brreg import BrregRestError, enhetsregisteret
 
+DATA_DIR = Path(__file__).parent.parent / "data"
 
-def test_get_enhet(
-    httpx_mock: HTTPXMock,
-    organization_details_response: bytes,
-) -> None:
+
+def test_get_enhet(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/112233445",
         status_code=200,
         headers={"content-type": "application/json"},
-        content=organization_details_response,
+        content=(DATA_DIR / "enheter-details-response.json").read_bytes(),
     )
 
     org = enhetsregisteret.Client().get_enhet("112233445")
@@ -54,16 +54,13 @@ def test_get_enhet(
     assert org.slettedato is None
 
 
-def test_get_enhet_when_deleted(
-    httpx_mock: HTTPXMock,
-    deleted_organization_details_response: bytes,
-) -> None:
+def test_get_enhet_when_deleted(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
         status_code=200,
         headers={"content-type": "application/json"},
-        content=deleted_organization_details_response,
+        content=(DATA_DIR / "enheter-details-deleted-response.json").read_bytes(),
     )
 
     org = enhetsregisteret.Client().get_enhet("123456789")
@@ -79,9 +76,7 @@ def test_get_enhet_when_deleted(
     assert org.slettedato == date(2017, 10, 20)
 
 
-def test_get_enhet_when_gone(
-    httpx_mock: HTTPXMock,
-) -> None:
+def test_get_enhet_when_gone(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -94,9 +89,7 @@ def test_get_enhet_when_gone(
     assert org is None
 
 
-def test_get_enhet_when_not_found(
-    httpx_mock: HTTPXMock,
-) -> None:
+def test_get_enhet_when_not_found(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -109,9 +102,7 @@ def test_get_enhet_when_not_found(
     assert org is None
 
 
-def test_get_enhet_when_http_error(
-    httpx_mock: HTTPXMock,
-) -> None:
+def test_get_enhet_when_http_error(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -133,9 +124,7 @@ def test_get_enhet_when_http_error(
     assert exc_info.value.status_code == 400
 
 
-def test_get_organization_by_number_when_http_timeout(
-    httpx_mock: HTTPXMock,
-) -> None:
+def test_get_organization_by_number_when_http_timeout(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
         httpx.ConnectTimeout("Connection refused"),
     )

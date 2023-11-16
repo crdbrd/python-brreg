@@ -1,0 +1,49 @@
+{
+  "organisasjonsnummer": "776655441",
+  "navn": "SESAM STASJON",
+  "organisasjonsform": {
+    "kode": "BEDR",
+    "beskrivelse": "Bedrift",
+    "_links": {
+      "self": {
+        "href": "http://localhost/enhetsregisteret/api/organisasjonsformer/BEDR"
+      }
+    }
+  },
+  "postadresse": {
+    "land": "Norge",
+    "landkode": "NO",
+    "postnummer": "0122",
+    "poststed": "OSLO",
+    "adresse": ["c/o reder K. Rusing", "Postboks 1752 Vika", ""],
+    "kommune": "OSLO",
+    "kommunenummer": "0301"
+  },
+  "registreringsdatoEnhetsregisteret": "2017-10-20",
+  "registrertIMvaregisteret": true,
+  "naeringskode1": {
+    "kode": "52.292",
+    "beskrivelse": "Skipsmegling"
+  },
+  "antallAnsatte": 50,
+  "harRegistrertAntallAnsatte": true,
+  "overordnetEnhet": "112233445",
+  "beliggenhetsadresse": {
+    "land": "Norge",
+    "landkode": "NO",
+    "postnummer": "0122",
+    "poststed": "OSLO",
+    "adresse": ["Tyvholmen 1", null, null],
+    "kommune": "OSLO",
+    "kommunenummer": "0301"
+  },
+  "nedleggelsesdato": "2018-10-20",
+  "_links": {
+    "self": {
+      "href": "http://localhost/enhetsregisteret/api/underenheter/776655441"
+    },
+    "overordnetEnhet": {
+      "href": "http://localhost/enhetsregisteret/api/enheter/112233445"
+    }
+  }
+}

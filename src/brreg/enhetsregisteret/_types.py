@@ -197,3 +197,74 @@ class Enhet(BaseModel):
 
     #: Dato under-/enheten ble slettet
     slettedato: DateOrNone = None
+
+
+class Underenhet(BaseModel):
+    """Enhet på laveste nivå i registreringsstrukturen i Enhetsregisteret.
+
+    En underenhet kan ikke eksistere alene og har alltid knytning til en
+    hovedenhet. Identifiseres med organisasjonsnummer.
+    """
+
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Underenhetens organisasjonsnummer
+    organisasjonsnummer: str
+
+    #: Underenhetens navn
+    navn: str
+
+    #: Underenhetens navn
+    organisasjonsform: Organisasjonsform
+
+    #: Underenhetens hjemmeside
+    hjemmeside: Optional[str] = None
+
+    #: Underenhetens postadresse
+    postadresse: Optional[Adresse] = None
+
+    #: Underenhetens registreringsdato i Enhetsregisteret
+    registreringsdato_enhetsregisteret: DateOrNone = None
+
+    #: Hvorvidt underenheten er registrert i MVA-registeret
+    registrert_i_mvaregisteret: Optional[bool] = None
+
+    #: Underenheter som i utgangspunktet ikke er mva-pliktig, kan søke om
+    #: frivillig registrering i Merverdiavgiftsregisteret
+    frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
+
+    #: Næringskode 1
+    naeringskode1: Optional[Naeringskode] = None
+
+    #: Næringskode 2
+    naeringskode2: Optional[Naeringskode] = None
+
+    #: Næringskode 3
+    naeringskode3: Optional[Naeringskode] = None
+
+    #: Hjelpeenhetskode
+    hjelpeenhetskode: Optional[Naeringskode] = None
+
+    #: Antall ansatte
+    antall_ansatte: Optional[int] = None
+
+    #: Angir om enheten har registrert ansatte
+    har_registrert_antall_ansatte: Optional[bool] = None
+
+    #: Underenhetens overordnede enhet
+    overordnet_enhet: Optional[str] = None
+
+    #: Underenhetens beliggenhetsadresse
+    beliggenhetsadresse: Optional[Adresse] = None
+
+    #: Underenhetens oppstartsdato
+    oppstartsdato: DateOrNone = None
+
+    #: Underenhetens dato for eierskifte
+    dato_eierskifte: DateOrNone = None
+
+    #: Nedleggelsesdato for underenheten
+    nedleggelsesdato: DateOrNone = None
+
+    #: Dato under-/enheten ble slettet
+    slettedato: DateOrNone = None
