@@ -1,0 +1,20 @@
+{
+  "organisasjonsnummer": "987123456",
+  "navn": "SLETTET UNDERENHET AS",
+  "organisasjonsform": {
+    "kode": "AAFY",
+    "beskrivelse": "Virksomhet til ikke-næringsdrivende person",
+    "_links": {
+      "self": {
+        "href": "http://localhost/enhetsregisteret/api/organisasjonsformer/AAFY"
+      }
+    }
+  },
+  "slettedato": "2017-10-20",
+  "nedleggelsesdato": "2017-10-05",
+  "_links": {
+    "self": {
+      "href": "http://localhost/enhetsregisteret/api/underenheter/987123456"
+    }
+  }
+}

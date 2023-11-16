@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret._types import Enhet
+from brreg.enhetsregisteret._types import Enhet, Underenhet
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -66,3 +66,20 @@ class Client:
                 return None
             res.raise_for_status()
             return Enhet.model_validate_json(res.content)
+
+    def get_underenhet(self, organisasjonsnummer: str) -> Optional[Underenhet]:
+        """Get :class:`Underenhet` given an organization number."""
+        with error_handler():
+            res = self._client.get(
+                f"/underenheter/{organisasjonsnummer}",
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
+                        "charset=UTF-8"
+                    )
+                },
+            )
+            if res.status_code in (404, 410):
+                return None
+            res.raise_for_status()
+            return Underenhet.model_validate_json(res.content)

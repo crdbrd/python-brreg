@@ -10,6 +10,7 @@ from brreg.enhetsregisteret._types import (
     InstitusjonellSektorkode,
     Naeringskode,
     Organisasjonsform,
+    Underenhet,
 )
 
 __all__ = [
@@ -21,4 +22,5 @@ __all__ = [
     "InstitusjonellSektorkode",
     "Naeringskode",
     "Organisasjonsform",
+    "Underenhet",
 ]
