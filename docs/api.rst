@@ -24,24 +24,27 @@ Enhetsregisteret
 
 .. autoclass:: brreg.enhetsregisteret.Client
    :members:
-   :undoc-members:
 
 .. autoclass:: brreg.enhetsregisteret.Enhet
    :members:
-   :undoc-members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.Underenhet
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Adresse
    :members:
-   :undoc-members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.InstitusjonellSektorkode
    :members:
-   :undoc-members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Naeringskode
    :members:
-   :undoc-members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Organisasjonsform
    :members:
-   :undoc-members:
+   :exclude-members: model_config, model_fields

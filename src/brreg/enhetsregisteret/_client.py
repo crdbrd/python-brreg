@@ -29,6 +29,22 @@ def error_handler() -> Generator[None, Any, None]:
 
 
 class Client:
+    """Client for the Enhetregisteret API.
+
+    Ensures that HTTP connections are reused across requests.
+
+    It can be used as a context manager::
+
+        with Client() as client:
+            enhet = client.get_enhet("915501680")
+
+    Or by manually opening and closing the client::
+
+        client = Client()
+        enhet = client.get_enhet("915501680")
+        client.close()
+    """
+
     _client: httpx.Client
 
     def __init__(self) -> None:
@@ -46,11 +62,19 @@ class Client:
         self.close()
 
     def open(self) -> None:
+        """Prepare the client for use.
+
+        This is called automatically when the client is created.
+        """
         self._client = httpx.Client(
             base_url="https://data.brreg.no/enhetsregisteret/api",
         )
 
     def close(self) -> None:
+        """Close the client and any open HTTP connections.
+
+        This is called automatically if the client is used as a context manager.
+        """
         self._client.close()
 
     def get_enhet(self, organisasjonsnummer: str) -> Optional[Enhet]:
