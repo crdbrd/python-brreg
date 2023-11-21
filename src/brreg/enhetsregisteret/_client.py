@@ -12,22 +12,6 @@ if TYPE_CHECKING:
     from types import TracebackType
 
 
-@contextmanager
-def error_handler() -> Generator[None, Any, None]:
-    try:
-        yield
-    except httpx.HTTPError as exc:
-        response: httpx.Response | None = getattr(exc, "response", None)
-        raise BrregRestError(
-            str(exc),
-            method=(exc.request.method if exc.request else None),
-            url=(str(exc.request.url) if exc.request else None),
-            status_code=(response.status_code if response else None),
-        ) from exc
-    except Exception as exc:
-        raise BrregError(exc) from exc
-
-
 class Client:
     """Client for the Enhetregisteret API.
 
@@ -107,3 +91,19 @@ class Client:
                 return None
             res.raise_for_status()
             return Underenhet.model_validate_json(res.content)
+
+
+@contextmanager
+def error_handler() -> Generator[None, Any, None]:
+    try:
+        yield
+    except httpx.HTTPError as exc:
+        response: httpx.Response | None = getattr(exc, "response", None)
+        raise BrregRestError(
+            str(exc),
+            method=(exc.request.method if exc.request else None),
+            url=(str(exc.request.url) if exc.request else None),
+            status_code=(response.status_code if response else None),
+        ) from exc
+    except Exception as exc:
+        raise BrregError(exc) from exc
