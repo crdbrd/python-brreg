@@ -6,7 +6,12 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret._types import Enhet, Underenhet
+from brreg.enhetsregisteret._types import (
+    Enhet,
+    Organisasjonsnummer,
+    OrganisasjonsnummerValidator,
+    Underenhet,
+)
 
 if TYPE_CHECKING:
     from types import TracebackType
@@ -61,8 +66,12 @@ class Client:
         """
         self._client.close()
 
-    def get_enhet(self, organisasjonsnummer: str) -> Optional[Enhet]:
+    def get_enhet(
+        self,
+        organisasjonsnummer: Organisasjonsnummer,
+    ) -> Optional[Enhet]:
         """Get :class:`Enhet` given an organization number."""
+        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
                 f"/enheter/{organisasjonsnummer}",
@@ -78,8 +87,12 @@ class Client:
             res.raise_for_status()
             return Enhet.model_validate_json(res.content)
 
-    def get_underenhet(self, organisasjonsnummer: str) -> Optional[Underenhet]:
+    def get_underenhet(
+        self,
+        organisasjonsnummer: Organisasjonsnummer,
+    ) -> Optional[Underenhet]:
         """Get :class:`Underenhet` given an organization number."""
+        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
                 f"/underenheter/{organisasjonsnummer}",
