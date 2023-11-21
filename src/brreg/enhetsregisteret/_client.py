@@ -67,7 +67,10 @@ class Client:
             res = self._client.get(
                 f"/enheter/{organisasjonsnummer}",
                 headers={
-                    "accept": "application/vnd.brreg.enhetsregisteret.enhet.v2+json"
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
+                        "charset=UTF-8"
+                    )
                 },
             )
             if res.status_code in (404, 410):
