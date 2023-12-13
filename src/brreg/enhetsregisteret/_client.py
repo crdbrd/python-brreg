@@ -6,6 +6,7 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
+from brreg.enhetsregisteret._pagination import EnhetPage
 from brreg.enhetsregisteret._responses import Enhet, Underenhet
 from brreg.enhetsregisteret._types import (
     Organisasjonsnummer,
@@ -14,6 +15,8 @@ from brreg.enhetsregisteret._types import (
 
 if TYPE_CHECKING:
     from types import TracebackType
+
+    from brreg.enhetsregisteret._queries import EnhetQuery
 
 
 class Client:
@@ -106,6 +109,24 @@ class Client:
                 return None
             res.raise_for_status()
             return Underenhet.model_validate_json(res.content)
+
+    def search_enhet(
+        self,
+        query: EnhetQuery,
+    ) -> EnhetPage:
+        """Search for :class:`Enhet` that matches the given query."""
+        with error_handler():
+            res = self._client.get(
+                f"/enheter?{query.as_url_query()}",
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
+                        "charset=UTF-8"
+                    )
+                },
+            )
+            res.raise_for_status()
+            return EnhetPage.model_validate_json(res.content)
 
 
 @contextmanager

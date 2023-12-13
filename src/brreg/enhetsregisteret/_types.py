@@ -1,12 +1,25 @@
 import datetime as dt
-from typing import Optional
+from typing import List, Optional, TypeVar
 
 from pydantic import (
     BeforeValidator,
     Field,
+    PlainSerializer,
     TypeAdapter,
 )
 from typing_extensions import Annotated
+
+T = TypeVar("T")
+
+# A list that serializes to a comma-separated string.
+CommaList = Annotated[
+    List[T],
+    PlainSerializer(
+        lambda v: ",".join(v),
+        return_type=str,
+        when_used="json",
+    ),
+]
 
 # Same as `Optional[dt.date]`, except that this version deserializes empty
 # strings to `None`.

@@ -20,10 +20,24 @@ Exceptions
 Enhetsregisteret
 ================
 
-.. automodule:: brreg.enhetsregisteret
+.. module:: brreg.enhetsregisteret
+
+Client and queries
+------------------
 
 .. autoclass:: brreg.enhetsregisteret.Client
    :members:
+
+.. autoclass:: brreg.enhetsregisteret.EnhetQuery
+   :members:
+   :exclude-members: model_config, model_fields
+
+Responses
+---------
+
+.. autoclass:: brreg.enhetsregisteret.EnhetPage
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Enhet
    :members:
