@@ -9,8 +9,8 @@ from brreg.enhetsregisteret._queries import EnhetQuery
 from brreg.enhetsregisteret._responses import (
     Adresse,
     Enhet,
-    InstitusjonellSektorkode,
-    NaeringskodeModel,
+    InstitusjonellSektor,
+    Naering,
     Organisasjonsform,
     Underenhet,
 )
@@ -35,8 +35,8 @@ __all__ = [
     # From _responses module:
     "Adresse",
     "Enhet",
-    "InstitusjonellSektorkode",
-    "NaeringskodeModel",
+    "InstitusjonellSektor",
+    "Naering",
     "Organisasjonsform",
     "Underenhet",
     # From _types module:

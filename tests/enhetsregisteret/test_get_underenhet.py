@@ -25,7 +25,7 @@ def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
     assert org.hjemmeside is None
     assert org.registreringsdato_enhetsregisteret == date(2017, 10, 20)
     assert org.registrert_i_mvaregisteret is True
-    assert org.naeringskode1 == enhetsregisteret.NaeringskodeModel(
+    assert org.naeringskode1 == enhetsregisteret.Naering(
         kode="52.292", beskrivelse="Skipsmegling"
     )
     assert org.antall_ansatte == 50

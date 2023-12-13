@@ -51,11 +51,11 @@ Responses
    :members:
    :exclude-members: model_config, model_fields
 
-.. autoclass:: brreg.enhetsregisteret.InstitusjonellSektorkode
+.. autoclass:: brreg.enhetsregisteret.InstitusjonellSektor
    :members:
    :exclude-members: model_config, model_fields
 
-.. autoclass:: brreg.enhetsregisteret.Naeringskode
+.. autoclass:: brreg.enhetsregisteret.Naering
    :members:
    :exclude-members: model_config, model_fields
 

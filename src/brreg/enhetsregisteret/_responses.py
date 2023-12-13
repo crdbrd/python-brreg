@@ -12,13 +12,13 @@ from brreg.enhetsregisteret._types import DateOrNone
 __all__ = [
     "Adresse",
     "Enhet",
-    "InstitusjonellSektorkode",
-    "NaeringskodeModel",
+    "InstitusjonellSektor",
+    "Naering",
     "Organisasjonsform",
 ]
 
 
-class InstitusjonellSektorkode(BaseModel):
+class InstitusjonellSektor(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Sektorkoden
@@ -53,12 +53,11 @@ class Adresse(BaseModel):
     land: Optional[str] = None
 
 
-class NaeringskodeModel(BaseModel):
+class Naering(BaseModel):
     """Næringskode.
 
-    Organisasjonsform er virksomhetens formelle organisering og gir
-    retningslinjer overfor blant annet ansvarsforhold, skatt, revisjonsplikt,
-    rettigheter og plikter.
+    Næringskoden skal vise virksomhetens hovedaktivitet, og den skal primært
+    dekke statistiske behov for Statistisk sentralbyrå (SSB).
     """
 
     model_config = ConfigDict(alias_generator=to_camel)
@@ -124,16 +123,16 @@ class Enhet(BaseModel):
     frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[NaeringskodeModel] = None
+    naeringskode1: Optional[Naering] = None
 
     #: Næringskode 2
-    naeringskode2: Optional[NaeringskodeModel] = None
+    naeringskode2: Optional[Naering] = None
 
     #: Næringskode 3
-    naeringskode3: Optional[NaeringskodeModel] = None
+    naeringskode3: Optional[Naering] = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[NaeringskodeModel] = None
+    hjelpeenhetskode: Optional[Naering] = None
 
     #: Antall ansatte
     antall_ansatte: Optional[int] = None
@@ -151,7 +150,7 @@ class Enhet(BaseModel):
     stiftelsesdato: DateOrNone = None
 
     #: Sektorkode
-    institusjonell_sektorkode: Optional[InstitusjonellSektorkode] = None
+    institusjonell_sektorkode: Optional[InstitusjonellSektor] = None
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
     registrert_i_foretaksregisteret: Optional[bool] = None
@@ -231,16 +230,16 @@ class Underenhet(BaseModel):
     frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[NaeringskodeModel] = None
+    naeringskode1: Optional[Naering] = None
 
     #: Næringskode 2
-    naeringskode2: Optional[NaeringskodeModel] = None
+    naeringskode2: Optional[Naering] = None
 
     #: Næringskode 3
-    naeringskode3: Optional[NaeringskodeModel] = None
+    naeringskode3: Optional[Naering] = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[NaeringskodeModel] = None
+    hjelpeenhetskode: Optional[Naering] = None
 
     #: Antall ansatte
     antall_ansatte: Optional[int] = None
