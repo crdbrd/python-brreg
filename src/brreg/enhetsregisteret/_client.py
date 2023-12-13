@@ -6,11 +6,10 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
+from brreg.enhetsregisteret._responses import Enhet, Underenhet
 from brreg.enhetsregisteret._types import (
-    Enhet,
     Organisasjonsnummer,
     OrganisasjonsnummerValidator,
-    Underenhet,
 )
 
 if TYPE_CHECKING:

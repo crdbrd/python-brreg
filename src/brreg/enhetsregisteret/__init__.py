@@ -4,21 +4,23 @@ See https://data.brreg.no/enhetsregisteret/api/docs/index.html for API details.
 """
 
 from brreg.enhetsregisteret._client import Client
-from brreg.enhetsregisteret._types import (
+from brreg.enhetsregisteret._responses import (
     Adresse,
     Enhet,
     InstitusjonellSektorkode,
-    Kommunenummer,
-    KommunenummerValidator,
     NaeringskodeModel,
     Organisasjonsform,
+    Underenhet,
+)
+from brreg.enhetsregisteret._types import (
+    Kommunenummer,
+    KommunenummerValidator,
     Organisasjonsnummer,
     OrganisasjonsnummerValidator,
     Postnummer,
     PostnummerValidator,
     Sektorkode,
     SektorkodeValidator,
-    Underenhet,
 )
 
 __all__ = [
