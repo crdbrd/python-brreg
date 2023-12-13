@@ -8,7 +8,7 @@ from brreg.enhetsregisteret._types import (
     Adresse,
     Enhet,
     InstitusjonellSektorkode,
-    Naeringskode,
+    NaeringskodeModel,
     Organisasjonsform,
     Underenhet,
 )
@@ -20,7 +20,7 @@ __all__ = [
     "Adresse",
     "Enhet",
     "InstitusjonellSektorkode",
-    "Naeringskode",
+    "NaeringskodeModel",
     "Organisasjonsform",
     "Underenhet",
 ]

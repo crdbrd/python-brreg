@@ -9,7 +9,7 @@ __all__ = [
     "Adresse",
     "Enhet",
     "InstitusjonellSektorkode",
-    "Naeringskode",
+    "NaeringskodeModel",
     "Organisasjonsform",
 ]
 
@@ -56,7 +56,7 @@ class Adresse(BaseModel):
     land: Optional[str] = None
 
 
-class Naeringskode(BaseModel):
+class NaeringskodeModel(BaseModel):
     """Næringskode.
 
     Organisasjonsform er virksomhetens formelle organisering og gir
@@ -127,16 +127,16 @@ class Enhet(BaseModel):
     frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[Naeringskode] = None
+    naeringskode1: Optional[NaeringskodeModel] = None
 
     #: Næringskode 2
-    naeringskode2: Optional[Naeringskode] = None
+    naeringskode2: Optional[NaeringskodeModel] = None
 
     #: Næringskode 3
-    naeringskode3: Optional[Naeringskode] = None
+    naeringskode3: Optional[NaeringskodeModel] = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[Naeringskode] = None
+    hjelpeenhetskode: Optional[NaeringskodeModel] = None
 
     #: Antall ansatte
     antall_ansatte: Optional[int] = None
@@ -234,16 +234,16 @@ class Underenhet(BaseModel):
     frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[Naeringskode] = None
+    naeringskode1: Optional[NaeringskodeModel] = None
 
     #: Næringskode 2
-    naeringskode2: Optional[Naeringskode] = None
+    naeringskode2: Optional[NaeringskodeModel] = None
 
     #: Næringskode 3
-    naeringskode3: Optional[Naeringskode] = None
+    naeringskode3: Optional[NaeringskodeModel] = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[Naeringskode] = None
+    hjelpeenhetskode: Optional[NaeringskodeModel] = None
 
     #: Antall ansatte
     antall_ansatte: Optional[int] = None
