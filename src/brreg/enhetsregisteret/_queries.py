@@ -5,6 +5,7 @@ from urllib.parse import urlencode
 from pydantic import (
     BaseModel,
     Field,
+    NonNegativeInt,
     PositiveInt,
 )
 
@@ -33,7 +34,7 @@ class Query(BaseModel):
     size: Optional[PositiveInt] = None
 
     #: Sidenummer
-    page: Optional[PositiveInt] = None
+    page: Optional[NonNegativeInt] = None
 
     def as_url_query(self) -> str:
         params = self.model_dump(
