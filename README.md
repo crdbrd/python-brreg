@@ -56,7 +56,7 @@ the parts of the API that there is an actual demand for.
 - Rolletype
   - Get all -- Request if needed
   - Get one -- Request if needed
-- Rollegrupetype
+- Rollegruppetype
   - Get all -- Request if needed
   - Get one -- Request if needed
 - Representant
