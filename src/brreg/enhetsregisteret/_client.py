@@ -6,10 +6,17 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret._types import Enhet, Underenhet
+from brreg.enhetsregisteret._pagination import EnhetPage, UnderenhetPage
+from brreg.enhetsregisteret._responses import Enhet, Underenhet
+from brreg.enhetsregisteret._types import (
+    Organisasjonsnummer,
+    OrganisasjonsnummerValidator,
+)
 
 if TYPE_CHECKING:
     from types import TracebackType
+
+    from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
 
 
 class Client:
@@ -61,8 +68,12 @@ class Client:
         """
         self._client.close()
 
-    def get_enhet(self, organisasjonsnummer: str) -> Optional[Enhet]:
+    def get_enhet(
+        self,
+        organisasjonsnummer: Organisasjonsnummer,
+    ) -> Optional[Enhet]:
         """Get :class:`Enhet` given an organization number."""
+        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
                 f"/enheter/{organisasjonsnummer}",
@@ -78,8 +89,12 @@ class Client:
             res.raise_for_status()
             return Enhet.model_validate_json(res.content)
 
-    def get_underenhet(self, organisasjonsnummer: str) -> Optional[Underenhet]:
+    def get_underenhet(
+        self,
+        organisasjonsnummer: Organisasjonsnummer,
+    ) -> Optional[Underenhet]:
         """Get :class:`Underenhet` given an organization number."""
+        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
                 f"/underenheter/{organisasjonsnummer}",
@@ -94,6 +109,48 @@ class Client:
                 return None
             res.raise_for_status()
             return Underenhet.model_validate_json(res.content)
+
+    def search_enhet(
+        self,
+        query: EnhetQuery,
+    ) -> EnhetPage:
+        """Search for :class:`Enhet` that matches the given query.
+
+        :param query: The search query.
+        """
+        with error_handler():
+            res = self._client.get(
+                f"/enheter?{query.as_url_query()}",
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
+                        "charset=UTF-8"
+                    )
+                },
+            )
+            res.raise_for_status()
+            return EnhetPage.model_validate_json(res.content)
+
+    def search_underenhet(
+        self,
+        query: UnderenhetQuery,
+    ) -> UnderenhetPage:
+        """Search for :class:`Underenhet` that matches the given query.
+
+        :param query: The search query.
+        """
+        with error_handler():
+            res = self._client.get(
+                f"/underenheter?{query.as_url_query()}",
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
+                        "charset=UTF-8"
+                    )
+                },
+            )
+            res.raise_for_status()
+            return UnderenhetPage.model_validate_json(res.content)
 
 
 @contextmanager

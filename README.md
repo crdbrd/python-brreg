@@ -30,25 +30,49 @@ python3 -m pip install brreg
 - [Issue tracker](https://github.com/jodal/python-brreg/issues)
 - [Contributors](https://github.com/jodal/python-brreg/graphs/contributors)
 
-## Development status
+## Features
 
-This project was originally developed in 2019 while I worked at Otovo.
-Eventually, it was never used there, and at the end of 2023, I got the project
-back under my control.
+### Enhetsregistret
 
-I intend to brush the project up with modern project tooling and typing hints,
-making it a good foundation to build upon, and will release a 1.0 release as
-soon as that is done.
+The `brreg.enhetsregisteret` part of this library wraps the open
+[Enhetsregistret API](https://data.brreg.no/enhetsregisteret/api/docs/index.html).
 
+This is a list of all features this library could implement on top of this API.
 However, I will not attempt to make the project cover all parts of
-Brønnøysundregisterene's API. I am open to requests, so that time is spent
-on the parts of the API that there is an actual demand for.
+Brønnøysundregisterene's API. I am open to requests, so that time is spent on
+the parts of the API that there is an actual demand for.
+
+- Enheter
+  - Search -- Implemented
+  - Get one by organization number -- Implemented
+  - Get one's roles by organization number -- Planned
+  - Get all updates since given time -- Request if needed
+- Underenheter
+  - Search -- Implemented
+  - Get one by organization number -- Implemented
+  - Get all updates since given time -- Request if needed
+- Organisasjonsform
+  - Get all -- Request if needed
+- Rolletype
+  - Get all -- Request if needed
+  - Get one -- Request if needed
+- Rollegrupetype
+  - Get all -- Request if needed
+  - Get one -- Request if needed
+- Representant
+  - Get all -- Request if needed
+  - Get one -- Request if needed
+- Kommuner
+  - Get all -- Request if needed
+- Matrikkelenhet
+  - Get one by matrikkelnummer -- Request if needed
+  - Get one by matrikkelenhet-ID -- Request if needed
 
 ## License
 
-`python-brreg` is copyright
+Copyright
 2019 [Otovo ASA](https://www.otovo.com/),
 2023 Stein Magnus Jodal and contributors.
 
-`python-brreg` is licensed under the
+Licensed under the
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).

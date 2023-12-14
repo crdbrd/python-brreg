@@ -1,0 +1,77 @@
+{
+  "_embedded": {
+    "enheter": [
+      {
+        "organisasjonsnummer": "112233445",
+        "navn": "SESAM STASJON",
+        "organisasjonsform": {
+          "kode": "AS",
+          "beskrivelse": "Aksjeselskap",
+          "_links": {
+            "self": {
+              "href": "http://localhost/enhetsregisteret/api/organisasjonsformer/AS"
+            }
+          }
+        },
+        "postadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "0122",
+          "poststed": "OSLO",
+          "adresse": ["c/o reder K. Rusing", "Postboks 1752 Vika", ""],
+          "kommune": "OSLO",
+          "kommunenummer": "0301"
+        },
+        "registreringsdatoEnhetsregisteret": "2017-10-20",
+        "registrertIMvaregisteret": true,
+        "naeringskode1": {
+          "kode": "52.292",
+          "beskrivelse": "Skipsmegling"
+        },
+        "antallAnsatte": 50,
+        "forretningsadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "0101",
+          "poststed": "OSLO",
+          "adresse": ["Tyvholmen 1", null, null, ""],
+          "kommune": "OSLO",
+          "kommunenummer": "0301"
+        },
+        "stiftelsesdato": "2017-10-20",
+        "registrertIForetaksregisteret": true,
+        "registrertIStiftelsesregisteret": false,
+        "registrertIFrivillighetsregisteret": false,
+        "konkurs": false,
+        "underAvvikling": false,
+        "underTvangsavviklingEllerTvangsopplosning": false,
+        "maalform": "Bokmål",
+        "_links": {
+          "self": {
+            "href": "http://localhost/enhetsregisteret/api/enheter/112233445"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&fraRegistreringsdatoEnhetsregisteret=2017-10-20&tilRegistreringsdatoEnhetsregisteret=2017-10-20&konkurs=false&page=0&size=1"
+    },
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&fraRegistreringsdatoEnhetsregisteret=2017-10-20&tilRegistreringsdatoEnhetsregisteret=2017-10-20&konkurs=false"
+    },
+    "next": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&fraRegistreringsdatoEnhetsregisteret=2017-10-20&tilRegistreringsdatoEnhetsregisteret=2017-10-20&konkurs=false&page=1&size=1"
+    },
+    "last": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&fraRegistreringsdatoEnhetsregisteret=2017-10-20&tilRegistreringsdatoEnhetsregisteret=2017-10-20&konkurs=false&page=1&size=1"
+    }
+  },
+  "page": {
+    "size": 1,
+    "totalElements": 1,
+    "totalPages": 1,
+    "number": 0
+  }
+}

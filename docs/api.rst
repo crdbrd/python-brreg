@@ -20,10 +20,43 @@ Exceptions
 Enhetsregisteret
 ================
 
-.. automodule:: brreg.enhetsregisteret
+.. module:: brreg.enhetsregisteret
+
+Client
+------
 
 .. autoclass:: brreg.enhetsregisteret.Client
    :members:
+
+Query objects
+-------------
+
+.. autoclass:: brreg.enhetsregisteret.Query
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.EnhetQuery
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.UnderenhetQuery
+   :members:
+   :exclude-members: model_config, model_fields
+
+Response objects
+----------------
+
+.. autoclass:: brreg.enhetsregisteret.Page
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.EnhetPage
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.UnderenhetPage
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Enhet
    :members:
@@ -37,11 +70,11 @@ Enhetsregisteret
    :members:
    :exclude-members: model_config, model_fields
 
-.. autoclass:: brreg.enhetsregisteret.InstitusjonellSektorkode
+.. autoclass:: brreg.enhetsregisteret.InstitusjonellSektor
    :members:
    :exclude-members: model_config, model_fields
 
-.. autoclass:: brreg.enhetsregisteret.Naeringskode
+.. autoclass:: brreg.enhetsregisteret.Naering
    :members:
    :exclude-members: model_config, model_fields
 
