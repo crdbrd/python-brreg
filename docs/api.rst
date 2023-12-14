@@ -22,11 +22,18 @@ Enhetsregisteret
 
 .. module:: brreg.enhetsregisteret
 
-Client and queries
-------------------
+Client
+------
 
 .. autoclass:: brreg.enhetsregisteret.Client
    :members:
+
+Query objects
+-------------
+
+.. autoclass:: brreg.enhetsregisteret.Query
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.EnhetQuery
    :members:
@@ -36,8 +43,12 @@ Client and queries
    :members:
    :exclude-members: model_config, model_fields
 
-Responses
----------
+Response objects
+----------------
+
+.. autoclass:: brreg.enhetsregisteret.Page
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.EnhetPage
    :members:

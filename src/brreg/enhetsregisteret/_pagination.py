@@ -18,6 +18,8 @@ T = TypeVar("T", bound=BaseModel)
 
 
 class Page(BaseModel, Generic[T]):
+    """The fields here are available on all page objects."""
+
     #: The items on this page.
     items: List[T]
 
@@ -43,12 +45,16 @@ class Page(BaseModel, Generic[T]):
 
 
 class EnhetPage(Page[Enhet]):
+    """Response type for enhet search."""
+
     items: List[Enhet] = Field(
         validation_alias=AliasPath("_embedded", "enheter"),
     )
 
 
 class UnderenhetPage(Page[Underenhet]):
+    """Response type for underenhet search."""
+
     items: List[Underenhet] = Field(
         validation_alias=AliasPath("_embedded", "underenheter"),
     )

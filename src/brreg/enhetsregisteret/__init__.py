@@ -4,8 +4,8 @@ See https://data.brreg.no/enhetsregisteret/api/docs/index.html for API details.
 """
 
 from brreg.enhetsregisteret._client import Client
-from brreg.enhetsregisteret._pagination import EnhetPage, UnderenhetPage
-from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
+from brreg.enhetsregisteret._pagination import EnhetPage, Page, UnderenhetPage
+from brreg.enhetsregisteret._queries import EnhetQuery, Query, UnderenhetQuery
 from brreg.enhetsregisteret._responses import (
     Adresse,
     Enhet,
@@ -30,9 +30,11 @@ __all__ = [
     "Client",
     # From _pagination module:
     "EnhetPage",
+    "Page",
     "UnderenhetPage",
     # From _queries module:
     "EnhetQuery",
+    "Query",
     "UnderenhetQuery",
     # From _responses module:
     "Adresse",

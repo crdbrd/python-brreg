@@ -114,7 +114,10 @@ class Client:
         self,
         query: EnhetQuery,
     ) -> EnhetPage:
-        """Search for :class:`Enhet` that matches the given query."""
+        """Search for :class:`Enhet` that matches the given query.
+
+        :param query: The search query.
+        """
         with error_handler():
             res = self._client.get(
                 f"/enheter?{query.as_url_query()}",
@@ -132,7 +135,10 @@ class Client:
         self,
         query: UnderenhetQuery,
     ) -> UnderenhetPage:
-        """Search for :class:`Underenhet` that matches the given query."""
+        """Search for :class:`Underenhet` that matches the given query.
+
+        :param query: The search query.
+        """
         with error_handler():
             res = self._client.get(
                 f"/underenheter?{query.as_url_query()}",

@@ -24,6 +24,8 @@ __all__ = [
 
 
 class Query(BaseModel):
+    """The fields here are available on all queries."""
+
     #: Sortering av resultatsett
     sort: Optional[Literal["ASC", "DESC"]] = None
 
@@ -46,6 +48,8 @@ class Query(BaseModel):
 
 
 class EnhetQuery(Query):
+    """The query type for enhet search."""
+
     #: Enhetens navn
     navn: Optional[str] = None
 
@@ -222,6 +226,8 @@ class EnhetQuery(Query):
 
 
 class UnderenhetQuery(Query):
+    """The query type for underenhet search."""
+
     #: Underenhetens navn
     navn: Optional[str] = None
 
