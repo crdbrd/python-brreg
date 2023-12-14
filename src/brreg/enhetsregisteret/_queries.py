@@ -19,6 +19,7 @@ from brreg.enhetsregisteret._types import (
 
 __all__ = [
     "EnhetQuery",
+    "UnderenhetQuery",
 ]
 
 
@@ -217,4 +218,159 @@ class EnhetQuery(Query):
     siste_innsendte_aarsregnskap: CommaList[str] = Field(
         default_factory=list,
         serialization_alias="sisteInnsendteAarsregnskap",
+    )
+
+
+class UnderenhetQuery(Query):
+    #: Underenhetens navn
+    navn: Optional[str] = None
+
+    #: Organisasjonsnummeret til underenheten
+    organisasjonsnummer: CommaList[Organisasjonsnummer] = Field(
+        default_factory=list,
+    )
+
+    #: Organisasjonsnummeret til underenhetens overordnede enhet
+    overordnet_enhet: Optional[Organisasjonsnummer] = Field(
+        default=None,
+        serialization_alias="overordnetEnhet",
+    )
+
+    #: Minste antall ansatte hos underenheten
+    fra_antall_ansatte: Optional[PositiveInt] = Field(
+        default=None,
+        serialization_alias="fraAntallAnsatte",
+    )
+
+    #: Største antall ansatte hos underenheten
+    til_antall_ansatte: Optional[PositiveInt] = Field(
+        default=None,
+        serialization_alias="tilAntallAnsatte",
+    )
+
+    #: Hvorvidt underenheten er registrert i Mva-registeret
+    registrert_i_mvaregisteret: Optional[bool] = Field(
+        default=None,
+        serialization_alias="registrertIMvaregisteret",
+    )
+
+    #: Tidligste registreringsdato i Enhetsregisteret
+    fra_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="fraRegistreringsdatoEnhetsregisteret",
+    )
+
+    #: Seneste registreringsdato i Enhetsregisteret
+    til_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="tilRegistreringsdatoEnhetsregisteret",
+    )
+
+    #: Tidligste oppstartsdato for enheten
+    fra_oppstartsdato: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="fraOppstartsdato",
+    )
+
+    #: Seneste oppstartsdato for enheten
+    til_oppstartsdato: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="tilOppstartsdato",
+    )
+
+    #: Tidligste registreringsdato for eierskifte
+    fra_dato_eierskifte: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="fraDatoEierskifte",
+    )
+
+    #: Seneste registreringsdato for eierskifte
+    til_dato_eierskifte: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="tilDatoEierskifte",
+    )
+
+    #: Tidligste nedleggelsesdato for enheten
+    fra_nedleggelsesdato: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="fraNedleggelsesdato",
+    )
+
+    #: Seneste nedleggelsesdato for enheten
+    til_nedleggelsesdato: Optional[dt.date] = Field(
+        default=None,
+        serialization_alias="tilNedleggelsesdato",
+    )
+
+    #: Underenhetens organisasjonsform
+    organisasjonsform: CommaList[str] = Field(
+        default_factory=list,
+    )
+
+    #: Enhetens hjemmeside
+    hjemmeside: Optional[str] = None
+
+    #: Kommunenummer til underenhetens postadresse
+    postadresse_kommunenummer: CommaList[Kommunenummer] = Field(
+        default_factory=list,
+        serialization_alias="postadresse.kommunenummer",
+    )
+
+    #: Postnummeret til underenhetens postadresse
+    postadresse_postnummer: CommaList[Postnummer] = Field(
+        default_factory=list,
+        serialization_alias="postadresse.postnummer",
+    )
+
+    #: Poststedet til underenhetens postadresse
+    postadresse_poststed: Optional[str] = Field(
+        default=None,
+        serialization_alias="postadresse.poststed",
+    )
+
+    #: Landkode til underenhetens postadresse
+    postadresse_landkode: CommaList[str] = Field(
+        default_factory=list,
+        serialization_alias="postadresse.landkode",
+    )
+
+    #: Adresse til underenhetens postadresse
+    postadresse_adresse: Optional[str] = Field(
+        default=None,
+        serialization_alias="postadresse.adresse",
+    )
+
+    #: Kommunenummer til enhetens beliggenhetsadresse
+    kommunenummer: CommaList[Kommunenummer] = Field(
+        default_factory=list,
+        serialization_alias="kommunenummer",
+    )
+
+    #: Postnummeret til enhetens beliggenhetsadresse
+    beliggenhetsadresse_postnummer: CommaList[Postnummer] = Field(
+        default_factory=list,
+        serialization_alias="beliggenhetsadresse.postnummer",
+    )
+
+    #: Poststedet til enhetens beliggenhetsadresse
+    beliggenhetsadresse_poststed: Optional[str] = Field(
+        default=None,
+        serialization_alias="beliggenhetsadresse.poststed",
+    )
+
+    #: Landkode til enhetens beliggenhetsadresse
+    beliggenhetsadresse_landkode: CommaList[str] = Field(
+        default_factory=list,
+        serialization_alias="beliggenhetsadresse.landkode",
+    )
+
+    #: Adresse til enhetens beliggenhetsadresse
+    beliggenhetsadresse_adresse: Optional[str] = Field(
+        default=None,
+        serialization_alias="beliggenhetsadresse.adresse",
+    )
+
+    #: Underenhetens næringskode
+    naeringskode: CommaList[Naeringskode] = Field(
+        default_factory=list,
     )

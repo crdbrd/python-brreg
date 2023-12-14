@@ -32,10 +32,18 @@ Client and queries
    :members:
    :exclude-members: model_config, model_fields
 
+.. autoclass:: brreg.enhetsregisteret.UnderenhetQuery
+   :members:
+   :exclude-members: model_config, model_fields
+
 Responses
 ---------
 
 .. autoclass:: brreg.enhetsregisteret.EnhetPage
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.UnderenhetPage
    :members:
    :exclude-members: model_config, model_fields
 

@@ -1,0 +1,55 @@
+{
+  "_embedded": {
+    "underenheter": [
+      {
+        "organisasjonsnummer": "334455660",
+        "navn": "TRYLLEBUTIKKEN SESAM",
+        "organisasjonsform": {
+          "kode": "BEDR",
+          "beskrivelse": "Bedrift",
+          "_links": {
+            "self": {
+              "href": "http://localhost/enhetsregisteret/api/organisasjonsformer/BEDR"
+            }
+          }
+        },
+        "registreringsdatoEnhetsregisteret": "2017-10-20",
+        "registrertIMvaregisteret": true,
+        "naeringskode1": {
+          "kode": "90.012",
+          "beskrivelse": "Utøvende kunstnere og underholdsningsvirksomhet innen scenekunst"
+        },
+        "harRegistrertAntallAnsatte": false,
+        "overordnetEnhet": "443322119",
+        "beliggenhetsadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "2120",
+          "poststed": "NORD-ODAL",
+          "adresse": ["Sagstua", null, null],
+          "kommune": "NORD-ODAL",
+          "kommunenummer": "0418"
+        },
+        "_links": {
+          "self": {
+            "href": "http://localhost/enhetsregisteret/api/underenheter/334455660"
+          },
+          "overordnetEnhet": {
+            "href": "http://localhost/enhetsregisteret/api/enheter/443322119"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/underenheter"
+    }
+  },
+  "page": {
+    "size": 1,
+    "totalElements": 1,
+    "totalPages": 1,
+    "number": 0
+  }
+}

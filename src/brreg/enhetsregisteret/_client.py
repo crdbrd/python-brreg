@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any, Generator, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret._pagination import EnhetPage
+from brreg.enhetsregisteret._pagination import EnhetPage, UnderenhetPage
 from brreg.enhetsregisteret._responses import Enhet, Underenhet
 from brreg.enhetsregisteret._types import (
     Organisasjonsnummer,
@@ -16,7 +16,7 @@ from brreg.enhetsregisteret._types import (
 if TYPE_CHECKING:
     from types import TracebackType
 
-    from brreg.enhetsregisteret._queries import EnhetQuery
+    from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
 
 
 class Client:
@@ -127,6 +127,24 @@ class Client:
             )
             res.raise_for_status()
             return EnhetPage.model_validate_json(res.content)
+
+    def search_underenhet(
+        self,
+        query: UnderenhetQuery,
+    ) -> UnderenhetPage:
+        """Search for :class:`Underenhet` that matches the given query."""
+        with error_handler():
+            res = self._client.get(
+                f"/underenheter?{query.as_url_query()}",
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
+                        "charset=UTF-8"
+                    )
+                },
+            )
+            res.raise_for_status()
+            return UnderenhetPage.model_validate_json(res.content)
 
 
 @contextmanager

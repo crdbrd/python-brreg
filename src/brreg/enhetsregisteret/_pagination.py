@@ -6,10 +6,11 @@ from pydantic import (
     Field,
 )
 
-from brreg.enhetsregisteret._responses import Enhet
+from brreg.enhetsregisteret._responses import Enhet, Underenhet
 
 __all__ = [
     "EnhetPage",
+    "UnderenhetPage",
 ]
 
 
@@ -44,4 +45,10 @@ class Page(BaseModel, Generic[T]):
 class EnhetPage(Page[Enhet]):
     items: List[Enhet] = Field(
         validation_alias=AliasPath("_embedded", "enheter"),
+    )
+
+
+class UnderenhetPage(Page[Underenhet]):
+    items: List[Underenhet] = Field(
+        validation_alias=AliasPath("_embedded", "underenheter"),
     )
