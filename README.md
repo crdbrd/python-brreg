@@ -2,9 +2,9 @@
 
 _API client for Brønnøysundregistrene's open API._
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/jodal/python-brreg/tests.yml?branch=main)](https://github.com/jodal/python-brreg/actions/workflows/tests.yml)
+[![Tests](https://img.shields.io/github/actions/workflow/status/crdbrd/python-brreg/tests.yml?branch=main)](https://github.com/crdbrd/python-brreg/actions/workflows/tests.yml)
 [![Docs](https://img.shields.io/readthedocs/brreg)](https://brreg.readthedocs.io/en/latest/)
-[![Coverage](https://img.shields.io/codecov/c/gh/jodal/python-brreg)](https://codecov.io/gh/jodal/python-brreg)
+[![Coverage](https://img.shields.io/codecov/c/gh/crdbrd/python-brreg)](https://codecov.io/gh/crdbrd/python-brreg)
 [![PyPI](https://img.shields.io/pypi/v/brreg)](https://pypi.org/project/brreg/)
 
 ---
@@ -25,10 +25,10 @@ python3 -m pip install brreg
 ## Project resources
 
 - [Documentation](https://brreg.readthedocs.io/)
-- [Source code](https://github.com/jodal/python-brreg)
-- [Releases](https://github.com/jodal/python-brreg/releases)
-- [Issue tracker](https://github.com/jodal/python-brreg/issues)
-- [Contributors](https://github.com/jodal/python-brreg/graphs/contributors)
+- [Source code](https://github.com/crdbrd/python-brreg)
+- [Releases](https://github.com/crdbrd/python-brreg/releases)
+- [Issue tracker](https://github.com/crdbrd/python-brreg/issues)
+- [Contributors](https://github.com/crdbrd/python-brreg/graphs/contributors)
 
 ## Features
 
@@ -43,36 +43,36 @@ Brønnøysundregisterene's API. I am open to requests, so that time is spent on
 the parts of the API that there is an actual demand for.
 
 - Enheter
-  - Search -- Implemented
-  - Get one by organization number -- Implemented
-  - Get one's roles by organization number -- Planned
-  - Get all updates since given time -- Request if needed
+  - Search - Implemented
+  - Get one by organization number - Implemented
+  - Get one's roles by organization number - Planned
+  - Get all updates since given time - Request if needed
 - Underenheter
-  - Search -- Implemented
-  - Get one by organization number -- Implemented
-  - Get all updates since given time -- Request if needed
+  - Search - Implemented
+  - Get one by organization number - Implemented
+  - Get all updates since given time - Request if needed
 - Organisasjonsform
-  - Get all -- Request if needed
+  - Get all - Request if needed
 - Rolletype
-  - Get all -- Request if needed
-  - Get one -- Request if needed
+  - Get all - Request if needed
+  - Get one - Request if needed
 - Rollegruppetype
-  - Get all -- Request if needed
-  - Get one -- Request if needed
+  - Get all - Request if needed
+  - Get one - Request if needed
 - Representant
-  - Get all -- Request if needed
-  - Get one -- Request if needed
+  - Get all - Request if needed
+  - Get one - Request if needed
 - Kommuner
-  - Get all -- Request if needed
+  - Get all - Request if needed
 - Matrikkelenhet
-  - Get one by matrikkelnummer -- Request if needed
-  - Get one by matrikkelenhet-ID -- Request if needed
+  - Get one by matrikkelnummer - Request if needed
+  - Get one by matrikkelenhet-ID - Request if needed
 
 ## License
 
 Copyright
 2019 [Otovo ASA](https://www.otovo.com/),
-2023 Stein Magnus Jodal and contributors.
+2023 [Cardboard AS](https://cardboard.inc/).
 
 Licensed under the
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
