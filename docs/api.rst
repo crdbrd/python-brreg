@@ -81,3 +81,39 @@ Response objects
 .. autoclass:: brreg.enhetsregisteret.Organisasjonsform
    :members:
    :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RollerResponse
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RolleGruppe
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RolleGruppeType
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.Rolle
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RolleType
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RollePerson
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RollePersonNavn
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RolleEnhet
+   :members:
+   :exclude-members: model_config, model_fields
+
+.. autoclass:: brreg.enhetsregisteret.RolleFullmektig
+   :members:
+   :exclude-members: model_config, model_fields

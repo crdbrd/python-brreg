@@ -322,7 +322,7 @@ class RolleEnhet(BaseModel):
     er_slettet: bool
 
 
-class RolleFullmektige(BaseModel):
+class RolleFullmektig(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Navn på fullmektig
@@ -354,7 +354,7 @@ class Rolle(BaseModel):
     fratraadt: bool
 
     #: Liste over fullmektige
-    fullmektige: List[RolleFullmektige] = Field(default_factory=list)
+    fullmektige: List[RolleFullmektig] = Field(default_factory=list)
 
     #: Rekkefølgen på rollen i gruppen
     rekkefolge: Optional[int] = None
