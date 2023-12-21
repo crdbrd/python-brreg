@@ -1,13 +1,18 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any, Generator, Optional
+from typing import TYPE_CHECKING, Any, Generator, List, Optional
 
 import httpx
 
 from brreg import BrregError, BrregRestError
 from brreg.enhetsregisteret._pagination import EnhetPage, UnderenhetPage
-from brreg.enhetsregisteret._responses import Enhet, Underenhet
+from brreg.enhetsregisteret._responses import (
+    Enhet,
+    RolleGruppe,
+    RollerResponse,
+    Underenhet,
+)
 from brreg.enhetsregisteret._types import (
     Organisasjonsnummer,
     OrganisasjonsnummerValidator,
@@ -109,6 +114,23 @@ class Client:
                 return None
             res.raise_for_status()
             return Underenhet.model_validate_json(res.content)
+
+    def get_roller(
+        self,
+        organisasjonsnummer: Organisasjonsnummer,
+    ) -> List[RolleGruppe]:
+        """Get :class:`Enhet` given an organization number."""
+        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
+        with error_handler():
+            res = self._client.get(
+                f"/enheter/{organisasjonsnummer}/roller",
+                headers={"accept": "application/json"},
+            )
+            if res.status_code in (404, 410):
+                return []
+            res.raise_for_status()
+            roller_response = RollerResponse.model_validate_json(res.content)
+            return roller_response.rollegrupper
 
     def search_enhet(
         self,

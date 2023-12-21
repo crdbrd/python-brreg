@@ -45,7 +45,7 @@ the parts of the API that there is an actual demand for.
 - Enheter
   - Search - Implemented
   - Get one by organization number - Implemented
-  - Get one's roles by organization number - Planned
+  - Get one's roles by organization number - Implemented
   - Get all updates since given time - Request if needed
 - Underenheter
   - Search - Implemented
