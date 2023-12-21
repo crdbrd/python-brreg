@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "brreg"
-version = "1.0.0a4"
+version = "1.0.0b1"
 description = "API client for Brønnøysundregistrene."
 authors = ["Stein Magnus Jodal <stein.magnus@jodal.no>"]
 license = "Apache-2.0"
