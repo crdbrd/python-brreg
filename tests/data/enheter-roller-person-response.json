@@ -1,0 +1,56 @@
+{
+  "rollegrupper": [
+    {
+      "type": {
+        "kode": "STYR",
+        "beskrivelse": "Styre",
+        "_links": {
+          "self": {
+            "href": "https://data.brreg.no/enhetsregisteret/api/roller/rollegruppetyper/STYR"
+          }
+        }
+      },
+      "sistEndret": "2019-01-01",
+      "roller": [
+        {
+          "type": {
+            "kode": "LEDE",
+            "beskrivelse": "Styrets leder",
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/roller/rolletyper/LEDE"
+              }
+            }
+          },
+          "person": {
+            "fodselsdato": "1981-01-01",
+            "navn": {
+              "fornavn": "Ove",
+              "etternavn": "Olsen"
+            },
+            "erDoed": false
+          },
+          "valgtAv": {
+            "kode": "A-AK",
+            "beskrivelse": "Representant for A-aksjonærene",
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/roller/representanter/A-AK"
+              }
+            }
+          },
+          "fratraadt": false,
+          "rekkefolge": 0
+        }
+      ]
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller"
+    },
+    "enhet": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810004622"
+    }
+  }
+}

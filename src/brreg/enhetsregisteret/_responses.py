@@ -1,3 +1,4 @@
+import datetime as dt
 from typing import List, Optional
 
 from pydantic import (
@@ -210,7 +211,7 @@ class Underenhet(BaseModel):
     #: Underenhetens navn
     navn: str
 
-    #: Underenhetens navn
+    #: Underenhetens organisasjonsform
     organisasjonsform: Organisasjonsform
 
     #: Underenhetens hjemmeside
@@ -264,3 +265,126 @@ class Underenhet(BaseModel):
 
     #: Dato under-/enheten ble slettet
     slettedato: DateOrNone = None
+
+
+class RolleType(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Kode for rolletype
+    kode: str
+
+    #: Beskrivelse av rolletypen
+    beskrivelse: str
+
+
+class RollePersonNavn(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Personens fornavn
+    fornavn: str
+
+    #: Personens mellomnavn
+    mellomnavn: Optional[str] = None
+
+    #: Personens etternavn
+    etternavn: str
+
+
+class RollePerson(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Personens fødselsdato
+    fodselsdato: dt.date
+
+    #: Personens fulle navn
+    navn: RollePersonNavn
+
+    #: Personens verge
+    verge: Optional["RollePerson"] = None
+
+    #: Hvorvidt personen er død
+    er_doed: bool
+
+
+class RolleEnhet(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Unik id-nummer tilhørende enheten
+    organisasjonsnummer: str
+
+    #: Organisasjonsformen til enheten
+    organisasjonsform: Organisasjonsform
+
+    #: Enhetens navn
+    navn: List[str] = Field(default_factory=list)
+
+    #: Hvorvidt enheten er slettet
+    er_slettet: bool
+
+
+class RolleFullmektige(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Navn på fullmektig
+    navn: Optional[str] = None
+
+    #: Adresser/adresselinjer knyttet til fullmektig
+    adresse: List[str] = Field(default_factory=list)
+
+
+class Rolle(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Rolletype, og beskrivelse av typen
+    type: RolleType
+
+    #: Person som innehar rollen
+    person: Optional[RollePerson] = None
+
+    #: Enhet som innehar rollen
+    enhet: Optional[RolleEnhet] = None
+
+    #: Rollens ansvarsandel for selskapets forpliktelser, i brøk eller prosent
+    ansvarsandel: Optional[str] = None
+
+    #: Kode og beskrivelse av hvem rollen representerer (ikke innehaver)
+    valgt_av: Optional[RolleType] = None
+
+    #: Fratrådt fra rolle
+    fratraadt: bool
+
+    #: Liste over fullmektige
+    fullmektige: List[RolleFullmektige] = Field(default_factory=list)
+
+    #: Rekkefølgen på rollen i gruppen
+    rekkefolge: Optional[int] = None
+
+
+class RolleGruppeType(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Kode for rollegruppetype
+    kode: str
+
+    #: Beskrivelse av rollegruppetypen
+    beskrivelse: str
+
+
+class RolleGruppe(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Rollegruppetype, og beskrivelse av typen
+    type: RolleGruppeType
+
+    #: Dato for siste endring
+    sist_endret: dt.date
+
+    #: Liste med alle rollene i gruppen
+    roller: List[Rolle]
+
+
+class RollerResponse(BaseModel):
+    model_config = ConfigDict(alias_generator=to_camel)
+
+    #: Liste med rollegrupper knyttet til enheten
+    rollegrupper: List[RolleGruppe]

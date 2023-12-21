@@ -1,0 +1,92 @@
+{
+  "rollegrupper": [
+    {
+      "type": {
+        "kode": "DELT",
+        "beskrivelse": "Deltakere",
+        "_links": {
+          "self": {
+            "href": "https://data.brreg.no/enhetsregisteret/api/roller/rollegruppetyper/DELT"
+          }
+        }
+      },
+      "sistEndret": "2021-02-01",
+      "roller": [
+        {
+          "type": {
+            "kode": "DTPR",
+            "beskrivelse": "Deltaker med delt ansvar",
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/roller/rolletyper/DTPR"
+              }
+            }
+          },
+          "enhet": {
+            "organisasjonsnummer": "810006242",
+            "organisasjonsform": {
+              "kode": "AS",
+              "beskrivelse": "Aksjeselskap",
+              "_links": {
+                "self": {
+                  "href": "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/AS"
+                }
+              }
+            },
+            "navn": ["Rolfsens Deltakerorganisasjon AS"],
+            "erSlettet": false,
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810006242"
+              }
+            }
+          },
+          "ansvarsandel": "50%",
+          "fratraadt": false,
+          "rekkefolge": 0
+        },
+        {
+          "type": {
+            "kode": "DTPR",
+            "beskrivelse": "Deltaker med delt ansvar",
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/roller/rolletyper/DTPR"
+              }
+            }
+          },
+          "enhet": {
+            "organisasjonsnummer": "810004282",
+            "organisasjonsform": {
+              "kode": "AS",
+              "beskrivelse": "Aksjeselskap",
+              "_links": {
+                "self": {
+                  "href": "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/AS"
+                }
+              }
+            },
+            "navn": ["Sult AS"],
+            "erSlettet": false,
+            "_links": {
+              "self": {
+                "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810004282"
+              }
+            }
+          },
+          "ansvarsandel": "50%",
+          "fratraadt": false,
+          "rekkefolge": 1
+        }
+      ]
+    }
+  ],
+  "_links": {
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810005912/roller"
+    },
+    "enhet": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter/810005912"
+    }
+  }
+}
