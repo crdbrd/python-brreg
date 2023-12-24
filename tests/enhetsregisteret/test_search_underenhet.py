@@ -78,3 +78,26 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
         kommunenummer="0418",
     )
     assert org.slettedato is None
+
+
+def test_search_underenhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url=(
+            "https://data.brreg.no/enhetsregisteret/api/underenheter" "?navn=jibberish"
+        ),
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=(DATA_DIR / "underenheter-search-empty-response.json").read_bytes(),
+    )
+
+    page = enhetsregisteret.Client().search_underenhet(
+        enhetsregisteret.UnderenhetQuery(navn="jibberish")
+    )
+
+    assert page.page_size == 20
+    assert page.page_number == 0
+    assert page.total_elements == 0
+    assert page.total_pages == 0
+
+    assert page.items == []

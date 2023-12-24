@@ -91,3 +91,23 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
     assert org.under_tvangsavvikling_eller_tvangsopplosning is False
     assert org.maalform == "Bokmål"
     assert org.slettedato is None
+
+
+def test_search_enhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url=("https://data.brreg.no/enhetsregisteret/api/enheter" "?navn=jibberish"),
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=(DATA_DIR / "enheter-search-empty-response.json").read_bytes(),
+    )
+
+    page = enhetsregisteret.Client().search_enhet(
+        enhetsregisteret.EnhetQuery(navn="jibberish")
+    )
+
+    assert page.page_size == 20
+    assert page.page_number == 0
+    assert page.total_elements == 0
+    assert page.total_pages == 0
+    assert page.items == []

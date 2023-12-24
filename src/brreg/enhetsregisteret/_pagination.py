@@ -48,6 +48,7 @@ class EnhetPage(Page[Enhet]):
     """Response type for enhet search."""
 
     items: List[Enhet] = Field(
+        default_factory=list,
         validation_alias=AliasPath("_embedded", "enheter"),
     )
 
@@ -56,5 +57,6 @@ class UnderenhetPage(Page[Underenhet]):
     """Response type for underenhet search."""
 
     items: List[Underenhet] = Field(
+        default_factory=list,
         validation_alias=AliasPath("_embedded", "underenheter"),
     )

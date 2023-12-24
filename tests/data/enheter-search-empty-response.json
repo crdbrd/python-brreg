@@ -1,0 +1,8 @@
+{
+  "_links": {
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=jibberish"
+    }
+  },
+  "page": { "size": 20, "totalElements": 0, "totalPages": 0, "number": 0 }
+}
