@@ -45,6 +45,23 @@ def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
     assert org.slettedato is None
 
 
+def test_get_underenhet_with_spaces_in_organisasjonsnummer(
+    httpx_mock: HTTPXMock,
+) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/underenheter/776655441",
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=(DATA_DIR / "underenheter-details-response.json").read_bytes(),
+    )
+
+    org = enhetsregisteret.Client().get_underenhet("776 655 441")
+
+    assert org is not None
+    assert org.organisasjonsnummer == "776655441"
+
+
 def test_get_underenhet_when_deleted(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",

@@ -78,7 +78,9 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> Optional[Enhet]:
         """Get :class:`Enhet` given an organization number."""
-        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
+        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
+            organisasjonsnummer
+        )
         with error_handler():
             res = self._client.get(
                 f"/enheter/{organisasjonsnummer}",
@@ -99,7 +101,9 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> Optional[Underenhet]:
         """Get :class:`Underenhet` given an organization number."""
-        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
+        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
+            organisasjonsnummer
+        )
         with error_handler():
             res = self._client.get(
                 f"/underenheter/{organisasjonsnummer}",
@@ -120,7 +124,9 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> List[RolleGruppe]:
         """Get :class:`Enhet` given an organization number."""
-        OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
+        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
+            organisasjonsnummer
+        )
         with error_handler():
             res = self._client.get(
                 f"/enheter/{organisasjonsnummer}/roller",

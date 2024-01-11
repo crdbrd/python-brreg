@@ -42,6 +42,23 @@ def test_get_roller_with_person(httpx_mock: HTTPXMock) -> None:
     assert rolle.rekkefolge == 0
 
 
+def test_get_roller_with_spaces_in_organisasjonsnummer(httpx_mock: HTTPXMock) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
+        status_code=200,
+        headers={"content-type": "application/json"},
+        content=(DATA_DIR / "enheter-roller-person-response.json").read_bytes(),
+    )
+
+    rollegrupper = enhetsregisteret.Client().get_roller("810 004 622")
+
+    assert rollegrupper
+
+    styret = rollegrupper[0]
+    assert styret.type.kode == "STYR"
+
+
 def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
