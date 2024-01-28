@@ -1,8 +1,8 @@
 """Sphinx configuration file."""
 
 project = "python-brreg"
-author = "Stein Magnus Jodal"
-copyright = f"2019 Otovo ASA, 2023 {author}"  # noqa: A001
+author = "Cardboard AS"
+copyright = f"2019 Otovo ASA, 2023-2024 {author}"  # noqa: A001
 
 extensions = [
     "sphinx.ext.autodoc",

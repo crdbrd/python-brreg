@@ -72,7 +72,7 @@ the parts of the API that there is an actual demand for.
 
 Copyright
 2019 [Otovo ASA](https://www.otovo.com/),
-2023 [Cardboard AS](https://cardboard.inc/).
+2023-2024 [Cardboard AS](https://cardboard.inc/).
 
 Licensed under the
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
