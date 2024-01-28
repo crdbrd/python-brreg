@@ -43,8 +43,12 @@ Query objects
    :members:
    :exclude-members: model_config, model_fields
 
-Response objects
-----------------
+Pagination objects
+------------------
+
+.. autoclass:: brreg.enhetsregisteret.Cursor
+   :members:
+   :exclude-members: model_config, model_fields
 
 .. autoclass:: brreg.enhetsregisteret.Page
    :members:
@@ -57,6 +61,9 @@ Response objects
 .. autoclass:: brreg.enhetsregisteret.UnderenhetPage
    :members:
    :exclude-members: model_config, model_fields
+
+Response objects
+----------------
 
 .. autoclass:: brreg.enhetsregisteret.Enhet
    :members:

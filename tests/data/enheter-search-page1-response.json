@@ -1,0 +1,124 @@
+{
+  "_embedded": {
+    "enheter": [
+      {
+        "organisasjonsnummer": "976030788",
+        "navn": "SESAM AS",
+        "organisasjonsform": {
+          "kode": "AS",
+          "beskrivelse": "Aksjeselskap",
+          "_links": {
+            "self": {
+              "href": "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/AS"
+            }
+          }
+        },
+        "registreringsdatoEnhetsregisteret": "1996-01-25",
+        "registrertIMvaregisteret": true,
+        "naeringskode1": {
+          "kode": "56.101",
+          "beskrivelse": "Drift av restauranter og kafeer"
+        },
+        "antallAnsatte": 10,
+        "forretningsadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "7030",
+          "poststed": "TRONDHEIM",
+          "adresse": [
+            "Elgeseter gate 1"
+          ],
+          "kommune": "TRONDHEIM",
+          "kommunenummer": "5001"
+        },
+        "stiftelsesdato": "1995-12-12",
+        "institusjonellSektorkode": {
+          "kode": "2100",
+          "beskrivelse": "Private aksjeselskaper mv."
+        },
+        "registrertIForetaksregisteret": true,
+        "registrertIStiftelsesregisteret": false,
+        "registrertIFrivillighetsregisteret": false,
+        "sisteInnsendteAarsregnskap": "2022",
+        "konkurs": false,
+        "underAvvikling": false,
+        "underTvangsavviklingEllerTvangsopplosning": false,
+        "maalform": "Bokmål",
+        "_links": {
+          "self": {
+            "href": "https://data.brreg.no/enhetsregisteret/api/enheter/976030788"
+          }
+        }
+      },
+      {
+        "organisasjonsnummer": "971497017",
+        "navn": "SESAM FAMILIEBARNEHAGE",
+        "organisasjonsform": {
+          "kode": "FLI",
+          "beskrivelse": "Forening/lag/innretning",
+          "_links": {
+            "self": {
+              "href": "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/FLI"
+            }
+          }
+        },
+        "registreringsdatoEnhetsregisteret": "1995-02-20",
+        "registrertIMvaregisteret": false,
+        "naeringskode1": {
+          "kode": "88.911",
+          "beskrivelse": "Barnehager"
+        },
+        "antallAnsatte": 0,
+        "forretningsadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "0169",
+          "poststed": "OSLO",
+          "adresse": [
+            "Colletts gate 44"
+          ],
+          "kommune": "OSLO",
+          "kommunenummer": "0301"
+        },
+        "stiftelsesdato": "1995-02-20",
+        "institusjonellSektorkode": {
+          "kode": "2100",
+          "beskrivelse": "Private aksjeselskaper mv."
+        },
+        "registrertIForetaksregisteret": false,
+        "registrertIStiftelsesregisteret": false,
+        "registrertIFrivillighetsregisteret": false,
+        "sisteInnsendteAarsregnskap": "2012",
+        "konkurs": false,
+        "underAvvikling": false,
+        "underTvangsavviklingEllerTvangsopplosning": false,
+        "maalform": "Bokmål",
+        "_links": {
+          "self": {
+            "href": "https://data.brreg.no/enhetsregisteret/api/enheter/971497017"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=0&size=2"
+    },
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&size=2"
+    },
+    "next": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2"
+    },
+    "last": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2"
+    }
+  },
+  "page": {
+    "size": 2,
+    "totalElements": 3,
+    "totalPages": 2,
+    "number": 0
+  }
+}
