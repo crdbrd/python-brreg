@@ -40,21 +40,23 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
         content=(DATA_DIR / "underenheter-search-response.json").read_bytes(),
     )
 
-    page = enhetsregisteret.Client().search_underenhet(
+    cursor = enhetsregisteret.Client().search_underenhet(
         enhetsregisteret.UnderenhetQuery(
             navn="Sesam",
             fra_registreringsdato_enhetsregisteret=date(2015, 1, 1),
             naeringskode=["90.012"],
         )
     )
+    page = next(cursor.pages)
 
     assert page.page_size == 1
     assert page.page_number == 0
     assert page.total_elements == 1
     assert page.total_pages == 1
 
-    org = page.items[0]
+    assert next(cursor.items) == page.items[0]
 
+    org = page.items[0]
     assert org is not None
     assert org.organisasjonsnummer == "334455660"
     assert org.navn == "TRYLLEBUTIKKEN SESAM"
@@ -91,13 +93,17 @@ def test_search_underenhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
         content=(DATA_DIR / "underenheter-search-empty-response.json").read_bytes(),
     )
 
-    page = enhetsregisteret.Client().search_underenhet(
+    cursor = enhetsregisteret.Client().search_underenhet(
         enhetsregisteret.UnderenhetQuery(navn="jibberish")
     )
 
+    assert list(cursor.page_numbers) == [0]
+    assert len(list(cursor.pages)) == 1
+    assert list(cursor.items) == []
+
+    page = next(cursor.pages)
     assert page.page_size == 20
     assert page.page_number == 0
     assert page.total_elements == 0
     assert page.total_pages == 0
-
     assert page.items == []

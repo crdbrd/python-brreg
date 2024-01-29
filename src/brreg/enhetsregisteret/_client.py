@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING, Any, Generator, List, Optional
 import httpx
 
 from brreg import BrregError, BrregRestError
-from brreg.enhetsregisteret._pagination import EnhetPage, UnderenhetPage
+from brreg.enhetsregisteret._pagination import Cursor, EnhetPage, UnderenhetPage
 from brreg.enhetsregisteret._responses import (
     Enhet,
     RolleGruppe,
@@ -141,7 +141,7 @@ class Client:
     def search_enhet(
         self,
         query: EnhetQuery,
-    ) -> EnhetPage:
+    ) -> Cursor[Enhet, EnhetQuery]:
         """Search for :class:`Enhet` that matches the given query.
 
         :param query: The search query.
@@ -157,12 +157,13 @@ class Client:
                 },
             )
             res.raise_for_status()
-            return EnhetPage.model_validate_json(res.content)
+            page = EnhetPage.model_validate_json(res.content)
+            return Cursor(self.search_enhet, query, page)
 
     def search_underenhet(
         self,
         query: UnderenhetQuery,
-    ) -> UnderenhetPage:
+    ) -> Cursor[Underenhet, UnderenhetQuery]:
         """Search for :class:`Underenhet` that matches the given query.
 
         :param query: The search query.
@@ -178,7 +179,8 @@ class Client:
                 },
             )
             res.raise_for_status()
-            return UnderenhetPage.model_validate_json(res.content)
+            page = UnderenhetPage.model_validate_json(res.content)
+            return Cursor(self.search_underenhet, query, page)
 
 
 @contextmanager

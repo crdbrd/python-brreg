@@ -44,9 +44,9 @@ Project resources
 License
 =======
 
-``python-brreg`` is copyright
+Copyright
 2019 `Otovo ASA <https://www.otovo.com/>`_,
-2023 Stein Magnus Jodal and contributors.
+2023-2024 `Cardboard AS <https://cardboard.inc/>`_.
 
-``python-brreg`` is licensed under the
+Licensed under the
 `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.

@@ -1,0 +1,91 @@
+{
+  "_embedded": {
+    "enheter": [
+      {
+        "organisasjonsnummer": "988879134",
+        "navn": "SESAM FILMKLUBB",
+        "organisasjonsform": {
+          "kode": "FLI",
+          "beskrivelse": "Forening/lag/innretning",
+          "_links": {
+            "self": {
+              "href": "https://data.brreg.no/enhetsregisteret/api/organisasjonsformer/FLI"
+            }
+          }
+        },
+        "hjemmeside": "www.sesam.filmklubb.blogspot.com",
+        "postadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "1751",
+          "poststed": "HALDEN",
+          "adresse": [
+            "FVS",
+            "Boks 40"
+          ],
+          "kommune": "HALDEN",
+          "kommunenummer": "3101"
+        },
+        "registreringsdatoEnhetsregisteret": "2005-11-12",
+        "registrertIMvaregisteret": false,
+        "naeringskode1": {
+          "kode": "94.991",
+          "beskrivelse": "Aktiviteter i andre interesseorganisasjoner ikke nevnt annet sted"
+        },
+        "antallAnsatte": 0,
+        "forretningsadresse": {
+          "land": "Norge",
+          "landkode": "NO",
+          "postnummer": "1776",
+          "poststed": "HALDEN",
+          "adresse": [
+            "Frivilligsentralen",
+            "Violgata 14"
+          ],
+          "kommune": "HALDEN",
+          "kommunenummer": "3101"
+        },
+        "stiftelsesdato": "2005-06-20",
+        "institusjonellSektorkode": {
+          "kode": "7000",
+          "beskrivelse": "Ideelle organisasjoner"
+        },
+        "registrertIForetaksregisteret": false,
+        "registrertIStiftelsesregisteret": false,
+        "registrertIFrivillighetsregisteret": false,
+        "konkurs": false,
+        "underAvvikling": false,
+        "underTvangsavviklingEllerTvangsopplosning": false,
+        "maalform": "Bokmål",
+        "_links": {
+          "self": {
+            "href": "https://data.brreg.no/enhetsregisteret/api/enheter/988879134"
+          }
+        }
+      }
+    ]
+  },
+  "_links": {
+    "first": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=0&size=2"
+    },
+    "prev": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=0&size=2"
+    },
+    "self": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2"
+    },
+    "next": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2"
+    },
+    "last": {
+      "href": "https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2"
+    }
+  },
+  "page": {
+    "size": 1,
+    "totalElements": 3,
+    "totalPages": 2,
+    "number": 1
+  }
+}
