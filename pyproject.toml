@@ -39,11 +39,11 @@ pyright = "1.1.347"
 ruff = "^0.1.14"
 
 [tool.poetry.group.tests.dependencies]
-coverage = { extras = ["toml"], version = "^7.3.2" }
-pytest = "^7.4.2"
+coverage = { extras = ["toml"], version = "^7.4.1" }
+pytest = "^7.4.4"
 pytest-cov = "^4.1.0"
 pytest-httpx = "0.22.0"
-pytest-watcher = "^0.3.4"
+pytest-watcher = "^0.3.5"
 
 [tool.coverage.paths]
 source = ["src"]
