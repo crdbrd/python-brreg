@@ -166,6 +166,12 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
     ]
     assert len(httpx_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
 
+    # Fetching a page that does not exist should return None, and not trigger
+    # any HTTP requests:
+    page2 = cursor.get_page(2)
+    assert page2 is None
+    assert len(httpx_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
+
     # Iterating over the pages returns all pages:
     assert list(cursor.pages) == [page0, page1]
 
