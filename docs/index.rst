@@ -22,10 +22,10 @@ Project resources
 =================
 
 - `Documentation <https://brreg.readthedocs.io/>`_
-- `Source code <https://github.com/jodal/python-brreg>`_
-- `Releases <https://github.com/jodal/python-brreg/releases>`_
-- `Issue tracker <https://github.com/jodal/python-brreg/issues>`_
-- `Contributors <https://github.com/jodal/python-brreg/graphs/contributors>`_
+- `Source code <https://github.com/crdbrd/python-brreg>`_
+- `Releases <https://github.com/crdbrd/python-brreg/releases>`_
+- `Issue tracker <https://github.com/crdbrd/python-brreg/issues>`_
+- `Contributors <https://github.com/crdbrd/python-brreg/graphs/contributors>`_
 
 
 .. toctree::
