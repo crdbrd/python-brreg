@@ -1,12 +1,12 @@
-from __future__ import annotations
-
 from contextlib import contextmanager
-from typing import TYPE_CHECKING, Any, Generator, List, Optional
+from types import TracebackType
+from typing import Any, Generator, List, Optional, Type
 
 import httpx
 
 from brreg import BrregError, BrregRestError
 from brreg.enhetsregisteret._pagination import Cursor, EnhetPage, UnderenhetPage
+from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
 from brreg.enhetsregisteret._responses import (
     Enhet,
     RolleGruppe,
@@ -17,11 +17,6 @@ from brreg.enhetsregisteret._types import (
     Organisasjonsnummer,
     OrganisasjonsnummerValidator,
 )
-
-if TYPE_CHECKING:
-    from types import TracebackType
-
-    from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
 
 
 class Client:
@@ -46,14 +41,14 @@ class Client:
     def __init__(self) -> None:
         self.open()
 
-    def __enter__(self) -> Client:
+    def __enter__(self) -> "Client":
         return self
 
     def __exit__(
         self,
-        exc_type: type[BaseException] | None = None,
-        exc_value: BaseException | None = None,
-        traceback: TracebackType | None = None,
+        exc_type: Optional[Type[BaseException]] = None,
+        exc_value: Optional[BaseException] = None,
+        traceback: Optional[TracebackType] = None,
     ) -> None:
         self.close()
 
@@ -188,7 +183,7 @@ def error_handler() -> Generator[None, Any, None]:
     try:
         yield
     except httpx.HTTPError as exc:
-        response: httpx.Response | None = getattr(exc, "response", None)
+        response: Optional[httpx.Response] = getattr(exc, "response", None)
         raise BrregRestError(
             str(exc),
             method=(exc.request.method if exc.request else None),

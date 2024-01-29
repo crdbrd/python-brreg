@@ -1,6 +1,7 @@
 from datetime import date
 from pathlib import Path
 
+import pytest
 from pytest_httpx import HTTPXMock
 
 from brreg import enhetsregisteret
@@ -102,3 +103,17 @@ def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
     assert rolle.ansvarsandel == "50%"
     assert rolle.fratraadt is False
     assert rolle.rekkefolge == 1
+
+
+@pytest.mark.parametrize("status_code", [404, 410])
+def test_get_underenhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
+        status_code=status_code,
+        headers={"content-type": "application/json"},
+    )
+
+    rollegrupper = enhetsregisteret.Client().get_roller("810004622")
+
+    assert rollegrupper == []

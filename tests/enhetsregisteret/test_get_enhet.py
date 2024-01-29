@@ -5,7 +5,7 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
-from brreg import BrregRestError, enhetsregisteret
+from brreg import BrregError, BrregRestError, enhetsregisteret
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
@@ -91,11 +91,12 @@ def test_get_enhet_when_deleted(httpx_mock: HTTPXMock) -> None:
     assert org.slettedato == date(2017, 10, 20)
 
 
-def test_get_enhet_when_gone(httpx_mock: HTTPXMock) -> None:
+@pytest.mark.parametrize("status_code", [404, 410])
+def test_get_enhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        status_code=410,
+        status_code=status_code,
         headers={"content-type": "application/json"},
     )
 
@@ -104,20 +105,7 @@ def test_get_enhet_when_gone(httpx_mock: HTTPXMock) -> None:
     assert org is None
 
 
-def test_get_enhet_when_not_found(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
-        method="GET",
-        url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
-        status_code=404,
-        headers={"content-type": "application/json"},
-    )
-
-    org = enhetsregisteret.Client().get_enhet("818511752")
-
-    assert org is None
-
-
-def test_get_enhet_when_http_error(httpx_mock: HTTPXMock) -> None:
+def test_get_enhet_when_bad_request(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
@@ -139,7 +127,7 @@ def test_get_enhet_when_http_error(httpx_mock: HTTPXMock) -> None:
     assert exc_info.value.status_code == 400
 
 
-def test_get_organization_by_number_when_http_timeout(httpx_mock: HTTPXMock) -> None:
+def test_get_enhet_when_http_timeout(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
         httpx.ConnectTimeout("Connection refused"),
     )
@@ -156,3 +144,17 @@ def test_get_organization_by_number_when_http_timeout(httpx_mock: HTTPXMock) -> 
         == "https://data.brreg.no/enhetsregisteret/api/enheter/818511752"
     )
     assert exc_info.value.status_code is None
+
+
+def test_get_enhet_when_other_error(httpx_mock: HTTPXMock) -> None:
+    httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
+        RuntimeError("Something else than HTTP failed")
+    )
+
+    with pytest.raises(BrregError) as exc_info:
+        enhetsregisteret.Client().get_enhet("818511752")
+
+    assert "Something else than HTTP failed" in str(exc_info.value)
+
+    # The BrregError wraps the original exception
+    assert isinstance(exc_info.value.__cause__, RuntimeError)

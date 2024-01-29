@@ -1,6 +1,7 @@
 from datetime import date
 from pathlib import Path
 
+import pytest
 from pytest_httpx import HTTPXMock
 
 from brreg import enhetsregisteret
@@ -82,3 +83,17 @@ def test_get_underenhet_when_deleted(httpx_mock: HTTPXMock) -> None:
         utgaatt=None,
     )
     assert org.slettedato == date(2017, 10, 20)
+
+
+@pytest.mark.parametrize("status_code", [404, 410])
+def test_get_underenhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
+    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+        method="GET",
+        url="https://data.brreg.no/enhetsregisteret/api/underenheter/987123456",
+        status_code=status_code,
+        headers={"content-type": "application/json"},
+    )
+
+    org = enhetsregisteret.Client().get_underenhet("987123456")
+
+    assert org is None
