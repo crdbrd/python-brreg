@@ -1,11 +1,10 @@
-from __future__ import annotations
-
 from typing import (
     Callable,
     Dict,
     Generic,
     Iterator,
     List,
+    Optional,
     TypeVar,
 )
 
@@ -58,7 +57,7 @@ class Page(BaseModel, Generic[T]):
 class Cursor(Generic[T, Q]):
     """Cursor for iterating over multiple pages of items."""
 
-    _operation: Callable[[Q], Cursor[T, Q]]
+    _operation: Callable[[Q], "Cursor[T, Q]"]
     _query: Q
     _pages: Dict[int, Page[T]]
     _current_page_number: int
@@ -68,7 +67,7 @@ class Cursor(Generic[T, Q]):
 
     def __init__(
         self,
-        operation: Callable[[Q], Cursor[T, Q]],
+        operation: Callable[[Q], "Cursor[T, Q]"],
         query: Q,
         page: Page[T],
     ) -> None:
@@ -78,7 +77,7 @@ class Cursor(Generic[T, Q]):
         # Expose the empty first page, even if it says the totalt number of pages is 0.
         self.page_numbers = range(max(1, page.total_pages))
 
-    def get_page(self, page_number: int) -> Page[T] | None:
+    def get_page(self, page_number: int) -> Optional[Page[T]]:
         """Get a page by its 0-indexed page number."""
         if page_number not in self.page_numbers:
             return None
