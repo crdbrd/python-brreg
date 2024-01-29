@@ -5,7 +5,7 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
-from brreg import BrregRestError, enhetsregisteret
+from brreg import BrregError, BrregRestError, enhetsregisteret
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 
@@ -144,3 +144,17 @@ def test_get_enhet_when_http_timeout(httpx_mock: HTTPXMock) -> None:
         == "https://data.brreg.no/enhetsregisteret/api/enheter/818511752"
     )
     assert exc_info.value.status_code is None
+
+
+def test_get_enhet_when_other_error(httpx_mock: HTTPXMock) -> None:
+    httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
+        RuntimeError("Something else than HTTP failed")
+    )
+
+    with pytest.raises(BrregError) as exc_info:
+        enhetsregisteret.Client().get_enhet("818511752")
+
+    assert "Something else than HTTP failed" in str(exc_info.value)
+
+    # The BrregError wraps the original exception
+    assert isinstance(exc_info.value.__cause__, RuntimeError)
