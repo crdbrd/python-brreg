@@ -36,7 +36,7 @@ mypy = "^1.8.0"
 pyright = "1.1.347"
 
 [tool.poetry.group.ruff.dependencies]
-ruff = "^0.1.14"
+ruff = "^0.2.0"
 
 [tool.poetry.group.tests.dependencies]
 coverage = { extras = ["toml"], version = "^7.4.1" }
@@ -72,6 +72,9 @@ module = "brreg.*"
 disallow_untyped_defs = true
 
 [tool.ruff]
+target-version = "py38"
+
+[tool.ruff.lint]
 select = [
 	"A",   # flake8-builtins
 	"ANN", # flake8-annotations
@@ -123,16 +126,15 @@ ignore = [
 	"UP006", # deprecated-collection-type
 	"UP007", # typing-union
 ]
-target-version = "py38"
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "docs/*" = ["INP001"]
 "tests/*" = ["D"]
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 known-first-party = ["brreg"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.pyright]
