@@ -73,12 +73,10 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> Optional[Enhet]:
         """Get :class:`Enhet` given an organization number."""
-        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
-            organisasjonsnummer
-        )
+        orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
-                f"/enheter/{organisasjonsnummer}",
+                f"/enheter/{orgnr}",
                 headers={
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
@@ -96,12 +94,10 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> Optional[Underenhet]:
         """Get :class:`Underenhet` given an organization number."""
-        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
-            organisasjonsnummer
-        )
+        orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
-                f"/underenheter/{organisasjonsnummer}",
+                f"/underenheter/{orgnr}",
                 headers={
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
@@ -119,12 +115,10 @@ class Client:
         organisasjonsnummer: Organisasjonsnummer,
     ) -> List[RolleGruppe]:
         """Get :class:`Enhet` given an organization number."""
-        organisasjonsnummer = OrganisasjonsnummerValidator.validate_python(
-            organisasjonsnummer
-        )
+        orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(
-                f"/enheter/{organisasjonsnummer}/roller",
+                f"/enheter/{orgnr}/roller",
                 headers={"accept": "application/json"},
             )
             if res.status_code in (404, 410):
