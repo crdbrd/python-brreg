@@ -22,7 +22,7 @@ pydantic = ">= 2"
 typing-extensions = ">= 4.4.0"
 
 [tool.poetry.group.dev.dependencies]
-nox = "^2023.4.22"
+nox = ">=2023.4.22,<2025.0.0"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = ">= 5.3"
