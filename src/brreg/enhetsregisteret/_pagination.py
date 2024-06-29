@@ -88,7 +88,7 @@ class Cursor(Generic[T, Q]):
                 self._query.model_copy(update={"page": page_number}),
             )
             new_page = new_cursor.get_page(page_number)
-            assert new_page is not None
+            assert new_page is not None  # noqa: S101
             self._pages[page_number] = new_page
 
         return self._pages[page_number]
@@ -98,7 +98,7 @@ class Cursor(Generic[T, Q]):
         """Iterator over all pages in this cursor."""
         for page_number in self.page_numbers:
             page = self.get_page(page_number)
-            assert page is not None
+            assert page is not None  # noqa: S101
             yield page
 
     @property
