@@ -81,7 +81,7 @@ class Client:
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
                         "charset=UTF-8"
-                    )
+                    ),
                 },
             )
             if res.status_code in (404, 410):
@@ -102,7 +102,7 @@ class Client:
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
                         "charset=UTF-8"
-                    )
+                    ),
                 },
             )
             if res.status_code in (404, 410):
@@ -142,7 +142,7 @@ class Client:
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.enhet.v2+json;"
                         "charset=UTF-8"
-                    )
+                    ),
                 },
             )
             res.raise_for_status()
@@ -164,7 +164,7 @@ class Client:
                     "accept": (
                         "application/vnd.brreg.enhetsregisteret.underenhet.v2+json;"
                         "charset=UTF-8"
-                    )
+                    ),
                 },
             )
             res.raise_for_status()

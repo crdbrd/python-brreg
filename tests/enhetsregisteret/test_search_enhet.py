@@ -50,7 +50,7 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
             fra_registreringsdato_enhetsregisteret=date(2017, 10, 20),
             til_registreringsdato_enhetsregisteret=date(2017, 10, 20),
             konkurs=False,
-        )
+        ),
     )
     page = next(cursor.pages)
 
@@ -69,7 +69,8 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
     assert org.registreringsdato_enhetsregisteret == date(2017, 10, 20)
     assert org.registrert_i_mvaregisteret is True
     assert org.naeringskode1 == enhetsregisteret.Naering(
-        kode="52.292", beskrivelse="Skipsmegling"
+        kode="52.292",
+        beskrivelse="Skipsmegling",
     )
     assert org.antall_ansatte == 50
     assert org.har_registrert_antall_ansatte is None
@@ -98,14 +99,14 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
 def test_search_enhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
-        url=("https://data.brreg.no/enhetsregisteret/api/enheter" "?navn=jibberish"),
+        url=("https://data.brreg.no/enhetsregisteret/api/enheter?navn=jibberish"),
         status_code=200,
         headers={"content-type": "application/json"},
         content=(DATA_DIR / "enheter-search-empty-response.json").read_bytes(),
     )
 
     cursor = enhetsregisteret.Client().search_enhet(
-        enhetsregisteret.EnhetQuery(navn="jibberish")
+        enhetsregisteret.EnhetQuery(navn="jibberish"),
     )
 
     assert list(cursor.page_numbers) == [0]
@@ -140,7 +141,7 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
         enhetsregisteret.EnhetQuery(
             navn="Sesam",
             size=2,
-        )
+        ),
     )
 
     assert len(httpx_mock.get_requests()) == 1  # pyright: ignore[reportUnknownMemberType]

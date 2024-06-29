@@ -28,7 +28,12 @@ def ruff_format(session: nox.Session) -> None:
     """Check formatting using Ruff."""
     args = session.posargs or locations
     session.run(
-        "poetry", "install", "--quiet", "--no-root", "--only=ruff", external=True
+        "poetry",
+        "install",
+        "--quiet",
+        "--no-root",
+        "--only=ruff",
+        external=True,
     )
     session.run("ruff", "format", "--check", *args)
 
@@ -38,7 +43,12 @@ def ruff_lint(session: nox.Session) -> None:
     """Lint using Ruff."""
     args = session.posargs or locations
     session.run(
-        "poetry", "install", "--quiet", "--no-root", "--only=ruff", external=True
+        "poetry",
+        "install",
+        "--quiet",
+        "--no-root",
+        "--only=ruff",
+        external=True,
     )
     session.run("ruff", *args)
 

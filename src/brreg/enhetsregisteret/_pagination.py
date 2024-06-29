@@ -85,7 +85,7 @@ class Cursor(Generic[T, Q]):
         if page_number not in self._pages:
             # We need to fetch the page.
             new_cursor = self._operation(
-                self._query.model_copy(update={"page": page_number})
+                self._query.model_copy(update={"page": page_number}),
             )
             new_page = new_cursor.get_page(page_number)
             assert new_page is not None

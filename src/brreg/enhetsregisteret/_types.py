@@ -24,7 +24,8 @@ CommaList = Annotated[
 # Same as `Optional[dt.date]`, except that this version deserializes empty
 # strings to `None`.
 DateOrNone = Annotated[
-    Optional[dt.date], BeforeValidator(lambda v: v if v != "" else None)
+    Optional[dt.date],
+    BeforeValidator(lambda v: v if v != "" else None),
 ]
 
 Kommunenummer = Annotated[

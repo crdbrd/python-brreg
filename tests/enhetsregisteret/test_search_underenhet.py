@@ -45,7 +45,7 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
             navn="Sesam",
             fra_registreringsdato_enhetsregisteret=date(2015, 1, 1),
             naeringskode=["90.012"],
-        )
+        ),
     )
     page = next(cursor.pages)
 
@@ -85,16 +85,14 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
 def test_search_underenhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
-        url=(
-            "https://data.brreg.no/enhetsregisteret/api/underenheter" "?navn=jibberish"
-        ),
+        url=("https://data.brreg.no/enhetsregisteret/api/underenheter?navn=jibberish"),
         status_code=200,
         headers={"content-type": "application/json"},
         content=(DATA_DIR / "underenheter-search-empty-response.json").read_bytes(),
     )
 
     cursor = enhetsregisteret.Client().search_underenhet(
-        enhetsregisteret.UnderenhetQuery(navn="jibberish")
+        enhetsregisteret.UnderenhetQuery(navn="jibberish"),
     )
 
     assert list(cursor.page_numbers) == [0]
