@@ -36,7 +36,7 @@ mypy = "^1.8.0"
 pyright = "1.1.376"
 
 [tool.poetry.group.ruff.dependencies]
-ruff = "^0.5.0"
+ruff = "0.6.1"
 
 [tool.poetry.group.tests.dependencies]
 coverage = { extras = ["toml"], version = "^7.4.1" }
@@ -76,7 +76,11 @@ target-version = "py38"
 
 [tool.ruff.lint]
 select = ["ALL"]
-ignore = []
+ignore = [
+	# These rules interfere with `ruff format`
+	"COM812",
+	"ISC001",
+]
 
 [tool.ruff.lint.per-file-ignores]
 "docs/*" = ["INP001"]
