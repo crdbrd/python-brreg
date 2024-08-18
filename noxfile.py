@@ -4,7 +4,7 @@ import nox
 
 locations = ["docs/conf.py", "noxfile.py", "src", "tests"]
 
-supported_pythons = ["3.8", "3.9", "3.10", "3.11", "3.12"]
+supported_pythons = ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13"]
 docs_python = "3.12"
 
 
@@ -39,7 +39,7 @@ def ruff_format(session: nox.Session) -> None:
 
 
 @nox.session(python=supported_pythons)
-def ruff_lint(session: nox.Session) -> None:
+def ruff_check(session: nox.Session) -> None:
     """Lint using Ruff."""
     args = session.posargs or locations
     session.run(

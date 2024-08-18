@@ -22,7 +22,7 @@ pydantic = ">= 2"
 typing-extensions = ">= 4.4.0"
 
 [tool.poetry.group.dev.dependencies]
-nox = ">=2023.4.22,<2025.0.0"
+nox = "^2024.4.15"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = ">= 5.3"
@@ -30,7 +30,7 @@ sphinx-rtd-theme = ">= 1.2"
 sphinx-autodoc-typehints = ">= 1.12"
 
 [tool.poetry.group.mypy.dependencies]
-mypy = "^1.8.0"
+mypy = "^1.11.1"
 
 [tool.poetry.group.pyright.dependencies]
 pyright = "1.1.376"
