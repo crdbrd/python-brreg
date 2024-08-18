@@ -5,6 +5,7 @@ import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
+import brreg
 from brreg import BrregError, BrregRestError, enhetsregisteret
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -20,6 +21,13 @@ def test_get_enhet(httpx_mock: HTTPXMock) -> None:
     )
 
     org = enhetsregisteret.Client().get_enhet("112233445")
+
+    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    assert len(requests) == 1
+    assert (
+        requests[0].headers["user-agent"]
+        == f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+    )
 
     assert org is not None
     assert org.organisasjonsnummer == "112233445"
