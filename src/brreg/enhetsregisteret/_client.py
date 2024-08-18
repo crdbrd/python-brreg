@@ -4,6 +4,7 @@ from typing import Any, Generator, List, Optional, Type
 
 import httpx
 
+import brreg
 from brreg import BrregError, BrregRestError
 from brreg.enhetsregisteret._pagination import Cursor, EnhetPage, UnderenhetPage
 from brreg.enhetsregisteret._queries import EnhetQuery, UnderenhetQuery
@@ -59,6 +60,12 @@ class Client:
         """
         self._client = httpx.Client(
             base_url="https://data.brreg.no/enhetsregisteret/api",
+            headers={
+                "user-agent": (
+                    f"python-brreg/{brreg.__version__} "
+                    f"python-httpx/{httpx.__version__}"
+                ),
+            },
         )
 
     def close(self) -> None:

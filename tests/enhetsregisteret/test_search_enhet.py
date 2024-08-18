@@ -1,8 +1,10 @@
 from datetime import date
 from pathlib import Path
 
+import httpx
 from pytest_httpx import HTTPXMock
 
+import brreg
 from brreg import enhetsregisteret
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -52,8 +54,15 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
             konkurs=False,
         ),
     )
-    page = next(cursor.pages)
 
+    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    assert len(requests) == 1
+    assert (
+        requests[0].headers["user-agent"]
+        == f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+    )
+
+    page = next(cursor.pages)
     assert page.page_size == 1
     assert page.page_number == 0
     assert page.total_elements == 1

@@ -1,9 +1,11 @@
 from datetime import date
 from pathlib import Path
 
+import httpx
 import pytest
 from pytest_httpx import HTTPXMock
 
+import brreg
 from brreg import enhetsregisteret
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -19,6 +21,13 @@ def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
     )
 
     org = enhetsregisteret.Client().get_underenhet("776655441")
+
+    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    assert len(requests) == 1
+    assert (
+        requests[0].headers["user-agent"]
+        == f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+    )
 
     assert org is not None
     assert org.organisasjonsnummer == "776655441"
