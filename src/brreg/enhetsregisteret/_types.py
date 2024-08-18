@@ -32,29 +32,31 @@ Kommunenummer = Annotated[
     str,
     Field(min_length=4, max_length=4, pattern=r"^\d{4}$"),
 ]
-KommunenummerValidator = TypeAdapter(Kommunenummer)  # pyright: ignore[reportCallIssue]
+KommunenummerValidator: TypeAdapter[Kommunenummer] = TypeAdapter(Kommunenummer)
 
 Naeringskode = Annotated[
     str,
     Field(min_length=6, max_length=6, pattern=r"^\d{2}\.\d{3}$"),
 ]
-NaeringskodeValidator = TypeAdapter(Naeringskode)  # pyright: ignore[reportCallIssue]
+NaeringskodeValidator: TypeAdapter[Naeringskode] = TypeAdapter(Naeringskode)
 
 Organisasjonsnummer = Annotated[
     str,
     BeforeValidator(lambda v: v.replace(" ", "")),
     Field(min_length=9, max_length=9, pattern=r"^\d{9}$"),
 ]
-OrganisasjonsnummerValidator = TypeAdapter(Organisasjonsnummer)  # pyright: ignore[reportCallIssue]
+OrganisasjonsnummerValidator: TypeAdapter[Organisasjonsnummer] = TypeAdapter(
+    Organisasjonsnummer,
+)
 
 Postnummer = Annotated[
     str,
     Field(min_length=4, max_length=4, pattern=r"^\d{4}$"),
 ]
-PostnummerValidator = TypeAdapter(Postnummer)  # pyright: ignore[reportCallIssue]
+PostnummerValidator: TypeAdapter[Postnummer] = TypeAdapter(Postnummer)
 
 Sektorkode = Annotated[
     str,
     Field(min_length=4, max_length=4, pattern=r"^\d{4}$"),
 ]
-SektorkodeValidator = TypeAdapter(Sektorkode)  # pyright: ignore[reportCallIssue]
+SektorkodeValidator: TypeAdapter[Sektorkode] = TypeAdapter(Sektorkode)
