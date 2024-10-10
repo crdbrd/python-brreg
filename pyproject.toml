@@ -19,7 +19,6 @@ classifiers = [
 python = "^3.9.0"
 httpx = ">= 0.24"
 pydantic = ">= 2"
-typing-extensions = ">= 4.4.0"
 
 [tool.poetry.group.dev.dependencies]
 nox = "^2024.4.15"
