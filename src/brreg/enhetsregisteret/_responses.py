@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import List, Optional
+from typing import Optional
 
 from pydantic import (
     BaseModel,
@@ -33,7 +33,7 @@ class Adresse(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Adresse
-    adresse: List[Optional[str]] = Field(default_factory=list)
+    adresse: list[Optional[str]] = Field(default_factory=list)
 
     #: Postnummer
     postnummer: Optional[str] = None
@@ -121,7 +121,7 @@ class Enhet(BaseModel):
 
     #: Enheter som i utgangspunktet ikke er mva-pliktig, kan søke om frivillig
     #: registrering i Merverdiavgiftsregisteret
-    frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
+    frivillig_mva_registrert_beskrivelser: list[str] = Field(default_factory=list)
 
     #: Næringskode 1
     naeringskode1: Optional[Naering] = None
@@ -184,10 +184,10 @@ class Enhet(BaseModel):
     vedtektsdato: DateOrNone = None
 
     #: Enhetens formål
-    vedtektsfestet_formaal: List[str] = Field(default_factory=list)
+    vedtektsfestet_formaal: list[str] = Field(default_factory=list)
 
     #: Enhetens aktivitet
-    aktivitet: List[str] = Field(default_factory=list)
+    aktivitet: list[str] = Field(default_factory=list)
 
     #: Nedleggelsesdato for underenheten
     nedleggelsesdato: DateOrNone = None
@@ -228,7 +228,7 @@ class Underenhet(BaseModel):
 
     #: Underenheter som i utgangspunktet ikke er mva-pliktig, kan søke om
     #: frivillig registrering i Merverdiavgiftsregisteret
-    frivillig_mva_registrert_beskrivelser: List[str] = Field(default_factory=list)
+    frivillig_mva_registrert_beskrivelser: list[str] = Field(default_factory=list)
 
     #: Næringskode 1
     naeringskode1: Optional[Naering] = None
@@ -316,7 +316,7 @@ class RolleEnhet(BaseModel):
     organisasjonsform: Organisasjonsform
 
     #: Enhetens navn
-    navn: List[str] = Field(default_factory=list)
+    navn: list[str] = Field(default_factory=list)
 
     #: Hvorvidt enheten er slettet
     er_slettet: bool
@@ -329,7 +329,7 @@ class RolleFullmektig(BaseModel):
     navn: Optional[str] = None
 
     #: Adresser/adresselinjer knyttet til fullmektig
-    adresse: List[str] = Field(default_factory=list)
+    adresse: list[str] = Field(default_factory=list)
 
 
 class Rolle(BaseModel):
@@ -354,7 +354,7 @@ class Rolle(BaseModel):
     fratraadt: bool
 
     #: Liste over fullmektige
-    fullmektige: List[RolleFullmektig] = Field(default_factory=list)
+    fullmektige: list[RolleFullmektig] = Field(default_factory=list)
 
     #: Rekkefølgen på rollen i gruppen
     rekkefolge: Optional[int] = None
@@ -380,11 +380,11 @@ class RolleGruppe(BaseModel):
     sist_endret: dt.date
 
     #: Liste med alle rollene i gruppen
-    roller: List[Rolle]
+    roller: list[Rolle]
 
 
 class RollerResponse(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Liste med rollegrupper knyttet til enheten
-    rollegrupper: List[RolleGruppe]
+    rollegrupper: list[RolleGruppe]

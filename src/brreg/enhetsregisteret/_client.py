@@ -1,7 +1,7 @@
 from collections.abc import Generator
 from contextlib import contextmanager
 from types import TracebackType
-from typing import Any, List, Optional, Type
+from typing import Any, Optional
 
 import httpx
 
@@ -48,7 +48,7 @@ class Client:
 
     def __exit__(
         self,
-        exc_type: Optional[Type[BaseException]] = None,
+        exc_type: Optional[type[BaseException]] = None,
         exc_value: Optional[BaseException] = None,
         traceback: Optional[TracebackType] = None,
     ) -> None:
@@ -121,7 +121,7 @@ class Client:
     def get_roller(
         self,
         organisasjonsnummer: Organisasjonsnummer,
-    ) -> List[RolleGruppe]:
+    ) -> list[RolleGruppe]:
         """Get :class:`Enhet` given an organization number."""
         orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
