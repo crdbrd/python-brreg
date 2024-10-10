@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import List, Optional, TypeVar
+from typing import Annotated, Optional, TypeVar
 
 from pydantic import (
     BeforeValidator,
@@ -7,13 +7,12 @@ from pydantic import (
     PlainSerializer,
     TypeAdapter,
 )
-from typing_extensions import Annotated
 
 T = TypeVar("T")
 
 # A list that serializes to a comma-separated string.
 CommaList = Annotated[
-    List[T],
+    list[T],
     PlainSerializer(
         lambda v: ",".join(v),
         return_type=str,

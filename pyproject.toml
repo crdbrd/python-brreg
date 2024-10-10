@@ -16,10 +16,9 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8.0"
+python = "^3.9.0"
 httpx = ">= 0.24"
 pydantic = ">= 2"
-typing-extensions = ">= 4.4.0"
 
 [tool.poetry.group.dev.dependencies]
 nox = "^2024.4.15"
@@ -72,7 +71,7 @@ module = "brreg.*"
 disallow_untyped_defs = true
 
 [tool.ruff]
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -100,7 +99,7 @@ convention = "google"
 keep-runtime-typing = true
 
 [tool.pyright]
-pythonVersion = "3.8"
+pythonVersion = "3.9"
 venvPath = "."
 venv = ".venv"
 typeCheckingMode = "strict"

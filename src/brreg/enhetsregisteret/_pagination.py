@@ -1,9 +1,7 @@
+from collections.abc import Iterator
 from typing import (
     Callable,
-    Dict,
     Generic,
-    Iterator,
-    List,
     Optional,
     TypeVar,
 )
@@ -31,7 +29,7 @@ class Page(BaseModel, Generic[T]):
     """The fields here are available on all page objects."""
 
     #: The items on this page.
-    items: List[T]
+    items: list[T]
 
     #: The number of elements on this page.
     page_size: int = Field(
@@ -59,7 +57,7 @@ class Cursor(Generic[T, Q]):
 
     _operation: Callable[[Q], "Cursor[T, Q]"]
     _query: Q
-    _pages: Dict[int, Page[T]]
+    _pages: dict[int, Page[T]]
     _current_page_number: int
 
     #: Iterate over all page numbers in this cursor.
@@ -111,7 +109,7 @@ class Cursor(Generic[T, Q]):
 class EnhetPage(Page[Enhet]):
     """Response type for enhet search."""
 
-    items: List[Enhet] = Field(
+    items: list[Enhet] = Field(
         default_factory=list,
         validation_alias=AliasPath("_embedded", "enheter"),
     )
@@ -120,7 +118,7 @@ class EnhetPage(Page[Enhet]):
 class UnderenhetPage(Page[Underenhet]):
     """Response type for underenhet search."""
 
-    items: List[Underenhet] = Field(
+    items: list[Underenhet] = Field(
         default_factory=list,
         validation_alias=AliasPath("_embedded", "underenheter"),
     )
