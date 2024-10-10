@@ -1,6 +1,7 @@
+from collections.abc import Generator
 from contextlib import contextmanager
 from types import TracebackType
-from typing import Any, Generator, List, Optional, Type
+from typing import Any, List, Optional, Type
 
 import httpx
 
