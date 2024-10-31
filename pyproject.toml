@@ -41,7 +41,7 @@ ruff = "0.7.1"
 coverage = { extras = ["toml"], version = "^7.4.1" }
 pytest = ">=7.4.4,<9.0.0"
 pytest-cov = ">=4.1,<7.0"
-pytest-httpx = "0.30.0"
+pytest-httpx = "0.33.0"
 pytest-watcher = "^0.4.1"
 
 [tool.coverage.paths]
