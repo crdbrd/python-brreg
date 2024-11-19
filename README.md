@@ -2,7 +2,7 @@
 
 _API client for Brønnøysundregistrene's open API._
 
-[![Tests](https://img.shields.io/github/actions/workflow/status/crdbrd/python-brreg/tests.yml?branch=main)](https://github.com/crdbrd/python-brreg/actions/workflows/tests.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/crdbrd/python-brreg/ci.yml?branch=main)](https://github.com/crdbrd/python-brreg/actions/workflows/ci.yml)
 [![Docs](https://img.shields.io/readthedocs/brreg)](https://brreg.readthedocs.io/en/latest/)
 [![Coverage](https://img.shields.io/codecov/c/gh/crdbrd/python-brreg)](https://codecov.io/gh/crdbrd/python-brreg)
 [![PyPI](https://img.shields.io/pypi/v/brreg)](https://pypi.org/project/brreg/)
