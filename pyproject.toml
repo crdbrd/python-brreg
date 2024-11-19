@@ -21,7 +21,7 @@ httpx = ">= 0.24"
 pydantic = ">= 2"
 
 [tool.poetry.group.dev.dependencies]
-nox = "^2024.4.15"
+nox = "^2024.10.9"
 
 [tool.poetry.group.docs.dependencies]
 sphinx = ">= 5.3"
