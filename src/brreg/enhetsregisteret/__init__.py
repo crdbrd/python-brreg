@@ -34,7 +34,7 @@ from brreg.enhetsregisteret._types import (
     SektorkodeValidator,
 )
 
-__all__ = [
+__all__ = [  # noqa: RUF022
     # From _client module:
     "Client",
     # From _pagination module:
