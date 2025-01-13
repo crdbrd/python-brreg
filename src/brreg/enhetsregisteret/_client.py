@@ -63,8 +63,7 @@ class Client:
             base_url="https://data.brreg.no/enhetsregisteret/api",
             headers={
                 "user-agent": (
-                    f"python-brreg/{brreg.__version__} "
-                    f"python-httpx/{httpx.__version__}"
+                    f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
                 ),
             },
         )
