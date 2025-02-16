@@ -10,9 +10,9 @@ repository = "https://github.com/crdbrd/python-brreg"
 documentation = "https://brreg.readthedocs.io"
 keywords = ["brreg", "enhetsregisteret"]
 classifiers = [
-	"Development Status :: 5 - Production/Stable",
-	"Intended Audience :: Developers",
-	"Topic :: Software Development :: Libraries",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
 ]
 
 [tool.poetry.dependencies]
@@ -76,17 +76,17 @@ target-version = "py39"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-	# These rules interfere with `ruff format`
-	"COM812",
-	"ISC001",
+    # These rules interfere with `ruff format`
+    "COM812",
+    "ISC001",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "docs/*" = ["INP001"]
 "tests/*" = [
-	"D",       # pydocstyle
-	"PLR2004", # magic-value-comparison
-	"S101",    # assert
+    "D",       # pydocstyle
+    "PLR2004", # magic-value-comparison
+    "S101",    # assert
 ]
 
 [tool.ruff.lint.isort]
