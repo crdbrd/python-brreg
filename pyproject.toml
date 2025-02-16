@@ -21,7 +21,8 @@ Documentation = "https://brreg.readthedocs.io"
 
 [dependency-groups]
 dev = [
-    "nox>=2024.10.9",
+    "tox>=4.21.2",
+    "tox-uv>=1.23.2",
     { include-group = "docs" },
     { include-group = "mypy" },
     { include-group = "pyright" },
@@ -74,6 +75,15 @@ module = "brreg.*"
 disallow_untyped_defs = true
 
 
+[tool.pyright]
+pythonVersion = "3.9"
+typeCheckingMode = "strict"
+# Already covered by tests and careful import ordering:
+reportImportCycles = false
+# Already covered by flake8-self:
+reportPrivateUsage = false
+
+
 [tool.ruff]
 target-version = "py39"
 
@@ -103,13 +113,80 @@ convention = "google"
 keep-runtime-typing = true
 
 
-[tool.pyright]
-pythonVersion = "3.9"
-typeCheckingMode = "strict"
-# Already covered by tests and careful import ordering:
-reportImportCycles = false
-# Already covered by flake8-self:
-reportPrivateUsage = false
+[tool.tox]
+requires = ["tox >= 4.21"]
+env_list = [
+    "3.9",
+    "3.10",
+    "3.11",
+    "3.12",
+    "3.13",
+    "docs",
+    "mypy",
+    "pyright",
+    "ruff-format",
+    "ruff-lint",
+]
+
+[tool.tox.env_run_base]
+dependency_groups = ["tests"]
+commands = [
+    [
+        "pytest",
+        "--basetemp={envtmpdir}",
+        "--cov=brreg",
+        "--cov-report=term-missing",
+        "{posargs}",
+    ],
+]
+
+[tool.tox.env.docs]
+dependency_groups = ["docs"]
+commands = [
+    [
+        "sphinx-build",
+        "--builder",
+        "html",
+        "--doctree-dir",
+        "{envtmpdir}{/}doctrees",
+        "docs",
+        "{envtmpdir}{/}html",
+    ],
+]
+
+[tool.tox.env.mypy]
+dependency_groups = ["tests", "mypy"]
+commands = [
+    [
+        "mypy",
+        { replace = "posargs", default = [
+            "src",
+            "tests",
+        ], extend = true },
+    ],
+]
+
+[tool.tox.env.pyright]
+dependency_groups = ["tests", "pyright"]
+commands = [
+    [
+        "pyright",
+        { replace = "posargs", default = [
+            "src",
+            "tests",
+        ], extend = true },
+    ],
+]
+
+[tool.tox.env.ruff-format]
+skip_install = true
+dependency_groups = ["ruff"]
+commands = [["ruff", "format", "--check", "{posargs:.}"]]
+
+[tool.tox.env.ruff-lint]
+skip_install = true
+dependency_groups = ["ruff"]
+commands = [["ruff", "check", "{posargs:.}"]]
 
 
 [build-system]
