@@ -2,7 +2,7 @@
 
 project = "python-brreg"
 author = "Cardboard AS"
-copyright = f"2019 Otovo ASA, 2023-2024 {author}"  # noqa: A001
+copyright = f"2019 Otovo ASA, 2023-2025 {author}"  # noqa: A001
 
 extensions = [
     "sphinx.ext.autodoc",

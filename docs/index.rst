@@ -46,7 +46,7 @@ License
 
 Copyright
 2019 `Otovo ASA <https://www.otovo.com/>`_,
-2023-2024 `Cardboard AS <https://cardboard.inc/>`_.
+2023-2025 `Cardboard AS <https://cardboard.inc/>`_.
 
 Licensed under the
 `Apache License, Version 2.0 <https://www.apache.org/licenses/LICENSE-2.0>`_.

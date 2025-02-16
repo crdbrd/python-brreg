@@ -1,48 +1,50 @@
-[tool.poetry]
+[project]
 name = "brreg"
 version = "1.2.0"
 description = "API client for Brønnøysundregistrene."
-authors = ["Stein Magnus Jodal <stein.magnus@jodal.no>"]
-license = "Apache-2.0"
+authors = [{ name = "Stein Magnus Jodal", email = "stein.magnus@jodal.no" }]
+requires-python = ">=3.9"
 readme = "README.md"
-homepage = "https://github.com/crdbrd/python-brreg"
-repository = "https://github.com/crdbrd/python-brreg"
-documentation = "https://brreg.readthedocs.io"
+license = "Apache-2.0"
 keywords = ["brreg", "enhetsregisteret"]
 classifiers = [
-	"Development Status :: 5 - Production/Stable",
-	"Intended Audience :: Developers",
-	"Topic :: Software Development :: Libraries",
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries",
+]
+dependencies = ["httpx>=0.24", "pydantic>=2"]
+
+[project.urls]
+Homepage = "https://github.com/crdbrd/python-brreg"
+Repository = "https://github.com/crdbrd/python-brreg"
+Documentation = "https://brreg.readthedocs.io"
+
+[dependency-groups]
+dev = [
+    "tox>=4.21.2",
+    "tox-uv>=1.23.2",
+    { include-group = "docs" },
+    { include-group = "mypy" },
+    { include-group = "pyright" },
+    { include-group = "ruff" },
+    { include-group = "tests" },
+]
+docs = [
+    "sphinx>=5.3",
+    "sphinx-rtd-theme>=1.2",
+    "sphinx-autodoc-typehints>=1.12",
+]
+mypy = ["mypy==1.11.1"]
+pyright = ["pyright==1.1.394"]
+ruff = ["ruff==0.9.6"]
+tests = [
+    "coverage[toml]>=7.4.1",
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1",
+    "pytest-httpx==0.35.0",
+    "pytest-watcher>=0.4.1",
 ]
 
-[tool.poetry.dependencies]
-python = "^3.9.0"
-httpx = ">= 0.24"
-pydantic = ">= 2"
-
-[tool.poetry.group.dev.dependencies]
-nox = ">=2024.10.9,<2026.0.0"
-
-[tool.poetry.group.docs.dependencies]
-sphinx = ">= 5.3"
-sphinx-rtd-theme = ">= 1.2"
-sphinx-autodoc-typehints = ">= 1.12"
-
-[tool.poetry.group.mypy.dependencies]
-mypy = "^1.11.1"
-
-[tool.poetry.group.pyright.dependencies]
-pyright = "1.1.394"
-
-[tool.poetry.group.ruff.dependencies]
-ruff = "0.9.6"
-
-[tool.poetry.group.tests.dependencies]
-coverage = { extras = ["toml"], version = "^7.4.1" }
-pytest = ">=7.4.4,<9.0.0"
-pytest-cov = ">=4.1,<7.0"
-pytest-httpx = "0.35.0"
-pytest-watcher = "^0.4.1"
 
 [tool.coverage.paths]
 source = ["src"]
@@ -55,9 +57,11 @@ source = ["brreg"]
 fail_under = 100
 show_missing = true
 
+
 [tool.pytest.ini_options]
 minversion = "6.0"
 filterwarnings = ["error::RuntimeWarning"]
+
 
 [tool.mypy]
 no_implicit_optional = true
@@ -70,23 +74,33 @@ strict_equality = true
 module = "brreg.*"
 disallow_untyped_defs = true
 
+
+[tool.pyright]
+pythonVersion = "3.9"
+typeCheckingMode = "strict"
+# Already covered by tests and careful import ordering:
+reportImportCycles = false
+# Already covered by flake8-self:
+reportPrivateUsage = false
+
+
 [tool.ruff]
 target-version = "py39"
 
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-	# These rules interfere with `ruff format`
-	"COM812",
-	"ISC001",
+    # These rules interfere with `ruff format`
+    "COM812",
+    "ISC001",
 ]
 
 [tool.ruff.lint.per-file-ignores]
 "docs/*" = ["INP001"]
 "tests/*" = [
-	"D",       # pydocstyle
-	"PLR2004", # magic-value-comparison
-	"S101",    # assert
+    "D",       # pydocstyle
+    "PLR2004", # magic-value-comparison
+    "S101",    # assert
 ]
 
 [tool.ruff.lint.isort]
@@ -98,16 +112,83 @@ convention = "google"
 [tool.ruff.lint.pyupgrade]
 keep-runtime-typing = true
 
-[tool.pyright]
-pythonVersion = "3.9"
-venvPath = "."
-venv = ".venv"
-typeCheckingMode = "strict"
-# Already covered by tests and careful import ordering:
-reportImportCycles = false
-# Already covered by flake8-self:
-reportPrivateUsage = false
+
+[tool.tox]
+requires = ["tox >= 4.21"]
+env_list = [
+    "3.9",
+    "3.10",
+    "3.11",
+    "3.12",
+    "3.13",
+    "docs",
+    "mypy",
+    "pyright",
+    "ruff-format",
+    "ruff-lint",
+]
+
+[tool.tox.env_run_base]
+dependency_groups = ["tests"]
+commands = [
+    [
+        "pytest",
+        "--basetemp={envtmpdir}",
+        "--cov=brreg",
+        "--cov-report=term-missing",
+        "{posargs}",
+    ],
+]
+
+[tool.tox.env.docs]
+dependency_groups = ["docs"]
+commands = [
+    [
+        "sphinx-build",
+        "--builder",
+        "html",
+        "--doctree-dir",
+        "{envtmpdir}{/}doctrees",
+        "docs",
+        "{envtmpdir}{/}html",
+    ],
+]
+
+[tool.tox.env.mypy]
+dependency_groups = ["tests", "mypy"]
+commands = [
+    [
+        "mypy",
+        { replace = "posargs", default = [
+            "src",
+            "tests",
+        ], extend = true },
+    ],
+]
+
+[tool.tox.env.pyright]
+dependency_groups = ["tests", "pyright"]
+commands = [
+    [
+        "pyright",
+        { replace = "posargs", default = [
+            "src",
+            "tests",
+        ], extend = true },
+    ],
+]
+
+[tool.tox.env.ruff-format]
+skip_install = true
+dependency_groups = ["ruff"]
+commands = [["ruff", "format", "--check", "{posargs:.}"]]
+
+[tool.tox.env.ruff-lint]
+skip_install = true
+dependency_groups = ["ruff"]
+commands = [["ruff", "check", "{posargs:.}"]]
+
 
 [build-system]
-requires = ["poetry-core>=1.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
