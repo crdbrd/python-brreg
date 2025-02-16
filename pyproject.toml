@@ -34,15 +34,15 @@ docs = [
     "sphinx-rtd-theme>=1.2",
     "sphinx-autodoc-typehints>=1.12",
 ]
-mypy = ["mypy==1.11.1"]
+mypy = ["mypy==1.15.0"]
 pyright = ["pyright==1.1.394"]
 ruff = ["ruff==0.9.6"]
 tests = [
-    "coverage[toml]>=7.4.1",
-    "pytest>=7.4.4",
-    "pytest-cov>=4.1",
-    "pytest-httpx==0.35.0",
-    "pytest-watcher>=0.4.1",
+    "coverage>=7.6.12",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "pytest-httpx>=0.35.0",
+    "pytest-watcher>=0.4.3",
 ]
 
 
