@@ -32,7 +32,7 @@ sphinx-autodoc-typehints = ">= 1.12"
 mypy = "^1.11.1"
 
 [tool.poetry.group.pyright.dependencies]
-pyright = "1.1.394"
+pyright = "^1.1.394"
 
 [tool.poetry.group.ruff.dependencies]
 ruff = "0.9.6"
