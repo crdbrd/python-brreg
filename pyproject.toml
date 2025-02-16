@@ -1,48 +1,48 @@
-[tool.poetry]
+[project]
 name = "brreg"
 version = "1.2.0"
 description = "API client for Brønnøysundregistrene."
-authors = ["Stein Magnus Jodal <stein.magnus@jodal.no>"]
-license = "Apache-2.0"
+authors = [{ name = "Stein Magnus Jodal", email = "stein.magnus@jodal.no" }]
+requires-python = ">=3.9"
 readme = "README.md"
-homepage = "https://github.com/crdbrd/python-brreg"
-repository = "https://github.com/crdbrd/python-brreg"
-documentation = "https://brreg.readthedocs.io"
+license = "Apache-2.0"
 keywords = ["brreg", "enhetsregisteret"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries",
 ]
+dependencies = ["httpx>=0.24", "pydantic>=2"]
 
-[tool.poetry.dependencies]
-python = "^3.9.0"
-httpx = ">= 0.24"
-pydantic = ">= 2"
+[project.urls]
+Homepage = "https://github.com/crdbrd/python-brreg"
+Repository = "https://github.com/crdbrd/python-brreg"
+Documentation = "https://brreg.readthedocs.io"
 
-[tool.poetry.group.dev.dependencies]
-nox = ">=2024.10.9,<2026.0.0"
-
-[tool.poetry.group.docs.dependencies]
-sphinx = ">= 5.3"
-sphinx-rtd-theme = ">= 1.2"
-sphinx-autodoc-typehints = ">= 1.12"
-
-[tool.poetry.group.mypy.dependencies]
-mypy = "^1.11.1"
-
-[tool.poetry.group.pyright.dependencies]
-pyright = "^1.1.394"
-
-[tool.poetry.group.ruff.dependencies]
-ruff = "0.9.6"
-
-[tool.poetry.group.tests.dependencies]
-coverage = { extras = ["toml"], version = "^7.4.1" }
-pytest = ">=7.4.4,<9.0.0"
-pytest-cov = ">=4.1,<7.0"
-pytest-httpx = "0.35.0"
-pytest-watcher = "^0.4.1"
+[dependency-groups]
+dev = [
+    "nox>=2024.10.9",
+    { include-group = "docs" },
+    { include-group = "mypy" },
+    { include-group = "pyright" },
+    { include-group = "ruff" },
+    { include-group = "tests" },
+]
+docs = [
+    "sphinx>=5.3",
+    "sphinx-rtd-theme>=1.2",
+    "sphinx-autodoc-typehints>=1.12",
+]
+mypy = ["mypy==1.11.1"]
+pyright = ["pyright==1.1.394"]
+ruff = ["ruff==0.9.6"]
+tests = [
+    "coverage[toml]>=7.4.1",
+    "pytest>=7.4.4",
+    "pytest-cov>=4.1",
+    "pytest-httpx==0.35.0",
+    "pytest-watcher>=0.4.1",
+]
 
 
 [tool.coverage.paths]
@@ -113,5 +113,5 @@ reportPrivateUsage = false
 
 
 [build-system]
-requires = ["poetry-core>=1.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
