@@ -103,9 +103,6 @@ ignore = [
     "S101",    # assert
 ]
 
-[tool.ruff.lint.isort]
-known-first-party = ["brreg"]
-
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
