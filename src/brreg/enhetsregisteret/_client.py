@@ -121,7 +121,7 @@ class Client:
         self,
         organisasjonsnummer: Organisasjonsnummer,
     ) -> list[RolleGruppe]:
-        """Get roles for an entity given an organization number."""
+        """Get a list of :class:`RolleGruppe` given an organization number."""
         orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
             res = self._client.get(

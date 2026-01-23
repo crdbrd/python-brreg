@@ -41,7 +41,7 @@ NaeringskodeValidator: TypeAdapter[Naeringskode] = TypeAdapter(Naeringskode)
 
 Organisasjonsnummer = Annotated[
     str,
-    BeforeValidator(lambda v: str(v).replace(" ", "")),
+    BeforeValidator(lambda v: str(v).replace(" ", "").zfill(9)),
     Field(min_length=9, max_length=9, pattern=r"^\d{9}$"),
 ]
 OrganisasjonsnummerValidator: TypeAdapter[Organisasjonsnummer] = TypeAdapter(
