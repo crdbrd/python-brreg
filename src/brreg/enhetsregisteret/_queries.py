@@ -87,7 +87,7 @@ class EnhetQuery(Query):
     )
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
-    registert_i_foretaksregisteret: Optional[bool] = Field(
+    registrert_i_foretaksregisteret: Optional[bool] = Field(
         default=None,
         serialization_alias="registrertIForetaksregisteret",
     )
@@ -111,8 +111,8 @@ class EnhetQuery(Query):
     )
 
     #: Hvorvidt enheten er registrert som under tvangsavvikling eller
-    #: tvangsopplosning
-    under_tvangsavvikling_eller_trangsopplosning: Optional[bool] = None
+    #: tvangsoppløsning
+    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool] = None
 
     #: Hvorvidt enheten er registrert som under avvikling
     under_avvikling: Optional[bool] = None
