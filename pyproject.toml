@@ -35,7 +35,7 @@ docs = [
     "sphinx-autodoc-typehints>=1.12",
 ]
 mypy = ["mypy==1.19.1"]
-pyright = ["pyright==1.1.408"]
+pyright = ["basedpyright==1.37.2"]
 ruff = ["ruff==0.14.14"]
 tests = [
     "coverage>=7.6.12",
@@ -168,7 +168,7 @@ commands = [
 dependency_groups = ["tests", "pyright"]
 commands = [
     [
-        "pyright",
+        "basedpyright",
         { replace = "posargs", default = [
             "src",
             "tests",
