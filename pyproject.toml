@@ -28,6 +28,7 @@ dev = [
     { include-group = "pyright" },
     { include-group = "ruff" },
     { include-group = "tests" },
+    { include-group = "ty" },
 ]
 docs = [
     "sphinx>=5.3",
@@ -44,6 +45,7 @@ tests = [
     "pytest-httpx>=0.35.0",
     "pytest-watcher>=0.4.3",
 ]
+ty = ["ty==0.0.14"]
 
 
 [tool.coverage.paths]
@@ -122,6 +124,7 @@ env_list = [
     "pyright",
     "ruff-format",
     "ruff-lint",
+    "ty",
 ]
 
 [tool.tox.env_run_base]
@@ -185,6 +188,19 @@ commands = [["ruff", "format", "--check", "{posargs:.}"]]
 skip_install = true
 dependency_groups = ["ruff"]
 commands = [["ruff", "check", "{posargs:.}"]]
+
+[tool.tox.env.ty]
+dependency_groups = ["tests", "ty"]
+commands = [
+    [
+        "ty",
+        "check",
+        { replace = "posargs", default = [
+            "src",
+            "tests",
+        ], extend = true },
+    ],
+]
 
 
 [build-system]
