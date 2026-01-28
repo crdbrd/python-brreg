@@ -1,7 +1,7 @@
 from collections.abc import Generator
 from contextlib import contextmanager
 from types import TracebackType
-from typing import Any, Optional
+from typing import Any
 
 import httpx
 
@@ -48,9 +48,9 @@ class Client:
 
     def __exit__(
         self,
-        exc_type: Optional[type[BaseException]] = None,
-        exc_value: Optional[BaseException] = None,
-        traceback: Optional[TracebackType] = None,
+        exc_type: type[BaseException] | None = None,
+        exc_value: BaseException | None = None,
+        traceback: TracebackType | None = None,
     ) -> None:
         self.close()
 
@@ -78,7 +78,7 @@ class Client:
     def get_enhet(
         self,
         organisasjonsnummer: Organisasjonsnummer,
-    ) -> Optional[Enhet]:
+    ) -> Enhet | None:
         """Get :class:`Enhet` given an organization number."""
         orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
@@ -99,7 +99,7 @@ class Client:
     def get_underenhet(
         self,
         organisasjonsnummer: Organisasjonsnummer,
-    ) -> Optional[Underenhet]:
+    ) -> Underenhet | None:
         """Get :class:`Underenhet` given an organization number."""
         orgnr = OrganisasjonsnummerValidator.validate_python(organisasjonsnummer)
         with error_handler():
@@ -184,7 +184,7 @@ def error_handler() -> Generator[None, Any, None]:
     try:
         yield
     except httpx.HTTPError as exc:
-        response: Optional[httpx.Response] = getattr(exc, "response", None)
+        response: httpx.Response | None = getattr(exc, "response", None)
         raise BrregRestError(
             str(exc),
             method=(exc.request.method if exc.request else None),

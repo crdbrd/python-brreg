@@ -1,6 +1,3 @@
-from typing import Optional
-
-
 class BrregError(Exception):
     """Top-level exception.
 
@@ -16,9 +13,9 @@ class BrregRestError(BrregError):
         self,
         msg: str,
         *,
-        method: Optional[str],
-        url: Optional[str],
-        status_code: Optional[int],
+        method: str | None,
+        url: str | None,
+        status_code: int | None,
     ) -> None:
         super().__init__(f"REST API exception: {msg}")
         self.method = method

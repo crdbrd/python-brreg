@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import Annotated, Optional, TypeVar
+from typing import Annotated, TypeVar
 
 from pydantic import (
     BeforeValidator,
@@ -23,7 +23,7 @@ CommaList = Annotated[
 # Same as `Optional[dt.date]`, except that this version deserializes empty
 # strings to `None`.
 DateOrNone = Annotated[
-    Optional[dt.date],
+    dt.date | None,
     BeforeValidator(lambda v: v if v != "" else None),
 ]
 

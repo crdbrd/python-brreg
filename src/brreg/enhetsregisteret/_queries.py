@@ -1,5 +1,5 @@
 import datetime as dt
-from typing import Literal, Optional
+from typing import Literal
 from urllib.parse import urlencode
 
 from pydantic import (
@@ -28,13 +28,13 @@ class Query(BaseModel):
     """The fields here are available on all queries."""
 
     #: Sortering av resultatsett
-    sort: Optional[Literal["ASC", "DESC"]] = None
+    sort: Literal["ASC", "DESC"] | None = None
 
     #: Sidestørrelse
-    size: Optional[PositiveInt] = None
+    size: PositiveInt | None = None
 
     #: Sidenummer
-    page: Optional[NonNegativeInt] = None
+    page: NonNegativeInt | None = None
 
     def as_url_query(self) -> str:
         params = self.model_dump(
@@ -52,7 +52,7 @@ class EnhetQuery(Query):
     """The query type for enhet search."""
 
     #: Enhetens navn
-    navn: Optional[str] = None
+    navn: str | None = None
 
     #: Organisasjonsnummeret til enheten
     organisasjonsnummer: CommaList[Organisasjonsnummer] = Field(
@@ -60,46 +60,46 @@ class EnhetQuery(Query):
     )
 
     #: Organisasjonsnummeret til enhetens overordnede enhet
-    overordnet_enhet: Optional[Organisasjonsnummer] = Field(
+    overordnet_enhet: Organisasjonsnummer | None = Field(
         default=None,
         serialization_alias="overordnetEnhet",
     )
 
     #: Minste antall ansatte hos enheten
-    fra_antall_ansatte: Optional[PositiveInt] = Field(
+    fra_antall_ansatte: PositiveInt | None = Field(
         default=None,
         serialization_alias="fraAntallAnsatte",
     )
 
     #: Største antall ansatte hos enheten
-    til_antall_ansatte: Optional[PositiveInt] = Field(
+    til_antall_ansatte: PositiveInt | None = Field(
         default=None,
         serialization_alias="tilAntallAnsatte",
     )
 
     #: Hvorvidt enheten er registrert som konkurs
-    konkurs: Optional[bool] = None
+    konkurs: bool | None = None
 
     #: Hvorvidt enheten er registrert i Mva-registeret
-    registrert_i_mvaregisteret: Optional[bool] = Field(
+    registrert_i_mvaregisteret: bool | None = Field(
         default=None,
         serialization_alias="registrertIMvaregisteret",
     )
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
-    registrert_i_foretaksregisteret: Optional[bool] = Field(
+    registrert_i_foretaksregisteret: bool | None = Field(
         default=None,
         serialization_alias="registrertIForetaksregisteret",
     )
 
     #: Hvorvidt enheten er registrert i Stiftelsesregisteret
-    registrert_i_stiftelsesregisteret: Optional[bool] = Field(
+    registrert_i_stiftelsesregisteret: bool | None = Field(
         default=None,
         serialization_alias="registrertIStiftelsesregisteret",
     )
 
     #: Hvorvidt enheten er registrert i Frivillighetsregisteret
-    registrert_i_frivillighetsregisteret: Optional[bool] = Field(
+    registrert_i_frivillighetsregisteret: bool | None = Field(
         default=None,
         serialization_alias="registrertIFrivillighetsregisteret",
     )
@@ -112,31 +112,31 @@ class EnhetQuery(Query):
 
     #: Hvorvidt enheten er registrert som under tvangsavvikling eller
     #: tvangsoppløsning
-    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool] = None
+    under_tvangsavvikling_eller_tvangsopplosning: bool | None = None
 
     #: Hvorvidt enheten er registrert som under avvikling
-    under_avvikling: Optional[bool] = None
+    under_avvikling: bool | None = None
 
     #: Tidligste registreringsdato i Enhetsregisteret
-    fra_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+    fra_registreringsdato_enhetsregisteret: dt.date | None = Field(
         default=None,
         serialization_alias="fraRegistreringsdatoEnhetsregisteret",
     )
 
     #: Seneste registreringsdato i Enhetsregisteret
-    til_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+    til_registreringsdato_enhetsregisteret: dt.date | None = Field(
         default=None,
         serialization_alias="tilRegistreringsdatoEnhetsregisteret",
     )
 
     #: Tidligste stiftelsesdato for enheten
-    fra_stiftelsesdato: Optional[dt.date] = Field(
+    fra_stiftelsesdato: dt.date | None = Field(
         default=None,
         serialization_alias="fraStiftelsesdato",
     )
 
     #: Seneste stiftelsesdato for enheten
-    til_stiftelsesdato: Optional[dt.date] = Field(
+    til_stiftelsesdato: dt.date | None = Field(
         default=None,
         serialization_alias="tilStiftelsesdato",
     )
@@ -147,7 +147,7 @@ class EnhetQuery(Query):
     )
 
     #: Enhetens hjemmeside
-    hjemmeside: Optional[str] = None
+    hjemmeside: str | None = None
 
     #: Enhetens institusjonelle sektorkode
     institusjonell_sektorkode: CommaList[Sektorkode] = Field(
@@ -167,7 +167,7 @@ class EnhetQuery(Query):
     )
 
     #: Poststedet til enhetens postadresse
-    postadresse_poststed: Optional[str] = Field(
+    postadresse_poststed: str | None = Field(
         default=None,
         serialization_alias="postadresse.poststed",
     )
@@ -179,7 +179,7 @@ class EnhetQuery(Query):
     )
 
     #: Adresse til enhetens postadresse
-    postadresse_adresse: Optional[str] = Field(
+    postadresse_adresse: str | None = Field(
         default=None,
         serialization_alias="postadresse.adresse",
     )
@@ -197,7 +197,7 @@ class EnhetQuery(Query):
     )
 
     #: Poststedet til enhetens forretningsadresse
-    forretningsadresse_poststed: Optional[str] = Field(
+    forretningsadresse_poststed: str | None = Field(
         default=None,
         serialization_alias="forretningsadresse.poststed",
     )
@@ -209,7 +209,7 @@ class EnhetQuery(Query):
     )
 
     #: Adresse til enhetens forretningsadresse
-    forretningsadresse_adresse: Optional[str] = Field(
+    forretningsadresse_adresse: str | None = Field(
         default=None,
         serialization_alias="forretningsadresse.adresse",
     )
@@ -230,7 +230,7 @@ class UnderenhetQuery(Query):
     """The query type for underenhet search."""
 
     #: Underenhetens navn
-    navn: Optional[str] = None
+    navn: str | None = None
 
     #: Organisasjonsnummeret til underenheten
     organisasjonsnummer: CommaList[Organisasjonsnummer] = Field(
@@ -238,73 +238,73 @@ class UnderenhetQuery(Query):
     )
 
     #: Organisasjonsnummeret til underenhetens overordnede enhet
-    overordnet_enhet: Optional[Organisasjonsnummer] = Field(
+    overordnet_enhet: Organisasjonsnummer | None = Field(
         default=None,
         serialization_alias="overordnetEnhet",
     )
 
     #: Minste antall ansatte hos underenheten
-    fra_antall_ansatte: Optional[PositiveInt] = Field(
+    fra_antall_ansatte: PositiveInt | None = Field(
         default=None,
         serialization_alias="fraAntallAnsatte",
     )
 
     #: Største antall ansatte hos underenheten
-    til_antall_ansatte: Optional[PositiveInt] = Field(
+    til_antall_ansatte: PositiveInt | None = Field(
         default=None,
         serialization_alias="tilAntallAnsatte",
     )
 
     #: Hvorvidt underenheten er registrert i Mva-registeret
-    registrert_i_mvaregisteret: Optional[bool] = Field(
+    registrert_i_mvaregisteret: bool | None = Field(
         default=None,
         serialization_alias="registrertIMvaregisteret",
     )
 
     #: Tidligste registreringsdato i Enhetsregisteret
-    fra_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+    fra_registreringsdato_enhetsregisteret: dt.date | None = Field(
         default=None,
         serialization_alias="fraRegistreringsdatoEnhetsregisteret",
     )
 
     #: Seneste registreringsdato i Enhetsregisteret
-    til_registreringsdato_enhetsregisteret: Optional[dt.date] = Field(
+    til_registreringsdato_enhetsregisteret: dt.date | None = Field(
         default=None,
         serialization_alias="tilRegistreringsdatoEnhetsregisteret",
     )
 
     #: Tidligste oppstartsdato for enheten
-    fra_oppstartsdato: Optional[dt.date] = Field(
+    fra_oppstartsdato: dt.date | None = Field(
         default=None,
         serialization_alias="fraOppstartsdato",
     )
 
     #: Seneste oppstartsdato for enheten
-    til_oppstartsdato: Optional[dt.date] = Field(
+    til_oppstartsdato: dt.date | None = Field(
         default=None,
         serialization_alias="tilOppstartsdato",
     )
 
     #: Tidligste registreringsdato for eierskifte
-    fra_dato_eierskifte: Optional[dt.date] = Field(
+    fra_dato_eierskifte: dt.date | None = Field(
         default=None,
         serialization_alias="fraDatoEierskifte",
     )
 
     #: Seneste registreringsdato for eierskifte
-    til_dato_eierskifte: Optional[dt.date] = Field(
+    til_dato_eierskifte: dt.date | None = Field(
         default=None,
         serialization_alias="tilDatoEierskifte",
     )
 
     #: Tidligste nedleggelsesdato for enheten
-    fra_nedleggelsesdato: Optional[dt.date] = Field(
+    fra_nedleggelsesdato: dt.date | None = Field(
         default=None,
         serialization_alias="fraNedleggelsesdato",
     )
 
     #: Seneste nedleggelsesdato for enheten
-    til_nedleggelsesdato: Optional[dt.date] = Field(
+    til_nedleggelsesdato: dt.date | None = Field(
         default=None,
         serialization_alias="tilNedleggelsesdato",
     )
@@ -315,7 +315,7 @@ class UnderenhetQuery(Query):
     )
 
     #: Enhetens hjemmeside
-    hjemmeside: Optional[str] = None
+    hjemmeside: str | None = None
 
     #: Kommunenummer til underenhetens postadresse
     postadresse_kommunenummer: CommaList[Kommunenummer] = Field(
@@ -330,7 +330,7 @@ class UnderenhetQuery(Query):
     )
 
     #: Poststedet til underenhetens postadresse
-    postadresse_poststed: Optional[str] = Field(
+    postadresse_poststed: str | None = Field(
         default=None,
         serialization_alias="postadresse.poststed",
     )
@@ -342,7 +342,7 @@ class UnderenhetQuery(Query):
     )
 
     #: Adresse til underenhetens postadresse
-    postadresse_adresse: Optional[str] = Field(
+    postadresse_adresse: str | None = Field(
         default=None,
         serialization_alias="postadresse.adresse",
     )
@@ -360,7 +360,7 @@ class UnderenhetQuery(Query):
     )
 
     #: Poststedet til enhetens beliggenhetsadresse
-    beliggenhetsadresse_poststed: Optional[str] = Field(
+    beliggenhetsadresse_poststed: str | None = Field(
         default=None,
         serialization_alias="beliggenhetsadresse.poststed",
     )
@@ -372,7 +372,7 @@ class UnderenhetQuery(Query):
     )
 
     #: Adresse til enhetens beliggenhetsadresse
-    beliggenhetsadresse_adresse: Optional[str] = Field(
+    beliggenhetsadresse_adresse: str | None = Field(
         default=None,
         serialization_alias="beliggenhetsadresse.adresse",
     )
