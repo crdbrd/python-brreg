@@ -44,15 +44,17 @@ def test_kommunenummer(
     [
         ("123456789", "123456789", None),
         ("123 456 789", "123456789", None),
+        # Int input: normal case
+        (123456789, "123456789", None),
+        # Int input: with leading zeros lost, should be zero-padded
+        (12345678, "012345678", None),
+        (1234567, "001234567", None),
+        # String input: short strings are also zero-padded
+        ("12345678", "012345678", None),
         (
             "1234567890",
             None,
             "Value should have at most 9 items after validation, not 10",
-        ),
-        (
-            "12345678",
-            None,
-            "Value should have at least 9 items after validation, not 8",
         ),
         ("aaabbbccc", None, r"String should match pattern '\^\\d\{9\}\$'"),
     ],
