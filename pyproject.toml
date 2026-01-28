@@ -34,9 +34,9 @@ docs = [
     "sphinx-rtd-theme>=1.2",
     "sphinx-autodoc-typehints>=1.12",
 ]
-mypy = ["mypy==1.15.0"]
-pyright = ["pyright==1.1.394"]
-ruff = ["ruff==0.9.6"]
+mypy = ["mypy==1.19.1"]
+pyright = ["pyright==1.1.408"]
+ruff = ["ruff==0.14.14"]
 tests = [
     "coverage>=7.6.12",
     "pytest>=8.3.4",

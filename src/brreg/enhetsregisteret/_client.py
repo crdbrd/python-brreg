@@ -43,7 +43,7 @@ class Client:
     def __init__(self) -> None:
         self.open()
 
-    def __enter__(self) -> "Client":
+    def __enter__(self) -> "Client":  # noqa: PYI034
         return self
 
     def __exit__(
