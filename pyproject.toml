@@ -1,6 +1,6 @@
 [project]
 name = "brreg"
-version = "1.4.0"
+version = "1.4.1"
 description = "API client for Brønnøysundregistrene."
 authors = [{ name = "Stein Magnus Jodal", email = "stein.magnus@jodal.no" }]
 requires-python = ">=3.10"
