@@ -1,11 +1,7 @@
 import datetime as dt
 from typing import Optional
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-)
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
 from brreg.enhetsregisteret._types import DateOrNone
@@ -23,35 +19,35 @@ class InstitusjonellSektor(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Sektorkoden
-    kode: Optional[str] = None
+    kode: str | None = None
 
     #: Tekstlig beskrivelse av sektorkoden
-    beskrivelse: Optional[str] = None
+    beskrivelse: str | None = None
 
 
 class Adresse(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Adresse
-    adresse: list[Optional[str]] = Field(default_factory=list)
+    adresse: list[str | None] = Field(default_factory=list)
 
     #: Postnummer
-    postnummer: Optional[str] = None
+    postnummer: str | None = None
 
     #: Poststed
-    poststed: Optional[str] = None
+    poststed: str | None = None
 
     #: Kommunenummer
-    kommunenummer: Optional[str] = None
+    kommunenummer: str | None = None
 
     #: Kommune
-    kommune: Optional[str] = None
+    kommune: str | None = None
 
     #: Landkode
-    landkode: Optional[str] = None
+    landkode: str | None = None
 
     #: Land
-    land: Optional[str] = None
+    land: str | None = None
 
 
 class Naering(BaseModel):
@@ -64,10 +60,10 @@ class Naering(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Næringskoden
-    kode: Optional[str] = None
+    kode: str | None = None
 
     #: Tekstlig beskrivelse av næringskoden
-    beskrivelse: Optional[str] = None
+    beskrivelse: str | None = None
 
 
 class Organisasjonsform(BaseModel):
@@ -108,77 +104,77 @@ class Enhet(BaseModel):
     organisasjonsform: Organisasjonsform
 
     #: Hjemmeside
-    hjemmeside: Optional[str] = None
+    hjemmeside: str | None = None
 
     #: Enhetens postadresse
-    postadresse: Optional[Adresse] = None
+    postadresse: Adresse | None = None
 
     #: Registreringsdato i Enhetsregisteret
     registreringsdato_enhetsregisteret: DateOrNone = None
 
     #: Hvorvidt enheten er registrert i MVA-registeret
-    registrert_i_mvaregisteret: Optional[bool] = None
+    registrert_i_mvaregisteret: bool | None = None
 
     #: Enheter som i utgangspunktet ikke er mva-pliktig, kan søke om frivillig
     #: registrering i Merverdiavgiftsregisteret
     frivillig_mva_registrert_beskrivelser: list[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[Naering] = None
+    naeringskode1: Naering | None = None
 
     #: Næringskode 2
-    naeringskode2: Optional[Naering] = None
+    naeringskode2: Naering | None = None
 
     #: Næringskode 3
-    naeringskode3: Optional[Naering] = None
+    naeringskode3: Naering | None = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[Naering] = None
+    hjelpeenhetskode: Naering | None = None
 
     #: Antall ansatte
-    antall_ansatte: Optional[int] = None
+    antall_ansatte: int | None = None
 
     #: Angir om enheten har registrert ansatte
-    har_registrert_antall_ansatte: Optional[bool] = None
+    har_registrert_antall_ansatte: bool | None = None
 
     #: Organisasjonsnummeret til overordnet enhet i offentlig sektor
-    overordnet_enhet: Optional[str] = None
+    overordnet_enhet: str | None = None
 
     #: Forretningsadresse
-    forretningsadresse: Optional[Adresse] = None
+    forretningsadresse: Adresse | None = None
 
     #: Stiftelsesdato
     stiftelsesdato: DateOrNone = None
 
     #: Sektorkode
-    institusjonell_sektorkode: Optional[InstitusjonellSektor] = None
+    institusjonell_sektorkode: InstitusjonellSektor | None = None
 
     #: Hvorvidt enheten er registrert i Foretaksregisteret
-    registrert_i_foretaksregisteret: Optional[bool] = None
+    registrert_i_foretaksregisteret: bool | None = None
 
     #: Hvorvidt enheten er registrert i Stiftelsesregisteret
-    registrert_i_stiftelsesregisteret: Optional[bool] = None
+    registrert_i_stiftelsesregisteret: bool | None = None
 
     #: Hvorvidt enheten er registrert i Frivillighetsregisteret
-    registrert_i_frivillighetsregisteret: Optional[bool] = None
+    registrert_i_frivillighetsregisteret: bool | None = None
 
     #: År for siste innsendte årsregnskap
-    siste_innsendte_aarsregnskap: Optional[int] = None
+    siste_innsendte_aarsregnskap: int | None = None
 
     #: Hvorvidt enheten er konkurs
-    konkurs: Optional[bool] = None
+    konkurs: bool | None = None
 
     #: Kjennelsesdato for konkursen
     konkursdato: DateOrNone = None
 
     #: Hvorvidt enheten er under avvikling
-    under_avvikling: Optional[bool] = None
+    under_avvikling: bool | None = None
 
     #: Hvorvidt enheten er under tvangsavvikling eller tvangsoppløsning
-    under_tvangsavvikling_eller_tvangsopplosning: Optional[bool] = None
+    under_tvangsavvikling_eller_tvangsopplosning: bool | None = None
 
     #: Målform
-    maalform: Optional[str] = None
+    maalform: str | None = None
 
     #: Enhetens vedtektsdato
     vedtektsdato: DateOrNone = None
@@ -215,44 +211,44 @@ class Underenhet(BaseModel):
     organisasjonsform: Organisasjonsform
 
     #: Underenhetens hjemmeside
-    hjemmeside: Optional[str] = None
+    hjemmeside: str | None = None
 
     #: Underenhetens postadresse
-    postadresse: Optional[Adresse] = None
+    postadresse: Adresse | None = None
 
     #: Underenhetens registreringsdato i Enhetsregisteret
     registreringsdato_enhetsregisteret: DateOrNone = None
 
     #: Hvorvidt underenheten er registrert i MVA-registeret
-    registrert_i_mvaregisteret: Optional[bool] = None
+    registrert_i_mvaregisteret: bool | None = None
 
     #: Underenheter som i utgangspunktet ikke er mva-pliktig, kan søke om
     #: frivillig registrering i Merverdiavgiftsregisteret
     frivillig_mva_registrert_beskrivelser: list[str] = Field(default_factory=list)
 
     #: Næringskode 1
-    naeringskode1: Optional[Naering] = None
+    naeringskode1: Naering | None = None
 
     #: Næringskode 2
-    naeringskode2: Optional[Naering] = None
+    naeringskode2: Naering | None = None
 
     #: Næringskode 3
-    naeringskode3: Optional[Naering] = None
+    naeringskode3: Naering | None = None
 
     #: Hjelpeenhetskode
-    hjelpeenhetskode: Optional[Naering] = None
+    hjelpeenhetskode: Naering | None = None
 
     #: Antall ansatte
-    antall_ansatte: Optional[int] = None
+    antall_ansatte: int | None = None
 
     #: Angir om enheten har registrert ansatte
-    har_registrert_antall_ansatte: Optional[bool] = None
+    har_registrert_antall_ansatte: bool | None = None
 
     #: Underenhetens overordnede enhet
-    overordnet_enhet: Optional[str] = None
+    overordnet_enhet: str | None = None
 
     #: Underenhetens beliggenhetsadresse
-    beliggenhetsadresse: Optional[Adresse] = None
+    beliggenhetsadresse: Adresse | None = None
 
     #: Underenhetens oppstartsdato
     oppstartsdato: DateOrNone = None
@@ -284,7 +280,7 @@ class RollePersonNavn(BaseModel):
     fornavn: str
 
     #: Personens mellomnavn
-    mellomnavn: Optional[str] = None
+    mellomnavn: str | None = None
 
     #: Personens etternavn
     etternavn: str
@@ -326,7 +322,7 @@ class RolleFullmektig(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
     #: Navn på fullmektig
-    navn: Optional[str] = None
+    navn: str | None = None
 
     #: Adresser/adresselinjer knyttet til fullmektig
     adresse: list[str] = Field(default_factory=list)
@@ -339,16 +335,16 @@ class Rolle(BaseModel):
     type: RolleType
 
     #: Person som innehar rollen
-    person: Optional[RollePerson] = None
+    person: RollePerson | None = None
 
     #: Enhet som innehar rollen
-    enhet: Optional[RolleEnhet] = None
+    enhet: RolleEnhet | None = None
 
     #: Rollens ansvarsandel for selskapets forpliktelser, i brøk eller prosent
-    ansvarsandel: Optional[str] = None
+    ansvarsandel: str | None = None
 
     #: Kode og beskrivelse av hvem rollen representerer (ikke innehaver)
-    valgt_av: Optional[RolleType] = None
+    valgt_av: RolleType | None = None
 
     #: Fratrådt fra rolle
     fratraadt: bool
@@ -357,7 +353,7 @@ class Rolle(BaseModel):
     fullmektige: list[RolleFullmektig] = Field(default_factory=list)
 
     #: Rekkefølgen på rollen i gruppen
-    rekkefolge: Optional[int] = None
+    rekkefolge: int | None = None
 
 
 class RolleGruppeType(BaseModel):

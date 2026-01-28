@@ -1,16 +1,7 @@
-from collections.abc import Iterator
-from typing import (
-    Callable,
-    Generic,
-    Optional,
-    TypeVar,
-)
+from collections.abc import Callable, Iterator
+from typing import Generic, TypeVar
 
-from pydantic import (
-    AliasPath,
-    BaseModel,
-    Field,
-)
+from pydantic import AliasPath, BaseModel, Field
 
 from brreg.enhetsregisteret._queries import Query
 from brreg.enhetsregisteret._responses import Enhet, Underenhet
@@ -75,7 +66,7 @@ class Cursor(Generic[T, Q]):
         # Expose the empty first page, even if it says the totalt number of pages is 0.
         self.page_numbers = range(max(1, page.total_pages))
 
-    def get_page(self, page_number: int) -> Optional[Page[T]]:
+    def get_page(self, page_number: int) -> Page[T] | None:
         """Get a page by its 0-indexed page number."""
         if page_number not in self.page_numbers:
             return None

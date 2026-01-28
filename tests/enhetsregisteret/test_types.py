@@ -1,5 +1,3 @@
-from typing import Optional
-
 import pytest
 
 from brreg.enhetsregisteret import (
@@ -28,8 +26,8 @@ from brreg.enhetsregisteret import (
 )
 def test_kommunenummer(
     value: str,
-    expected: Optional[str],
-    error: Optional[str],
+    expected: str | None,
+    error: str | None,
 ) -> None:
     if expected:
         assert KommunenummerValidator.validate_python(value) == expected
@@ -61,8 +59,8 @@ def test_kommunenummer(
 )
 def test_organisasjonsnummer(
     value: str,
-    expected: Optional[str],
-    error: Optional[str],
+    expected: str | None,
+    error: str | None,
 ) -> None:
     if expected:
         assert OrganisasjonsnummerValidator.validate_python(value) == expected
@@ -91,8 +89,8 @@ def test_organisasjonsnummer(
 )
 def test_sektorkode(
     value: str,
-    expected: Optional[str],
-    error: Optional[str],
+    expected: str | None,
+    error: str | None,
 ) -> None:
     if expected:
         assert SektorkodeValidator.validate_python(value) == expected
