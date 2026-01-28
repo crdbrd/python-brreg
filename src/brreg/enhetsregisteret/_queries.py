@@ -2,12 +2,7 @@ import datetime as dt
 from typing import Literal
 from urllib.parse import urlencode
 
-from pydantic import (
-    BaseModel,
-    Field,
-    NonNegativeInt,
-    PositiveInt,
-)
+from pydantic import BaseModel, Field, NonNegativeInt, PositiveInt
 
 from brreg.enhetsregisteret._types import (
     CommaList,

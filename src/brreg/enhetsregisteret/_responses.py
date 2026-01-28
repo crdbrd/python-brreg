@@ -1,11 +1,7 @@
 import datetime as dt
 from typing import Optional
 
-from pydantic import (
-    BaseModel,
-    ConfigDict,
-    Field,
-)
+from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
 
 from brreg.enhetsregisteret._types import DateOrNone

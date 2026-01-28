@@ -1,14 +1,7 @@
 from collections.abc import Callable, Iterator
-from typing import (
-    Generic,
-    TypeVar,
-)
+from typing import Generic, TypeVar
 
-from pydantic import (
-    AliasPath,
-    BaseModel,
-    Field,
-)
+from pydantic import AliasPath, BaseModel, Field
 
 from brreg.enhetsregisteret._queries import Query
 from brreg.enhetsregisteret._responses import Enhet, Underenhet

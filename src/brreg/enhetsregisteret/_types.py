@@ -1,12 +1,7 @@
 import datetime as dt
 from typing import Annotated, TypeVar
 
-from pydantic import (
-    BeforeValidator,
-    Field,
-    PlainSerializer,
-    TypeAdapter,
-)
+from pydantic import BeforeValidator, Field, PlainSerializer, TypeAdapter
 
 T = TypeVar("T")
 
