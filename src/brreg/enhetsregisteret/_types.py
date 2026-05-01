@@ -9,7 +9,7 @@ T = TypeVar("T")
 CommaList = Annotated[
     list[T],
     PlainSerializer(
-        lambda v: ",".join(v),
+        ",".join,
         return_type=str,
         when_used="json",
     ),
