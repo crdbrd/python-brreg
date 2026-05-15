@@ -45,7 +45,7 @@ tests = [
     "pytest-httpx>=0.35.0",
     "pytest-watcher>=0.4.3",
 ]
-ty = ["ty==0.0.35"]
+ty = ["ty==0.0.36"]
 
 
 [tool.coverage.paths]
