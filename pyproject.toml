@@ -36,7 +36,7 @@ docs = [
     "sphinx-autodoc-typehints>=1.12",
 ]
 mypy = ["mypy==2.1.0"]
-pyright = ["basedpyright==1.39.5"]
+pyright = ["basedpyright==1.39.6"]
 ruff = ["ruff==0.15.13"]
 tests = [
     "coverage>=7.6.12",
