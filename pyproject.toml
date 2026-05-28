@@ -29,6 +29,7 @@ dev = [
     { include-group = "ruff" },
     { include-group = "tests" },
     { include-group = "ty" },
+    { include-group = "zizmor" },
 ]
 docs = [
     "sphinx>=5.3",
@@ -46,6 +47,7 @@ tests = [
     "pytest-watcher>=0.4.3",
 ]
 ty = ["ty==0.0.37"]
+zizmor = ["zizmor==1.25.2"]
 
 
 [tool.coverage.paths]
@@ -125,6 +127,7 @@ env_list = [
     "ruff-format",
     "ruff-lint",
     "ty",
+    "zizmor",
 ]
 
 [tool.tox.env_run_base]
@@ -201,6 +204,11 @@ commands = [
         ], extend = true },
     ],
 ]
+
+[tool.tox.env.zizmor]
+skip_install = true
+dependency_groups = ["zizmor"]
+commands = [["zizmor", "{posargs:.}"]]
 
 
 [build-system]
