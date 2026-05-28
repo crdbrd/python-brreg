@@ -53,6 +53,9 @@ jobs:
           - name: "ty"
             python: "3.14"
             tox: ty
+          - name: "zizmor"
+            python: "3.14"
+            tox: zizmor
 
     name: ${{ matrix.name }}
     runs-on: ubuntu-24.04
