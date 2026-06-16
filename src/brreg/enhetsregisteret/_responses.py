@@ -185,9 +185,6 @@ class Enhet(BaseModel):
     #: Enhetens aktivitet
     aktivitet: list[str] = Field(default_factory=list)
 
-    #: Nedleggelsesdato for underenheten
-    nedleggelsesdato: DateOrNone = None
-
     #: Dato under-/enheten ble slettet
     slettedato: DateOrNone = None
 
