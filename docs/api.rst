@@ -120,7 +120,3 @@ Response objects
 .. autoclass:: brreg.enhetsregisteret.RolleEnhet
    :members:
    :exclude-members: model_computed_fields, model_config, model_fields
-
-.. autoclass:: brreg.enhetsregisteret.RolleFullmektig
-   :members:
-   :exclude-members: model_computed_fields, model_config, model_fields
