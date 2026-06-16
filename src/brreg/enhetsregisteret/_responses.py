@@ -323,6 +323,9 @@ class Rolle(BaseModel):
     #: Enhet som innehar rollen
     enhet: RolleEnhet | None = None
 
+    #: Hvorvidt rollen er avregistrert
+    avregistrert: bool
+
     #: Rollens ansvarsandel for selskapets forpliktelser, i brøk eller prosent
     ansvarsandel: str | None = None
 
