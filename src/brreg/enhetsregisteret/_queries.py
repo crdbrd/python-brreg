@@ -107,10 +107,16 @@ class EnhetQuery(Query):
 
     #: Hvorvidt enheten er registrert som under tvangsavvikling eller
     #: tvangsoppløsning
-    under_tvangsavvikling_eller_tvangsopplosning: bool | None = None
+    under_tvangsavvikling_eller_tvangsopplosning: bool | None = Field(
+        default=None,
+        serialization_alias="underTvangsavviklingEllerTvangsopplosning",
+    )
 
     #: Hvorvidt enheten er registrert som under avvikling
-    under_avvikling: bool | None = None
+    under_avvikling: bool | None = Field(
+        default=None,
+        serialization_alias="underAvvikling",
+    )
 
     #: Tidligste registreringsdato i Enhetsregisteret
     fra_registreringsdato_enhetsregisteret: dt.date | None = Field(
@@ -147,6 +153,7 @@ class EnhetQuery(Query):
     #: Enhetens institusjonelle sektorkode
     institusjonell_sektorkode: CommaList[Sektorkode] = Field(
         default_factory=list,
+        serialization_alias="institusjonellSektorkode",
     )
 
     #: Kommunenummer til enhetens postadresse
