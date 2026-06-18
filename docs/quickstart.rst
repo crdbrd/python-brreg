@@ -33,7 +33,7 @@ To get details about an organization ("enhet") given its organization number:
 >>> enhet.organisasjonsform
 Organisasjonsform(kode='AS', beskrivelse='Aksjeselskap', utgaatt=None)
 >>> enhet.forretningsadresse
-Adresse(adresse=['Grensen 13'], postnummer='0159', poststed='OSLO', kommunenummer='0301', kommune='OSLO', landkode='NO', land='Norge')
+Adresse(adresse=['Universitetsgata 2'], postnummer='0164', poststed='OSLO', kommunenummer='0301', kommune='OSLO', landkode='NO', land='Norge')
 >>>
 
 To get details of a suborganization ("underenhet") given its organization number:
@@ -42,18 +42,18 @@ To get details of a suborganization ("underenhet") given its organization number
 >>> underenhet.organisasjonsnummer
 '930090069'
 >>> underenhet.antall_ansatte
-5
+16
 >>> underenhet.beliggenhetsadresse
-Adresse(adresse=['Grensen 13'], postnummer='0159', poststed='OSLO', kommunenummer='0301', kommune='OSLO', landkode='NO', land='Norge')
+Adresse(adresse=['Universitetsgata 2'], postnummer='0164', poststed='OSLO', kommunenummer='0301', kommune='OSLO', landkode='NO', land='Norge')
 >>>
 
 To get details of roles ("roller") given an organization number:
 
 >>> rollegrupper = client.get_roller('930070556')
 >>> [rg.type.beskrivelse for rg in rollegrupper]
-['Daglig leder/ adm.direktør', 'Styre', 'Regnskapsfører']
->>> rollegrupper[2].roller[0].enhet
-RolleEnhet(organisasjonsnummer='914549140', organisasjonsform=Organisasjonsform(kode='AS', beskrivelse='Aksjeselskap', utgaatt=None), navn=['SYNEGA REGNSKAP AS'], er_slettet=False)
+['Daglig leder', 'Styre', 'Revisor', 'Regnskapsfører']
+>>> rollegrupper[3].roller[0].enhet
+RolleEnhet(organisasjonsnummer='930696390', organisasjonsform=Organisasjonsform(kode='AS', beskrivelse='Aksjeselskap', utgaatt=None), navn=['RAFO REGNSKAP OG RÅDGIVNING AS'], er_slettet=False)
 >>>
 
 
@@ -77,7 +77,7 @@ The cursor has two iterators, ``cursor.pages`` to iterate over the pages:
 >>> page = next(cursor.pages)
 >>> page.page_number
 0
->>> page.total_items
+>>> page.total_elements
 2
 >>> page.total_pages
 1
