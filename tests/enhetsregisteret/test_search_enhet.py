@@ -1,8 +1,8 @@
 from datetime import date
 from pathlib import Path
 
-import httpx
-from pytest_httpx import HTTPXMock
+import httpx2
+from pytest_httpx2 import HTTPXMock
 
 import brreg
 from brreg import enhetsregisteret
@@ -59,7 +59,7 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
-        == f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+        == f"python-brreg/{brreg.__version__} python-httpx2/{httpx2.__version__}"
     )
 
     page = next(cursor.pages)

@@ -1,9 +1,9 @@
 from datetime import date
 from pathlib import Path
 
-import httpx
+import httpx2
 import pytest
-from pytest_httpx import HTTPXMock
+from pytest_httpx2 import HTTPXMock
 
 import brreg
 from brreg import BrregError, BrregRestError, enhetsregisteret
@@ -26,7 +26,7 @@ def test_get_enhet(httpx_mock: HTTPXMock) -> None:
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
-        == f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+        == f"python-brreg/{brreg.__version__} python-httpx2/{httpx2.__version__}"
     )
 
     assert org is not None
@@ -138,7 +138,7 @@ def test_get_enhet_when_bad_request(httpx_mock: HTTPXMock) -> None:
 
 def test_get_enhet_when_http_timeout(httpx_mock: HTTPXMock) -> None:
     httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
-        httpx.ConnectTimeout("Connection refused"),
+        httpx2.ConnectTimeout("Connection refused"),
     )
 
     with pytest.raises(BrregRestError) as exc_info:
