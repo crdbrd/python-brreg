@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from types import TracebackType
 from typing import Any
 
-import httpx
+import httpx2
 
 import brreg
 from brreg import BrregError, BrregRestError
@@ -38,7 +38,7 @@ class Client:
         client.close()
     """
 
-    _client: httpx.Client
+    _client: httpx2.Client
 
     def __init__(self) -> None:
         self.open()
@@ -59,11 +59,12 @@ class Client:
 
         This is called automatically when the client is created.
         """
-        self._client = httpx.Client(
+        self._client = httpx2.Client(
             base_url="https://data.brreg.no/enhetsregisteret/api",
             headers={
                 "user-agent": (
-                    f"python-brreg/{brreg.__version__} python-httpx/{httpx.__version__}"
+                    f"python-brreg/{brreg.__version__} "
+                    f"python-httpx2/{httpx2.__version__}"
                 ),
             },
         )
@@ -188,8 +189,8 @@ class Client:
 def error_handler() -> Generator[None, Any, None]:
     try:
         yield
-    except httpx.HTTPError as exc:
-        response: httpx.Response | None = getattr(exc, "response", None)
+    except httpx2.HTTPError as exc:
+        response: httpx2.Response | None = getattr(exc, "response", None)
         raise BrregRestError(
             str(exc),
             method=(exc.request.method if exc.request else None),

@@ -12,7 +12,7 @@ classifiers = [
     "Intended Audience :: Developers",
     "Topic :: Software Development :: Libraries",
 ]
-dependencies = ["httpx>=0.24", "pydantic>=2"]
+dependencies = ["httpx2>=2", "pydantic>=2"]
 
 [project.urls]
 Homepage = "https://github.com/crdbrd/python-brreg"
@@ -41,10 +41,10 @@ pyright = ["basedpyright==1.39.6"]
 ruff = ["ruff==0.15.14"]
 tests = [
     "coverage>=7.6.12",
-    "pytest>=8.3.4",
+    "httpx2-pytest>=1",
     "pytest-cov>=6.0.0",
-    "pytest-httpx>=0.35.0",
     "pytest-watcher>=0.4.3",
+    "pytest>=8.3.4",
 ]
 ty = ["ty==0.0.39"]
 zizmor = ["zizmor==1.25.2"]
