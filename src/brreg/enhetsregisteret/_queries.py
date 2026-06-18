@@ -61,13 +61,13 @@ class EnhetQuery(Query):
     )
 
     #: Minste antall ansatte hos enheten
-    fra_antall_ansatte: PositiveInt | None = Field(
+    fra_antall_ansatte: NonNegativeInt | None = Field(
         default=None,
         serialization_alias="fraAntallAnsatte",
     )
 
     #: Største antall ansatte hos enheten
-    til_antall_ansatte: PositiveInt | None = Field(
+    til_antall_ansatte: NonNegativeInt | None = Field(
         default=None,
         serialization_alias="tilAntallAnsatte",
     )
