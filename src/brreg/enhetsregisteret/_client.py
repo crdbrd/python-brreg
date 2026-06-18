@@ -126,7 +126,12 @@ class Client:
         with error_handler():
             res = self._client.get(
                 f"/enheter/{orgnr}/roller",
-                headers={"accept": "application/json"},
+                headers={
+                    "accept": (
+                        "application/vnd.brreg.enhetsregisteret.rolle.v1+json;"
+                        "charset=UTF-8"
+                    )
+                },
             )
             if res.status_code in (404, 410):
                 return []
