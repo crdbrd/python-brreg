@@ -42,7 +42,7 @@
             }
           },
           "ansvarsandel": "50%",
-          "fratraadt": false,
+          "avregistrert": false,
           "rekkefolge": 0
         },
         {
@@ -75,7 +75,7 @@
             }
           },
           "ansvarsandel": "50%",
-          "fratraadt": false,
+          "avregistrert": false,
           "rekkefolge": 1
         }
       ]

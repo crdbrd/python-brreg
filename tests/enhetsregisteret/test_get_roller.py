@@ -48,7 +48,7 @@ def test_get_roller_with_person(httpx_mock: HTTPXMock) -> None:
     assert rolle.valgt_av
     assert rolle.valgt_av.kode == "A-AK"
     assert rolle.valgt_av.beskrivelse == "Representant for A-aksjonærene"
-    assert rolle.fratraadt is False
+    assert rolle.avregistrert is False
     assert rolle.rekkefolge == 0
 
 
@@ -97,7 +97,7 @@ def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
     assert rolle.enhet.navn == ["Rolfsens Deltakerorganisasjon AS"]
     assert rolle.enhet.er_slettet is False
     assert rolle.ansvarsandel == "50%"
-    assert rolle.fratraadt is False
+    assert rolle.avregistrert is False
     assert rolle.rekkefolge == 0
 
     rolle = deltakere.roller[1]
@@ -110,7 +110,7 @@ def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
     assert rolle.enhet.navn == ["Sult AS"]
     assert rolle.enhet.er_slettet is False
     assert rolle.ansvarsandel == "50%"
-    assert rolle.fratraadt is False
+    assert rolle.avregistrert is False
     assert rolle.rekkefolge == 1
 
 

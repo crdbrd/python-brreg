@@ -1,5 +1,4 @@
 import datetime as dt
-from typing import Optional
 
 from pydantic import BaseModel, ConfigDict, Field
 from pydantic.alias_generators import to_camel
@@ -292,9 +291,6 @@ class RollePerson(BaseModel):
     #: Personens fulle navn
     navn: RollePersonNavn
 
-    #: Personens verge
-    verge: Optional["RollePerson"] = None
-
     #: Hvorvidt personen er død
     er_doed: bool
 
@@ -315,16 +311,6 @@ class RolleEnhet(BaseModel):
     er_slettet: bool
 
 
-class RolleFullmektig(BaseModel):
-    model_config = ConfigDict(alias_generator=to_camel)
-
-    #: Navn på fullmektig
-    navn: str | None = None
-
-    #: Adresser/adresselinjer knyttet til fullmektig
-    adresse: list[str] = Field(default_factory=list)
-
-
 class Rolle(BaseModel):
     model_config = ConfigDict(alias_generator=to_camel)
 
@@ -337,17 +323,14 @@ class Rolle(BaseModel):
     #: Enhet som innehar rollen
     enhet: RolleEnhet | None = None
 
+    #: Hvorvidt rollen er avregistrert
+    avregistrert: bool
+
     #: Rollens ansvarsandel for selskapets forpliktelser, i brøk eller prosent
     ansvarsandel: str | None = None
 
     #: Kode og beskrivelse av hvem rollen representerer (ikke innehaver)
     valgt_av: RolleType | None = None
-
-    #: Fratrådt fra rolle
-    fratraadt: bool
-
-    #: Liste over fullmektige
-    fullmektige: list[RolleFullmektig] = Field(default_factory=list)
 
     #: Rekkefølgen på rollen i gruppen
     rekkefolge: int | None = None
