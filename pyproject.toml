@@ -37,8 +37,8 @@ docs = [
     "sphinx-autodoc-typehints>=1.12",
 ]
 mypy = ["mypy==2.1.0"]
-pyright = ["basedpyright==1.39.6"]
-ruff = ["ruff==0.15.14"]
+pyright = ["basedpyright==1.39.8"]
+ruff = ["ruff==0.15.19"]
 tests = [
     "coverage>=7.6.12",
     "httpx2-pytest>=1",
@@ -46,8 +46,8 @@ tests = [
     "pytest-watcher>=0.4.3",
     "pytest>=8.3.4",
 ]
-ty = ["ty==0.0.39"]
-zizmor = ["zizmor==1.25.2"]
+ty = ["ty==0.0.53"]
+zizmor = ["zizmor==1.26.1"]
 
 
 [tool.coverage.paths]
