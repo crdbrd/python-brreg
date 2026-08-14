@@ -94,6 +94,8 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
+    "CPY",  # flake8-copyright
+    #
     # These rules interfere with `ruff format`
     "COM812",
     "ISC001",
