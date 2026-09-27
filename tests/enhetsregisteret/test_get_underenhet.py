@@ -11,8 +11,8 @@ from brreg import enhetsregisteret
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_underenhet(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/underenheter/776655441",
         status_code=200,
@@ -22,7 +22,7 @@ def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
 
     org = enhetsregisteret.Client().get_underenhet("776655441")
 
-    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    requests = httpx2_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
@@ -57,9 +57,9 @@ def test_get_underenhet(httpx_mock: HTTPXMock) -> None:
 
 
 def test_get_underenhet_with_spaces_in_organisasjonsnummer(
-    httpx_mock: HTTPXMock,
+    httpx2_mock: HTTPXMock,
 ) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/underenheter/776655441",
         status_code=200,
@@ -73,8 +73,8 @@ def test_get_underenhet_with_spaces_in_organisasjonsnummer(
     assert org.organisasjonsnummer == "776655441"
 
 
-def test_get_underenhet_when_deleted(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_underenhet_when_deleted(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/underenheter/987123456",
         status_code=200,
@@ -96,8 +96,8 @@ def test_get_underenhet_when_deleted(httpx_mock: HTTPXMock) -> None:
 
 
 @pytest.mark.parametrize("status_code", [404, 410])
-def test_get_underenhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_underenhet_when_4xx(httpx2_mock: HTTPXMock, status_code: int) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/underenheter/987123456",
         status_code=status_code,

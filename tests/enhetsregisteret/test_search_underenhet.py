@@ -28,8 +28,8 @@ def test_underenhet_query() -> None:
     )
 
 
-def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_search_underenhet(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url=(
             "https://data.brreg.no/enhetsregisteret/api/underenheter"
@@ -50,7 +50,7 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
         ),
     )
 
-    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    requests = httpx2_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
@@ -91,8 +91,8 @@ def test_search_underenhet(httpx_mock: HTTPXMock) -> None:
     assert org.slettedato is None
 
 
-def test_search_underenhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_search_underenhet_with_empty_response(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url=("https://data.brreg.no/enhetsregisteret/api/underenheter?navn=jibberish"),
         status_code=200,
