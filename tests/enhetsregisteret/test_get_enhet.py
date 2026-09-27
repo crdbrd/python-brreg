@@ -11,8 +11,8 @@ from brreg import BrregError, BrregRestError, enhetsregisteret
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-def test_get_enhet(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/112233445",
         status_code=200,
@@ -22,7 +22,7 @@ def test_get_enhet(httpx_mock: HTTPXMock) -> None:
 
     org = enhetsregisteret.Client().get_enhet("112233445")
 
-    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    requests = httpx2_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
@@ -63,8 +63,8 @@ def test_get_enhet(httpx_mock: HTTPXMock) -> None:
     assert org.slettedato is None
 
 
-def test_get_enhet_with_spaces_in_organisasjonsnummer(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_with_spaces_in_organisasjonsnummer(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/112233445",
         status_code=200,
@@ -78,8 +78,8 @@ def test_get_enhet_with_spaces_in_organisasjonsnummer(httpx_mock: HTTPXMock) -> 
     assert org.organisasjonsnummer == "112233445"
 
 
-def test_get_enhet_when_deleted(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_when_deleted(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/123456789",
         status_code=200,
@@ -101,8 +101,8 @@ def test_get_enhet_when_deleted(httpx_mock: HTTPXMock) -> None:
 
 
 @pytest.mark.parametrize("status_code", [404, 410])
-def test_get_enhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_when_4xx(httpx2_mock: HTTPXMock, status_code: int) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
         status_code=status_code,
@@ -114,8 +114,8 @@ def test_get_enhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
     assert org is None
 
 
-def test_get_enhet_when_bad_request(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_when_bad_request(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/818511752",
         status_code=400,
@@ -136,8 +136,8 @@ def test_get_enhet_when_bad_request(httpx_mock: HTTPXMock) -> None:
     assert exc_info.value.status_code == 400
 
 
-def test_get_enhet_when_http_timeout(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_when_http_timeout(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
         httpx2.ConnectTimeout("Connection refused"),
     )
 
@@ -155,8 +155,8 @@ def test_get_enhet_when_http_timeout(httpx_mock: HTTPXMock) -> None:
     assert exc_info.value.status_code is None
 
 
-def test_get_enhet_when_other_error(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
+def test_get_enhet_when_other_error(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_exception(  # pyright: ignore[reportUnknownMemberType]
         RuntimeError("Something else than HTTP failed"),
     )
 

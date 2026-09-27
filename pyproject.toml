@@ -41,7 +41,7 @@ pyright = ["basedpyright==1.39.10"]
 ruff = ["ruff==0.16.4"]
 tests = [
     "coverage>=7.6.12",
-    "httpx2-pytest>=1",
+    "httpx2-pytest>=2",
     "pytest-cov>=6.0.0",
     "pytest-watcher>=0.4.3",
     "pytest>=8.3.4",

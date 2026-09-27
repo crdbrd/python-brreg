@@ -31,8 +31,8 @@ def test_enhet_query() -> None:
     )
 
 
-def test_search_enhet(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_search_enhet(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url=(
             "https://data.brreg.no/enhetsregisteret/api/enheter"
@@ -55,7 +55,7 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
         ),
     )
 
-    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    requests = httpx2_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
@@ -105,8 +105,8 @@ def test_search_enhet(httpx_mock: HTTPXMock) -> None:
     assert org.slettedato is None
 
 
-def test_search_enhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_search_enhet_with_empty_response(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url=("https://data.brreg.no/enhetsregisteret/api/enheter?navn=jibberish"),
         status_code=200,
@@ -130,15 +130,15 @@ def test_search_enhet_with_empty_response(httpx_mock: HTTPXMock) -> None:
     assert page.items == []
 
 
-def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_search_enhet_with_pagination(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&size=2",
         status_code=200,
         headers={"content-type": "application/json"},
         content=(DATA_DIR / "enheter-search-page1-response.json").read_bytes(),
     )
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter?navn=Sesam&page=1&size=2",
         status_code=200,
@@ -153,7 +153,7 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
         ),
     )
 
-    assert len(httpx_mock.get_requests()) == 1  # pyright: ignore[reportUnknownMemberType]
+    assert len(httpx2_mock.get_requests()) == 1  # pyright: ignore[reportUnknownMemberType]
 
     assert list(cursor.page_numbers) == [0, 1]
 
@@ -165,7 +165,7 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
         "SESAM AS",
         "SESAM FAMILIEBARNEHAGE",
     ]
-    assert len(httpx_mock.get_requests()) == 1  # pyright: ignore[reportUnknownMemberType]
+    assert len(httpx2_mock.get_requests()) == 1  # pyright: ignore[reportUnknownMemberType]
 
     # Fetching a new page should trigger an HTTP request:
     page1 = cursor.get_page(1)
@@ -174,13 +174,13 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
     assert [org.navn for org in page1.items] == [
         "SESAM FILMKLUBB",
     ]
-    assert len(httpx_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
+    assert len(httpx2_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
 
     # Fetching a page that does not exist should return None, and not trigger
     # any HTTP requests:
     page2 = cursor.get_page(2)
     assert page2 is None
-    assert len(httpx_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
+    assert len(httpx2_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
 
     # Iterating over the pages returns all pages:
     assert list(cursor.pages) == [page0, page1]
@@ -192,7 +192,7 @@ def test_search_enhet_with_pagination(httpx_mock: HTTPXMock) -> None:
         "SESAM FILMKLUBB",
     ]
     # This does not trigger any HTTP requests as we already have all the pages:
-    assert len(httpx_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
+    assert len(httpx2_mock.get_requests()) == 2  # pyright: ignore[reportUnknownMemberType]
 
     # Iterating over the items again works:
     assert [org.navn for org in cursor.items] == [

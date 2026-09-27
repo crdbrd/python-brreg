@@ -11,8 +11,8 @@ from brreg import enhetsregisteret
 DATA_DIR = Path(__file__).parent.parent / "data"
 
 
-def test_get_roller_with_person(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_roller_with_person(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
         status_code=200,
@@ -22,7 +22,7 @@ def test_get_roller_with_person(httpx_mock: HTTPXMock) -> None:
 
     rollegrupper = enhetsregisteret.Client().get_roller("810004622")
 
-    requests = httpx_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
+    requests = httpx2_mock.get_requests()  # pyright: ignore[reportUnknownMemberType]
     assert len(requests) == 1
     assert (
         requests[0].headers["user-agent"]
@@ -52,8 +52,8 @@ def test_get_roller_with_person(httpx_mock: HTTPXMock) -> None:
     assert rolle.rekkefolge == 0
 
 
-def test_get_roller_with_spaces_in_organisasjonsnummer(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_roller_with_spaces_in_organisasjonsnummer(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
         status_code=200,
@@ -69,8 +69,8 @@ def test_get_roller_with_spaces_in_organisasjonsnummer(httpx_mock: HTTPXMock) ->
     assert styret.type.kode == "STYR"
 
 
-def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_roller_with_enhet(httpx2_mock: HTTPXMock) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
         status_code=200,
@@ -115,8 +115,8 @@ def test_get_roller_with_enhet(httpx_mock: HTTPXMock) -> None:
 
 
 @pytest.mark.parametrize("status_code", [404, 410])
-def test_get_underenhet_when_4xx(httpx_mock: HTTPXMock, status_code: int) -> None:
-    httpx_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
+def test_get_underenhet_when_4xx(httpx2_mock: HTTPXMock, status_code: int) -> None:
+    httpx2_mock.add_response(  # pyright: ignore[reportUnknownMemberType]
         method="GET",
         url="https://data.brreg.no/enhetsregisteret/api/enheter/810004622/roller",
         status_code=status_code,
