@@ -36,9 +36,9 @@ docs = [
     "sphinx-rtd-theme>=1.2",
     "sphinx-autodoc-typehints>=1.12",
 ]
-mypy = ["mypy==2.3.1"]
-pyright = ["basedpyright==1.40.1"]
-ruff = ["ruff==0.16.8"]
+mypy = ["mypy==2.4.0"]
+pyright = ["basedpyright==1.40.2"]
+ruff = ["ruff==0.17.2"]
 tests = [
     "coverage>=7.6.12",
     "httpx2-pytest>=2",
@@ -46,7 +46,7 @@ tests = [
     "pytest-watcher>=0.4.3",
     "pytest>=8.3.4",
 ]
-ty = ["ty==0.0.84"]
+ty = ["ty==0.0.91"]
 zizmor = ["zizmor==1.30.1"]
 
 
